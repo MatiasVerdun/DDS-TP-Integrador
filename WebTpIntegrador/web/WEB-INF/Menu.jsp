@@ -23,7 +23,7 @@
     <br>
     <br>
     <br>
-    <input class="button" type="submit"  value="Cargar Cuentas">
+    <input class="button" type="submit"  name="cargarCuentas" value="Cargar Cuentas">
     <br>	
     <br>
     <input class="button" type="submit"  name="consultarValores" value="Consultar Valores">
