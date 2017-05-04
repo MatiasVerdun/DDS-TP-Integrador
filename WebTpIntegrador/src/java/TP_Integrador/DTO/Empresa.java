@@ -10,5 +10,23 @@ package TP_Integrador.DTO;
  * @author Victoria
  */
 public class Empresa {
+    private String CodEmpresa;
+    private String Descripcion;
     
+    
+    public String getCodEmpresa() {
+        return CodEmpresa;
+    }
+
+    public void setCodEmpresa(String CodEmpresa) {
+        this.CodEmpresa = CodEmpresa;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
 }

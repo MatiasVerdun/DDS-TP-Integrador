@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ConsultarValores
-    Created on : 03/05/2017, 13:43:06
+    Document   : CargarIndicador
+    Created on : 03/05/2017, 18:42:54
     Author     : Matias
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cargar Indicador</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>En Construccion</h1>
     </body>
 </html>
