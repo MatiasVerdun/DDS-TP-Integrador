@@ -56,7 +56,7 @@ public class CargarCuentasControllerServlet extends HttpServlet {
         BufferedReader reader=new BufferedReader(new InputStreamReader(filecontent));
         linea=reader.readLine();
         if(linea != null){
-        while( linea!=null){
+        while( linea !=null){
                 String[] arreglo_datos = linea.split(",");
                 ValorCuenta valorCuentaLinea = new ValorCuenta();
                 EmpresaDAO empresa = new EmpresaDAO();
@@ -70,20 +70,15 @@ public class CargarCuentasControllerServlet extends HttpServlet {
                 if(empresa.validarExistencia(codigoEmpresa)){
                 ValorCuentaDAO valorCuenta = new ValorCuentaDAO();
                 valorCuenta.GuardarValorCuenta(valorCuentaLinea);
-                RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
-                rd.forward(request, response);
                 } else{RequestDispatcher rd=request.getRequestDispatcher("Empresa-error.jsp");  
                   rd.forward(request, response);}
-            
+           linea = reader.readLine();
           }
+           RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+           rd.forward(request, response); 
         } else {RequestDispatcher rd=request.getRequestDispatcher("Archivo-error.jsp");  
-                rd.forward(request, response);  
-        
-        }
-          
-        
-     
-    
+                rd.forward(request, response); }
+  
      }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
