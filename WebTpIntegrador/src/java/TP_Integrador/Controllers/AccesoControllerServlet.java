@@ -49,7 +49,7 @@ public class AccesoControllerServlet extends HttpServlet {
             String strPassword=request.getParameter("Clave");  
 
             //--- Crea el objeto usuario que desde Validar
-            Usuario objUsuario=new Usuario();  
+            Usuario objUsuario = new Usuario();  
             objUsuario.setUserName(strUserName);  
             objUsuario.setPassword(strPassword); 
 
