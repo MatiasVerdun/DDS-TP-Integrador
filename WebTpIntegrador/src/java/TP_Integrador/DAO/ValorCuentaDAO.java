@@ -9,6 +9,7 @@ import TP_Integrador.DTO.ValorCuenta;
 import TP_Integrador.MySQL.MySqlHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -34,5 +35,29 @@ public class ValorCuentaDAO {
         } catch (SQLException ex) {
             System.out.println("Error al Insertar el Valor de la Cuenta");
         }
-    }               
+    }
+    
+    public boolean ObtenerCuentas(ValorCuenta valorCuenta){
+        Boolean existe=false;
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaCuentas = conn.prepareStatement("SELECT * FROM valorcuenta where codEmpresa = ? AND periodo= ? ");
+          //  consultaCuentas.setString(1, valorCuenta.getUserName());
+           // consultaCuentas.setString(2, valorCuenta.getPassword());
+
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaCuentas.executeQuery();
+            //--- Verifica si pudo obtener al Usuuario
+            if(rs.next())   {
+                existe=true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al validar el usuario");
+        }
+        return existe;
+    }
 }
