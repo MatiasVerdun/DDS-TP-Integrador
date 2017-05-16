@@ -32,6 +32,7 @@ public class UsuarioDAO {
             //--- Verifica si pudo obtener al Usuuario
             if(rs.next())   {
                 existe=true;
+                
             }
         } catch (SQLException ex) {
             System.out.println("Error al validar el usuario");

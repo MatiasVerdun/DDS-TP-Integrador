@@ -5,9 +5,13 @@
  */
 package TP_Integrador.Controllers;
 
+import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.ValorCuentaDAO;
+import TP_Integrador.DTO.Cuenta;
+import TP_Integrador.DTO.Empresa;
 import TP_Integrador.DTO.ValorCuenta;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,28 +48,38 @@ public class CargarCuentasControllerServlet extends HttpServlet {
         PrintWriter out=response.getWriter(); 
         
         //--- Obtiene los datos desde la Vista (CargarCuentas.jsp)
+       
+        
         final Part filePart = request.getPart("uploadedfile");
         InputStream filecontent = filePart.getInputStream();
-        String linea = null;
-
+        String linea;
         BufferedReader reader=new BufferedReader(new InputStreamReader(filecontent));
-        
-        while( (linea=reader.readLine())!=null){
-            String[] arreglo_datos = linea.split(",");
-            
-            ValorCuenta valorCuentaLinea = new ValorCuenta();
-            
-            valorCuentaLinea.setCodEmpresa(arreglo_datos[0]);
-            valorCuentaLinea.setPeriodo(arreglo_datos[1]);
-            valorCuentaLinea.setCodCuenta(arreglo_datos[2]);
-            valorCuentaLinea.setValor(Double.parseDouble(arreglo_datos[3]));
+        linea=reader.readLine();
+        if(linea != null){
+        while( linea !=null){
+                String[] arreglo_datos = linea.split(",");
+                ValorCuenta valorCuentaLinea = new ValorCuenta();
+                EmpresaDAO empresa = new EmpresaDAO();
+                
+                String codigoEmpresa = arreglo_datos[0];
+                valorCuentaLinea.setCodEmpresa(codigoEmpresa);
+                valorCuentaLinea.setPeriodo(arreglo_datos[1]);  
+                valorCuentaLinea.setCodCuenta(arreglo_datos[2]);
+                valorCuentaLinea.setValor(Double.parseDouble(arreglo_datos[3]));
 
-            ValorCuentaDAO valorCuenta = new ValorCuentaDAO();
-            valorCuenta.GuardarValorCuenta(valorCuentaLinea);
-        }
-     RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
-                rd.forward(request, response);
-    }
+                if(empresa.validarExistencia(codigoEmpresa)){
+                ValorCuentaDAO valorCuenta = new ValorCuentaDAO();
+                valorCuenta.GuardarValorCuenta(valorCuentaLinea);
+                } else{RequestDispatcher rd=request.getRequestDispatcher("Empresa-error.jsp");  
+                  rd.forward(request, response);}
+           linea = reader.readLine();
+          }
+           RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+           rd.forward(request, response); 
+        } else {RequestDispatcher rd=request.getRequestDispatcher("Archivo-error.jsp");  
+                rd.forward(request, response); }
+  
+     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
