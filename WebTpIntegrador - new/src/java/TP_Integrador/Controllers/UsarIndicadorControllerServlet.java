@@ -37,13 +37,11 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-         String strCodEmpresa = request.getParameter("Empresa");
-            String strPeriodo = request.getParameter("Periodo");
+            
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             ArrayList<Indicador> indicadores = indicadorDAO.ObtenerIndicadores();
             //
-            request.setAttribute("valoresCuentasBean",indicadores);
-            
+            request.setAttribute("indicadoresBean",indicadores);
             RequestDispatcher rd=request.getRequestDispatcher("UsarIndicadores.jsp");  
             rd.forward(request, response);  
         }

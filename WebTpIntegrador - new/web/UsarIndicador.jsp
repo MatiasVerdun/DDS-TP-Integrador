@@ -74,7 +74,7 @@ for (int counter = 0; counter < empresas.size(); counter++) {
     }
 */
     out.print(" >"); 		
-    out.print(empresas.get(counter).getDescripcion()); 		
+    out.print(empresas.get(counter).getNombreEmpresa()); 		
     out.print("</option>"); 		
 } 
 %>
