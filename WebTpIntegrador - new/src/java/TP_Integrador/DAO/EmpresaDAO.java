@@ -18,6 +18,49 @@ import java.util.ArrayList;
  * @author Matias
  */
 public class EmpresaDAO {
+    public boolean validarExistencia(String codigo){
+        Boolean existe=false;
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaUsuario = conn.prepareStatement("SELECT * FROM empresa where codEmpresa = ?   ");
+            consultaUsuario.setString(1,codigo);
+            
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaUsuario.executeQuery();
+            //--- Verifica si pudo obtener al Usuuario
+            if(rs.next())   {
+                existe=true;
+               
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al validar empresa ");
+        }
+        return existe;
+    }   
+    public void GuardarEmpresa(Empresa empresa){
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement guardarIndicador = conn.prepareStatement("INSERT INTO `empresa` (`codEmpresa`, `nombreEmpresa`) VALUES (?, ?)");
+            guardarIndicador.setString(1, empresa.getCodEmpresa());
+            guardarIndicador.setString(2, empresa.getNombreEmpresa());
+          
+            
+
+            //--- Ejecuta la sentencia para almacenar datos
+            guardarIndicador.execute();
+        } catch (SQLException ex) {
+            System.out.println("Error al Ingresar la Empresa");
+        }
+    }
+    
     public ArrayList<Empresa> ObtenerEmpresas(){
         ArrayList<Empresa> listaEmpresas = new ArrayList<Empresa>();
         try {
@@ -35,7 +78,7 @@ public class EmpresaDAO {
             {
                 Empresa empresa = new Empresa();
                 empresa.setCodEmpresa(rs.getString("codEmpresa"));
-                empresa.setDescripcion(rs.getString("Descripcion"));
+                empresa.setNombreEmpresa(rs.getString("nombreEmpresa"));
                 
                 listaEmpresas.add(empresa);
             }

@@ -11,7 +11,7 @@ package TP_Integrador.DTO;
  */
 public class Empresa {
     private String CodEmpresa;
-    private String Descripcion;
+    private String NombreEmpresa;
     
     
     public String getCodEmpresa() {
@@ -22,11 +22,11 @@ public class Empresa {
         this.CodEmpresa = CodEmpresa;
     }
 
-    public String getDescripcion() {
-        return Descripcion;
+    public String getNombreEmpresa() {
+        return NombreEmpresa;
     }
 
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+    public void setNombreEmpresa(String Descripcion) {
+        this.NombreEmpresa = Descripcion;
     }
 }

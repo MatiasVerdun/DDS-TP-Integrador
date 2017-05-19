@@ -5,23 +5,25 @@
  */
 package TP_Integrador.Controllers;
 
-
-import TP_Integrador.DAO.UsuarioDAO;
-import TP_Integrador.DTO.Usuario;
+import TP_Integrador.DAO.CuentaDAO;
+import TP_Integrador.DTO.Cuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Matias
+ * @author Victoria
  */
-public class CambiarClaveControllerServlet extends HttpServlet {
+@WebServlet(name = "GuardarDatosCuentasControllerServlet", urlPatterns = {"/GuardarDatosCuentasControllerServlet"})
+public class GuardarDatosCuentasControllerServlet extends HttpServlet {
 
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,29 +37,22 @@ public class CambiarClaveControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //--- Obtiene los datos desde la Vista (CambioClave.jsp)
-            String strUserName=request.getParameter("Usuario");  
-            String strPassword=request.getParameter("Clave");  
-            String strPasswordNew=request.getParameter("ClaveNueva");
+        //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
+            String strCodCuenta=request.getParameter("codCuenta");  
+            String strNombreCuenta=request.getParameter("nombreCuenta");  
+            Cuenta objCuenta = new Cuenta();
+            objCuenta.setCodCuenta(strCodCuenta);
+            objCuenta.setNombreCuenta(strNombreCuenta);
             
-            //--- Crea el objeto usuario que desde Validar
-            Usuario objUsuario=new Usuario();  
-            objUsuario.setUserName(strUserName);  
-            objUsuario.setPassword(strPassword); 
+        //--- Crea el objeto indicador que desde Validar
+            
+            CuentaDAO empresaDAO = new CuentaDAO();
+            empresaDAO.GuardarCuenta(objCuenta);
+            
+            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+            rd.forward(request, response);
+            
 
-            //--- Controla si existe el usuario en la Tabla
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean modifica = usuarioDAO.ModificarClave(objUsuario, strPasswordNew);
-
-            //--- Determina la acción en base a la existencia
-            if(modifica){
-                RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");  
-                rd.forward(request, response);  
-            }  
-            else{  
-                RequestDispatcher rd=request.getRequestDispatcher("CambioClave-error.jsp");  
-                rd.forward(request, response);  
-            }
         }
     }
 

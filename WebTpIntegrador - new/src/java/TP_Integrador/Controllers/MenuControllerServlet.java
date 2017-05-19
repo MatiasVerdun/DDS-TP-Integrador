@@ -1,7 +1,9 @@
 package TP_Integrador.Controllers;
 
 import TP_Integrador.DAO.EmpresaDAO;
+import TP_Integrador.DAO.IndicadorDAO;
 import TP_Integrador.DTO.Empresa;
+import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,8 +36,13 @@ public class MenuControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        if(request.getParameter("cargarCuentas")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarCuentas.jsp"); 
+        if(request.getParameter("cargarDatos")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("CargarDatos.jsp"); 
+            rd.forward(request, response);
+        } 
+        
+        if(request.getParameter("cargarValoresCuentas")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
             rd.forward(request, response);
         } 
         
@@ -52,8 +59,22 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
-        if(request.getParameter("cargarIndicador")!= null){
+          if(request.getParameter("cargarIndicador")!= null){
             RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
+            rd.forward(request, response);
+        } 
+        if(request.getParameter("usarIndicador")!= null){
+            //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
+            IndicadorDAO indicadorDAO= new IndicadorDAO();
+            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
+            request.getSession().setAttribute("indicadoresBean",indicadores);  
+            //
+            //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
+            EmpresaDAO empresaDAO = new EmpresaDAO();
+            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            request.getSession().setAttribute("empresasBean",empresas);  
+            //
+            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
             rd.forward(request, response);
         }
         if(request.getParameter("graficos")!= null){

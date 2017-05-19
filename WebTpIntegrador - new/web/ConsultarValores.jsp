@@ -1,3 +1,4 @@
+<%@page import="TP_Integrador.DAO.EmpresaDAO"%>
 <%@page import="TP_Integrador.DTO.*"%>  
 <%@page import="java.util.ArrayList"%>  
 <!DOCTYPE html>
@@ -43,7 +44,9 @@
     <select required class="select" name="Empresa">
 <%  
 //--- Obtiene el listado de Empresas
+
 ArrayList<Empresa> empresas =(ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");  
+
 for (int counter = 0; counter < empresas.size(); counter++) { 		      
     out.print("<option value='"); 		
     out.print(empresas.get(counter).getCodEmpresa()); 		

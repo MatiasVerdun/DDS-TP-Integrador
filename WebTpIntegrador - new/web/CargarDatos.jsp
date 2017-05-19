@@ -23,14 +23,13 @@
 </style>
 </head>
 <form action="CargarDatosControllerServlet" method="post">
-  <fieldset style="width:12%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+    <fieldset>
     <br>
-    <input class="button" type="submit"  name="cargarNuevaCuenta" value="Cargar Nueva Cuenta">
-    <br>	
+    <input class="button" type="submit"  name="cargarNuevasCuentas" value="Cargar Nuevas Cuentas ">
     <br>
-    <input class="button" type="submit"  name="cargarNuevaEmpresa" value="Cargar Nueva Empresa">
     <br>
-  
+    <input class="button" type="submit" name="cargarNuevasEmpresas"  value="Cargar Nuevas Empresas">
+    <br>
   </fieldset>
 </form>
 </body>

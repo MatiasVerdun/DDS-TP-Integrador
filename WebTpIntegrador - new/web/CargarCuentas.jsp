@@ -3,9 +3,11 @@
 <body>
 <head>
 <style>
-.file{
+.form{
    height:30px;
+   width:180px;
    border-color:#00c8f8;
+   font-size:110%
 }
 .button{
     background-color: #00c8f8;
@@ -19,16 +21,23 @@
     font-size:110%
 }
 </style>
-  <form enctype="multipart/form-data" action="CargarCuentasControllerServlet" method="POST">
-  <fieldset style="width:30%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+</head>
+<form action="GuardarEnLaBaseControllerServlet" method="post">
+  <fieldset style="width:12%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
-	<br> 
-    <input class="file" name="uploadedfile" id="uploadedfile" type="file" />
+	<br>
+    <input placeholder="Codigo Cuenta" class="form" type="text" name="codCuenta" value="" maxlength="15" >
     <br>
     <br>
-    <input class="button" type="submit" value="Subir archivo" />
+	<br>
+    <input placeholder="Nombre Cuenta" class="form" type="text" name="nombreCuenta" value="" maxlength="15" >
+    <br>
+	<br>
+	<br>
+    <input class="button" type="submit"  value="Cargar Cuenta">
     <br>
     <br>
+  
   </fieldset>
 </form>
 </body>

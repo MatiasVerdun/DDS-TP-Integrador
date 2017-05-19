@@ -11,7 +11,7 @@ package TP_Integrador.DTO;
  */
 public class Cuenta {
     private String CodCuenta;
-    private int Descripcion;
+    private String nombreCuenta;
 
     public String getCodCuenta() {
         return CodCuenta;
@@ -21,12 +21,12 @@ public class Cuenta {
         this.CodCuenta = CodCuenta;
     }
 
-    public int getDescripcion() {
-        return Descripcion;
+    public String getNombreCuenta() {
+        return nombreCuenta;
     }
 
-    public void setDescripcion(int Descripcion) {
-        this.Descripcion = Descripcion;
+    public void setNombreCuenta(String nombreCuenta) {
+        this.nombreCuenta = nombreCuenta;
     }
     
 }
