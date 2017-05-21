@@ -41,6 +41,27 @@ public class ValorCuentaDAO {
         }
     }               
     
+      public double conseguirValor(String Cuenta, String Empresa, String Anio){
+          double valor = 0;
+           try {
+         MySqlHelper mySQL = new MySqlHelper();
+         Connection conn = mySQL.getConnection();
+         
+         PreparedStatement cuenta = conn.prepareStatement("SELECT valor FROM valorcuenta WHERE codEmpresa = ? AND periodo = ? AND codCuenta = ?");
+            cuenta.setString(1,Empresa);
+            cuenta.setString(2,Anio);
+            cuenta.setString(3,Cuenta);
+            //--- Ejecuta la consulta
+            ResultSet rs = cuenta.executeQuery();
+            //--- Recorre los registros y los carga en lo que va a devolver de Usar Indicador
+            rs.next();
+           valor = rs.getInt("valor");
+    } catch (SQLException ex) {
+            System.out.println("Error al Obtener Valores de Cuentas");
+        }
+           return valor;
+    }
+    
     
     
     public ArrayList<ValorCuenta> ObtenerValoresDeCuentas(String codEmpresa, String Periodo){

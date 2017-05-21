@@ -36,18 +36,24 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+            String strIndicadorName=request.getParameter("Indicador");  
+            String strEmpresa=request.getParameter("Empresa");  
+            String strAnio=request.getParameter("Anio");
             
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-            ArrayList<Indicador> indicadores = indicadorDAO.ObtenerIndicadores();
-            //
-            request.setAttribute("indicadoresBean",indicadores);
-            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicadores.jsp");  
-            rd.forward(request, response);  
-        }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+            
+            String Indicador = indicadorDAO.conseguirIndicador(strIndicadorName);
+            double resultadoFinal = indicadorDAO.resultadoFinal(Indicador, strEmpresa, strAnio);
+            
+            String total = String.valueOf(resultadoFinal);
+          
+            request.getSession().setAttribute("IndicadorBean",total);
+            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicadoresPrueba.jsp");  
+            rd.forward(request, response);  
+    }
+   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

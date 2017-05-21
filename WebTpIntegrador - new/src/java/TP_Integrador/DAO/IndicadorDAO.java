@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.mariuszgromada.math.mxparser.*;
 
 
 
@@ -63,9 +64,44 @@ public class IndicadorDAO {
         }
         return listaIndicadores;
     }
+    
+      public String conseguirIndicador(String indicadorName){
+          String indicadorEcuacion = "";
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement indicador = conn.prepareStatement("SELECT indicador FROM indicadores WHERE nombreIndicador = ?");
+            indicador.setString(1,indicadorName);
+            //--- Ejecuta la consulta
+            ResultSet rs = indicador.executeQuery();
+            //--- Recorre los registros y los carga en lo que va a devolver de Usar Indicador
+            rs.next();
+            indicadorEcuacion = rs.getString("indicador");
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al Obtener Indicadores");
+        }
+        return indicadorEcuacion;
+    }
+      
 
-  
 
+  public double resultadoFinal(String Indicador, String Empresa, String Anio){
+      
+            ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
+            
+            Function f = new Function(Indicador);
+            
+          for(int i = 0; i < f.getArgumentsNumber(); i++){
+            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
+            f.getArgument(i).setArgumentValue(valor);
+          }
+          double resultadoFinal = f.calculate();
+          return resultadoFinal;
    
 
+}
 }
