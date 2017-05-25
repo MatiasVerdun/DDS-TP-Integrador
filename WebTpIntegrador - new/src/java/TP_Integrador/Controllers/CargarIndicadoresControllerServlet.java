@@ -42,15 +42,17 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
             Indicador objIndicador=new Indicador();  
             objIndicador.setNombre(strNombreIndicador);  
             objIndicador.setIndicador(strIndicador); 
-            
               
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-            indicadorDAO.GuardarIndicador(objIndicador);
-            
-            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
-            rd.forward(request, response);
-            
-
+            if(indicadorDAO.comprobarSintaxis(objIndicador)){
+                
+                    indicadorDAO.GuardarIndicador(objIndicador);
+                    RequestDispatcher rd=request.getRequestDispatcher("Guardado.jsp");  
+                    rd.forward(request, response);
+            } else {
+                    RequestDispatcher rd=request.getRequestDispatcher("Cargar-Indicador-Error.jsp");  
+                    rd.forward(request, response);  
+            }
         }
     }
     

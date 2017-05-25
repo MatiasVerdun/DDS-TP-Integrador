@@ -11,7 +11,7 @@
     background-color: #00c8f8;
     color: white;
     height:38px; 
-    width:190px;
+    width:300px;;
     font-size:120%
 }
 .error {
@@ -20,7 +20,7 @@
 }
 </style>
   <form enctype="multipart/form-data" action="CargarValoresCuentasControllerServlet" method="POST">
-  <fieldset style="width:30%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+  <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
 	<br> 
     <input class="file" name="uploadedfile" id="uploadedfile" type="file" />

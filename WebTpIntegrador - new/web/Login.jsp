@@ -1,3 +1,5 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="org.mariuszgromada.math.mxparser.*"%>
 <!DOCTYPE html>
 <html>
 <body>

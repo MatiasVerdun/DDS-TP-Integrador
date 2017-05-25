@@ -18,12 +18,12 @@
     background-color: #00c8f8;
     color: white;
     height:38px; 
-    width:190px;
+    width:300px;
     font-size:120%
 }
 .select{
    height:35px;
-   width:180px;
+   width:290px;
    border-color:#00c8f8;
    font-size:110%
 }
@@ -33,7 +33,7 @@
 }
 </style>
    <form action="UsarIndicadorControllerServlet" method="POST">
-  <fieldset style="width:12%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+  <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
     <br> 
     <select required class="select" name="Indicador">

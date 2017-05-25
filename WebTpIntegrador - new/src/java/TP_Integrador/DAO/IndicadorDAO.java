@@ -104,4 +104,15 @@ public class IndicadorDAO {
    
 
 }
+  
+  public boolean comprobarSintaxis(Indicador objIndicador){
+            
+            Function f = new Function(objIndicador.getIndicador());
+            
+            f.checkSyntax();
+            String subStr = f.getErrorMessage().substring(f.getErrorMessage().length() - 11);
+            
+            
+            return (subStr.equals("no errors.\n"));
+}
 }
