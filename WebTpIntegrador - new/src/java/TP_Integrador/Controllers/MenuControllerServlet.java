@@ -41,6 +41,11 @@ public class MenuControllerServlet extends HttpServlet {
             rd.forward(request, response);
         } 
         
+        if(request.getParameter("verIndicador")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("VerIndicador.jsp"); 
+            rd.forward(request, response);
+        } 
+        
         if(request.getParameter("cargarValoresCuentas")!= null){
             RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
             rd.forward(request, response);

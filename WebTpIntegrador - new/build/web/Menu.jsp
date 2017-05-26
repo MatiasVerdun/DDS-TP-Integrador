@@ -43,6 +43,9 @@
     <br>
     <input class="button" type="submit"  name="analizarEmpresa" value="Analizar Empresa">
     <br>
+    <br>
+    <input class="button" type="submit"  name="verIndicador" value="Ver Indicador">
+    <br>
     
     <br>
   </fieldset>
