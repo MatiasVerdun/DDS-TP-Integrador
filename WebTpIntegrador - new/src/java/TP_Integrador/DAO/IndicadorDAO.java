@@ -6,6 +6,8 @@
 package TP_Integrador.DAO;
 
 import TP_Integrador.DTO.Indicador;
+import TP_Integrador.DTO.ValorCuenta;
+import TP_Integrador.DTO.ValorIndicador;
 import TP_Integrador.MySQL.MySqlHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -107,12 +109,9 @@ public class IndicadorDAO {
         }
         return existe;
     }
-      
-      
-      
-
-
-  public double resultadoFinal(String Indicador, String Empresa, String Anio){
+       
+       
+      public double resultadoFinal(String Indicador, String Empresa, String Anio){
       
             ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
             //IndicadorDAO indicadorDAO = new IndicadorDAO();
@@ -132,6 +131,40 @@ public class IndicadorDAO {
    
 
 }
+      
+      
+
+
+  public ArrayList<ValorIndicador> ObtenerValoresIndicadores(String Empresa, String Anio){
+      
+       ArrayList<ValorIndicador> listaValoresIndicadores = new ArrayList<ValorIndicador>();
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaIndicadores = conn.prepareStatement("SELECT * FROM indicadores");
+
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaIndicadores.executeQuery();
+            //--- Recorre los registros y los carga en lo que va a devolver de Valores de Cuentas
+            while(rs.next())
+            {
+                ValorIndicador valorIndicador = new ValorIndicador();
+                valorIndicador.setCodEmpresa(Empresa);
+                valorIndicador.setPeriodo(Anio);
+                valorIndicador.setNombreIndicador(rs.getString("nombreIndicador"));
+                valorIndicador.setValor(resultadoFinal(rs.getString("indicador"), Empresa, Anio));
+                
+                listaValoresIndicadores.add(valorIndicador);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al Obtener Valores de Cuentas");
+        }
+        return listaValoresIndicadores;
+    }
+
   
   public boolean comprobarSintaxis(Indicador objIndicador){
             

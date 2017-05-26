@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package TP_Integrador.Controllers;
 
 import TP_Integrador.DAO.EmpresaDAO;
@@ -14,13 +19,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Victoria
  */
-@WebServlet(name = "MenuControllerServlet", urlPatterns = {"/MenuControllerServlet"})
-public class MenuControllerServlet extends HttpServlet {
+@WebServlet(name = "MenuIndicadoresControllerServlet", urlPatterns = {"/MenuIndicadoresControllerServlet"})
+public class MenuIndicadoresControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,53 +32,45 @@ public class MenuControllerServlet extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws javax.servlet.ServletException
+     * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        if(request.getParameter("cargarDatos")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarDatos.jsp"); 
+        if(request.getParameter("verIndicador")!= null){
+            //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
+            IndicadorDAO indicadorDAO= new IndicadorDAO();
+            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
+            request.getSession().setAttribute("indicadoresBean",indicadores);  
+            
+            RequestDispatcher rd=request.getRequestDispatcher("VerIndicador.jsp"); 
             rd.forward(request, response);
         } 
         
-        if(request.getParameter("indicadores")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("TodoIndicadores.jsp"); 
-            rd.forward(request, response);
-        }
-        
-        if(request.getParameter("cargarValoresCuentas")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
-            rd.forward(request, response);
-        } 
-        
-        if(request.getParameter("consultarValores")!= null){
+        if(request.getParameter("usarIndicador")!= null){
+  //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
+            IndicadorDAO indicadorDAO= new IndicadorDAO();
+            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
+            request.getSession().setAttribute("indicadoresBean",indicadores);  
+            //
             //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
             EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
             request.getSession().setAttribute("empresasBean",empresas);  
             //
-            RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 
+            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
             rd.forward(request, response);
         } 
-        if(request.getParameter("cargarMetodologia")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
-            rd.forward(request, response);
-        } 
-        if(request.getParameter("graficos")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("VisualizarGraficos.jsp"); 
+        if(request.getParameter("cargarIndicador")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
             rd.forward(request, response);
         }
-        if(request.getParameter("analizarEmpresa")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("AnalizarEmpresa.jsp"); 
-            rd.forward(request, response);
-        }   
-    
     }
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -110,6 +106,7 @@ public class MenuControllerServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Controlador del Menu";
+        return "Short description";
     }// </editor-fold>
+
 }

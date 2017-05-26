@@ -75,6 +75,8 @@ for (int counter = 0; counter < empresas.size(); counter++) {
 <%  
 //--- Obtiene el listado de Valores de Cuentas
 ArrayList<ValorCuenta>valoresCuentas =(ArrayList<ValorCuenta>)request.getAttribute("valoresCuentasBean");  
+
+
 if (valoresCuentas!=null && valoresCuentas.size()>0)
 {
     out.print("<br/><br/>");
@@ -89,6 +91,21 @@ if (valoresCuentas!=null && valoresCuentas.size()>0)
         out.print("</td>");
         out.print("</tr>");
     } 
+   
+ArrayList<ValorIndicador>valoresIndicadores =(ArrayList<ValorIndicador>)request.getAttribute("valoresIndicadoresBean");  
+
+    
+    for (int counter = 0; counter < valoresIndicadores.size(); counter++) { 		      
+        out.print("<tr>");
+        out.print("<td>");
+        out.print(valoresIndicadores.get(counter).getNombreIndicador());
+        out.print("</td>");
+        out.print("<td>");
+        out.print(java.math.BigDecimal.valueOf(valoresIndicadores.get(counter).getValor()));
+        out.print("</td>");
+        out.print("</tr>");
+    } 
+    
     out.print("</table>");
 } 
 %>
