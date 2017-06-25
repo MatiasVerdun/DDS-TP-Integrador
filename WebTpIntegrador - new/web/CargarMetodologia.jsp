@@ -38,12 +38,15 @@
 </head>
 
 
-<form action="" method="post">
+<form action="CargarMetodologiaControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
     
-<input placeholder="Nombre" class="form" type="text" name="nombreMetodologia" value="" maxlength="15" >
+<input placeholder="Nombre" class="form" type="text" name="nombreMetodologia" value="" maxlength="500" >
     <br>	
+    <br>
+    <br>
+ <input class="button" type="submit" name="cargarCondiciones" value="Cargar Condiciones"/>
     <br>
 
 </fieldset>
@@ -51,4 +54,4 @@
 </body>
 </html>
 
-<%@ include file="CargarMetodologiaCampos.jsp" %>
+

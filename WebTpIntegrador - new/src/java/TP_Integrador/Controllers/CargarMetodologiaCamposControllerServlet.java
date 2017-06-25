@@ -1,9 +1,11 @@
 package TP_Integrador.Controllers;
 
+import TP_Integrador.DAO.CondicionDAO;
 import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DTO.Empresa;
-import TP_Integrador.DTO.Indicador;
+import TP_Integrador.DAO.MetodologiaDAO;
+import TP_Integrador.DTO.Condicion;
+import TP_Integrador.DTO.Metodologia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,13 +37,30 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+          //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
+            String strNombreMetodologia =request.getParameter("nombreMetodologia");  
+            String condicion =request.getParameter("condicion");  
+            String indicador = request.getParameter("Indicador");
+            int  numero = Integer.parseInt(request.getParameter("numero"));
+            int  periodoDesde= Integer.parseInt(request.getParameter("periodoDesde"));
+            int  periodoHasta = Integer.parseInt(request.getParameter("periodoHasta"));
+            
+          //--- Crea los objetos
+            CondicionDAO condicionDAO = new CondicionDAO();
+            Condicion objCondicion = new Condicion();
+          
         if(request.getParameter("proximaCondicion")!= null){
+            objCondicion.setIndicador(indicador);
+            objCondicion.setMetodologia(strNombreMetodologia);
+            objCondicion.setNumero(numero);
+            condicionDAO.GuardarCondicion(objCondicion);
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
             rd.forward(request, response);
+            
+            
         } 
         
-        if(request.getParameter("condicion")!= null){
+        if(request.getParameter("finalizarCarga")!= null){  
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
             rd.forward(request, response);
         } 

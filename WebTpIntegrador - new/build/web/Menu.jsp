@@ -30,9 +30,6 @@
     <input class="button" type="submit"  name="consultarValores" value="Consultar Valores">
     <br>
     <br>
-    <input class="button" type="submit" name="cargarMetodologia"  value="Cargar Metodologia">
-    <br>
-    <br>
     <input class="button" type="submit"  name="graficos" value="Visualizar Gráficos">
     <br>
     <br>
@@ -40,6 +37,9 @@
     <br>
     <br>
     <input class="button" type="submit"  name="indicadores" value="Indicadores">
+    <br>
+    <br>
+    <input class="button" type="submit"  name="metodologia" value="Metodologia">
     <br>
     <br>
   </fieldset>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
-<%@page import="TP_Integrador.DTO.Empresa"%>
 <%@page import="TP_Integrador.DTO.Indicador"%>
 
 <html>
@@ -42,7 +41,14 @@
 <form action="CargarMetodologiaCamposControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
-    
+    <input name ="nombreMetodologia" class="form" disabled="disable" 
+           <%
+            out.print("< value='"); 		
+            out.print(request.getAttribute("nombreMetodologiaBean")); 		
+            out.print("' ");
+            out.print(" >"); 		
+           %>
+    <br>
     <fieldset style="width:40%;text-align:left; margin:auto;float: left; border: 0;">
     <input name ="condicion" class = "check" type="radio"  value="menorA"> menorA<br>
     <input name ="condicion" class = "check" type="radio"  value="mayorA"> mayorA<br>
@@ -69,7 +75,13 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
 </select>
 <br>
 <br>
-<input type="number" min="2" onkeypress="return event.charCode >= 48" class="select" name="numero" placeholder="Numero/Periodos"/>
+<input type="number" min="2" onkeypress="return event.charCode >= 48" class="select" name="numero" placeholder="Numero"/>
+<br>
+<br>
+<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde"/>
+<br>
+<br>
+<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta"/>
 <br>
 <br>
 <input class="button" type="submit" name="proximaCondicion" value="Proxima Condicion"/>

@@ -42,7 +42,7 @@ public class MenuControllerServlet extends HttpServlet {
         } 
         
         if(request.getParameter("indicadores")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("TodoIndicadores.jsp"); 
+            RequestDispatcher rd=request.getRequestDispatcher("MenuIndicadores.jsp"); 
             rd.forward(request, response);
         }
         
