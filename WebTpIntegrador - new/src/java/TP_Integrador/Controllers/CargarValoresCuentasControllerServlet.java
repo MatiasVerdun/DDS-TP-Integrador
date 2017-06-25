@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package TP_Integrador.Controllers;
-
 import TP_Integrador.DAO.CuentaDAO;
 import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.ValorCuentaDAO;
@@ -70,7 +69,7 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
                 if(empresa.validarExistencia(codigoEmpresa) && cuenta.validarExistencia(codigoCuenta) ){
                 ValorCuentaDAO valorCuenta = new ValorCuentaDAO();
                 valorCuenta.GuardarValorCuenta(valorCuentaLinea);
-                } else{RequestDispatcher rd=request.getRequestDispatcher("Empresa-error.jsp");  
+                } else{RequestDispatcher rd=request.getRequestDispatcher("EmpresaCuenta-error.jsp");  
                   rd.forward(request, response);}
             linea = reader.readLine();
           }

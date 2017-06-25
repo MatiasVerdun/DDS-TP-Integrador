@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Victoria
  */
-@WebServlet(name = "MenuControllerServlet", urlPatterns = {"/MenuControllerServlet"})
-public class MenuControllerServlet extends HttpServlet {
+@WebServlet(name = "MenuMetodologiaControllerServlet", urlPatterns = {"/MenuMetodologiaControllerServlet"})
+public class MenuMetodologiaControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,46 +36,20 @@ public class MenuControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        if(request.getParameter("cargarDatos")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarDatos.jsp"); 
+        if(request.getParameter("usarMetodologia")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
         
-        if(request.getParameter("indicadores")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("TodoIndicadores.jsp"); 
-            rd.forward(request, response);
-        }
-        
-        if(request.getParameter("cargarValoresCuentas")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
-            rd.forward(request, response);
-        } 
-         if(request.getParameter("metodologia")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
-            rd.forward(request, response);
-        } 
-        
-        if(request.getParameter("consultarValores")!= null){
-            //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
-            EmpresaDAO empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
-            request.getSession().setAttribute("empresasBean",empresas);  
-            //
-            RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 
-            rd.forward(request, response);
-        } 
         if(request.getParameter("cargarMetodologia")!= null){
+            
+               IndicadorDAO indicadorDAO= new IndicadorDAO();
+            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
+            request.getSession().setAttribute("indicadoresBean",indicadores);  
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
-        } 
-        if(request.getParameter("graficos")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("VisualizarGraficos.jsp"); 
-            rd.forward(request, response);
         }
-        if(request.getParameter("analizarEmpresa")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("AnalizarEmpresa.jsp"); 
-            rd.forward(request, response);
-        }   
+        
     
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
