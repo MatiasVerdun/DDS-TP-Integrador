@@ -1,7 +1,12 @@
 package TP_Integrador.Controllers;
 
+import TP_Integrador.DAO.EmpresaDAO;
+import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DTO.Empresa;
+import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,12 +36,31 @@ public class MenuControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        if(request.getParameter("cargarCuentas")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarCuentas.jsp"); 
+        if(request.getParameter("cargarDatos")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("CargarDatos.jsp"); 
+            rd.forward(request, response);
+        } 
+        
+        if(request.getParameter("indicadores")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("MenuIndicadores.jsp"); 
+            rd.forward(request, response);
+        }
+        
+        if(request.getParameter("cargarValoresCuentas")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
+            rd.forward(request, response);
+        } 
+         if(request.getParameter("metodologia")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
             rd.forward(request, response);
         } 
         
         if(request.getParameter("consultarValores")!= null){
+            //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
+            EmpresaDAO empresaDAO = new EmpresaDAO();
+            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            request.getSession().setAttribute("empresasBean",empresas);  
+            //
             RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 
             rd.forward(request, response);
         } 
@@ -44,10 +68,6 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
-        if(request.getParameter("cargarIndicador")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
-            rd.forward(request, response);
-        }
         if(request.getParameter("graficos")!= null){
             RequestDispatcher rd=request.getRequestDispatcher("VisualizarGraficos.jsp"); 
             rd.forward(request, response);

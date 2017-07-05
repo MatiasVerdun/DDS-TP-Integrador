@@ -35,7 +35,7 @@ public class CambiarClaveControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //--- Obtiene los datos desde la Vista (VambioClave.jsp)
+            //--- Obtiene los datos desde la Vista (CambioClave.jsp)
             String strUserName=request.getParameter("Usuario");  
             String strPassword=request.getParameter("Clave");  
             String strPasswordNew=request.getParameter("ClaveNueva");

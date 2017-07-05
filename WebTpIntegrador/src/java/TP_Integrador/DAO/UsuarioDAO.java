@@ -29,10 +29,9 @@ public class UsuarioDAO {
 
             //--- Ejecuta la consulta
             ResultSet rs = consultaUsuario.executeQuery();
-            //--- Verifica si pudo obtener al Usuuario
+            //--- Verifica si pudo obtener al Usuario
             if(rs.next())   {
                 existe=true;
-                
             }
         } catch (SQLException ex) {
             System.out.println("Error al validar el usuario");

@@ -1,3 +1,5 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="org.mariuszgromada.math.mxparser.*"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -23,7 +25,7 @@
 </style>
 </head>
 <form action="AccesoControllerServlet" method="post">
-  <fieldset style="width:12%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+  <fieldset style="width:20%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
 	<br>
     <input placeholder="Usuario" class="form" type="text" name="Usuario" value="" maxlength="15" >

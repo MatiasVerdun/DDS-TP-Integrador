@@ -3,11 +3,9 @@
 <body>
 <head>
 <style>
-.form{
+.file{
    height:30px;
-   width:290px;
    border-color:#00c8f8;
-   font-size:110%;
 }
 .button{
     background-color: #00c8f8;
@@ -21,18 +19,16 @@
     font-size:110%
 }
 </style>
-</head>
-<form action="CargarIndicadoresControllerServlet" method="post">
+  <form enctype="multipart/form-data" action="CargarValoresCuentasControllerServlet" method="POST">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
-    <br>
-    <input placeholder="Nombre" class="form" type="text" name="nombreIndicador" value="" maxlength="15" >
-    <br>	
-    <br>
-    <input placeholder="Indicador" class="form" type="text" name="indicador" value="" maxlength="200" >
+ 	<br>
+	<br> 
+    <input class="file" name="uploadedfile" id="uploadedfile" type="file" />
     <br>
     <br>
-    <input class="button" type="submit"  name="cargarIndicador" value="Cargar Indicador">
-  
+    <input class="button" type="submit" value="Subir archivo" />
+    <br>
+    <br>
   </fieldset>
 </form>
 </body>
