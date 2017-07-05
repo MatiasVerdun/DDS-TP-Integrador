@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2017 a las 00:24:51
+-- Tiempo de generación: 06-07-2017 a las 00:53:06
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -32,7 +32,8 @@ DROP TABLE IF EXISTS `condiciones`;
 CREATE TABLE `condiciones` (
   `metodologia` varchar(500) NOT NULL,
   `indicador` varchar(50) NOT NULL,
-  `numeroPeriodo` varchar(20) NOT NULL
+  `numeroPeriodo` varchar(20) NOT NULL,
+  `tipo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
