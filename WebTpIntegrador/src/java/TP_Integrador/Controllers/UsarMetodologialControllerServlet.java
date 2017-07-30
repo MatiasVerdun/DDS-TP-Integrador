@@ -1,11 +1,9 @@
 
 package TP_Integrador.Controllers;
 
-import TP_Integrador.DAO.CondicionDAO;
-import TP_Integrador.DAO.EmpresaDAO;
-import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DTO.Condicion;
-import TP_Integrador.DTO.Indicador;
+
+import TP_Integrador.DAO.*;
+import TP_Integrador.DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class UsarMetodologialControllerServlet extends HttpServlet {
             String strPeriodoHasta=request.getParameter("periodoHasta");
            
             CondicionDAO condicionDAO = new CondicionDAO();
-            ArrayList<Condicion> condiciones = new ArrayList<>();
+            ArrayList<Condicion> condiciones = new ArrayList<Condicion>();
             condiciones = condicionDAO.ObtenerCondicion(strEmpresa);
             int desde = Integer.parseInt(strPeriodoDesde);
             int hasta = Integer.parseInt(strPeriodoHasta);
@@ -52,7 +50,9 @@ public class UsarMetodologialControllerServlet extends HttpServlet {
             pasaCondicion = condiciones.get(i).pasaCondicion(empresaDAO.ObtenerEmpresa(strEmpresa),desde,hasta);
             }
             
-          
+            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
+            ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
+            request.getSession().setAttribute("metodologiasBean",metodologias);  
             request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoMetodologia.jsp");  
             rd.forward(request, response);  

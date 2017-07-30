@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@ include file="UsarIndicador.jsp" %>
+ <%@ include file="UsarMetodologia.jsp" %>
  <!DOCTYPE html>
  <html>
      <head>

@@ -59,8 +59,14 @@
     <script>
     function handleClick(texto) {
     //document.getElementById("monto").disabled = bool;
-      document.getElementById("monto").placeholder=texto;   
-      }
+    document.getElementById("monto").placeholder=texto;  
+    if(texto.equals('Monto')){
+        document.getElementById("monto").min="0";    
+    }
+    else{
+        document.getElementById("monto").min="2";     
+    }
+    }
      </script>
     
     <select required class="select" name="Indicador">
