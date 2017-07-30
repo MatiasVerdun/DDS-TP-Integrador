@@ -1,7 +1,8 @@
 
 <%@page import="TP_Integrador.DTO.Empresa"%>
-<%@page import="TP_Integrador.DTO.Indicador"%>
+<%@page import="TP_Integrador.DTO.*"%>
 <%@page import="java.util.ArrayList"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,11 +41,11 @@
 <%  
 //--- Obtiene el listado de Indicadores
 
-ArrayList<Indicador> indicadores =(ArrayList<Indicador>)request.getSession().getAttribute("indicadoresBean");  
+ArrayList<Metodologia> metodologias =(ArrayList<Metodologia>)request.getSession().getAttribute("metodologiasBean");  
 
-for (int counter = 0; counter < indicadores.size(); counter++) { 		      
+for (int counter = 0; counter < metodologias.size(); counter++) { 		      
     out.print("<option value='"); 		
-    out.print(indicadores.get(counter).getNombre()); 		
+    out.print(metodologias.get(counter).getNombreMetodologia()); 		
     out.print("' ");
 /*
     if (empresas.get(counter).getId().equals(objSeleccionZona.getId_pais()))   {
@@ -52,7 +53,7 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
     }
 */
     out.print(" >"); 		
-    out.print(indicadores.get(counter).getNombre()); 		
+    out.print(metodologias.get(counter).getNombreMetodologia()); 		
     out.print("</option>"); 		
 } 
 %>

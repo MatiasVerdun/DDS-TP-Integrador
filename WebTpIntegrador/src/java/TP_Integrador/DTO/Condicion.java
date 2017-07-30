@@ -15,7 +15,16 @@ public class Condicion {
     private String metodologia;
     private String numero;
     private String indicador;
-    public Boolean pasa = true;
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public String getMetodologia() {
         return metodologia;
     }
@@ -43,7 +52,7 @@ public class Condicion {
     
     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
         
-         return pasa;
+         return true;
     }
 
     

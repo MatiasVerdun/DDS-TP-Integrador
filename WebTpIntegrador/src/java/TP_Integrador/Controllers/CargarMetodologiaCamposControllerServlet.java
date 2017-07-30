@@ -1,11 +1,7 @@
 package TP_Integrador.Controllers;
 
-import TP_Integrador.DAO.CondicionDAO;
-import TP_Integrador.DAO.EmpresaDAO;
-import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DAO.MetodologiaDAO;
-import TP_Integrador.DTO.Condicion;
-import TP_Integrador.DTO.Metodologia;
+import TP_Integrador.DAO.*;
+import TP_Integrador.DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,15 +33,16 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
           //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
             String strNombreMetodologia =request.getParameter("nombreMetodologia");  
             String condicion =request.getParameter("condicion");  
-            String indicador = request.getParameter("Indicador");
+            String metodologia = request.getParameter("Metodologia");
             String  numero = request.getParameter("numero");
+            request.setAttribute("nombreMetodologiaBean",strNombreMetodologia);
             
           //--- Crea los objetos
             CondicionDAO condicionDAO = new CondicionDAO();
             Condicion objCondicion = new Condicion();
           
         if(request.getParameter("proximaCondicion")!= null){
-            objCondicion.setIndicador(indicador);
+            objCondicion.setIndicador(metodologia);
             objCondicion.setMetodologia(strNombreMetodologia);
             objCondicion.setNumero(numero);
             condicionDAO.GuardarCondicion(objCondicion);
@@ -56,7 +53,7 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
         } 
         
         if(request.getParameter("finalizarCarga")!= null){  
-            RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
+            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
             rd.forward(request, response);
         } 
         

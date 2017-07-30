@@ -43,14 +43,10 @@ public class CargarMetodologiaControllerServlet extends HttpServlet {
            metodologiaDAO.GuardarMetodologia(objMetodologia); 
            
            if(request.getParameter("cargarCondiciones")!= null){
-            if(!"".equals(strNombreMetodologia)){
             request.setAttribute("nombreMetodologiaBean",strNombreMetodologia);
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
             rd.forward(request, response);
-        }else {
-                RequestDispatcher rd=request.getRequestDispatcher("MetodologiaNombre-error.jsp");  
-                  rd.forward(request, response);
-            } 
+    
            } 
         }
     }

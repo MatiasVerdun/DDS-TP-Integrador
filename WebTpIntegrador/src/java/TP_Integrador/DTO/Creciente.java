@@ -3,6 +3,7 @@ import TP_Integrador.DAO.IndicadorDAO;
 
 
 public class Creciente extends Condicion{
+    @Override
     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
         IndicadorDAO indicadorDAO = new IndicadorDAO();
         double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));

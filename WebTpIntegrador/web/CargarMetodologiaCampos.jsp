@@ -34,29 +34,35 @@
 }
 </style>
 </head>
- <%
-
-%>
-
 <form action="CargarMetodologiaCamposControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
-    <br>
-    <input name ="nombreMetodologia" class="form" disabled
+<br>
+    <input name ="nombreMetodologia" class="form" readonly="true"
+           
            <%
-            out.print("<value='"); 		
+            out.print("value='"); 		
             out.print(request.getAttribute("nombreMetodologiaBean")); 		
             out.print("' ");
             out.print(" >"); 		
            %>
+
     <br>
     <fieldset style="width:40%;text-align:left; margin:auto;float: left; border: 0;">
-    <input name ="condicion" class = "check" type="radio"  value="menorA"> menorA<br>
-    <input name ="condicion" class = "check" type="radio"  value="mayorA"> mayorA<br>
-    <input name ="condicion" class = "check" type="radio"  value="creciente"> creciente<br>
-    <input name ="condicion" class = "check" type="radio"  value="decreciente"> decreciente<br>
-    <input name ="condicion" class = "check" type="radio"  value="consistente"> consistente<br>
+        <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="menorA" checked=true> menorA<br>
+    <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="mayorA"> mayorA<br>
+    <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="creciente"> creciente<br>
+    <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="decreciente"> decreciente<br>
+    <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="consistente"> consistente<br>
     </fieldset>
     <br>
+   
+    <script>
+    function handleClick(texto) {
+    //document.getElementById("monto").disabled = bool;
+      document.getElementById("monto").placeholder=texto;   
+      }
+     </script>
+    
     <select required class="select" name="Indicador">
 <%  
 //--- Obtiene el listado de Indicadores
@@ -75,7 +81,8 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
 </select>
 <br>
 <br>
-<input type="number" min="2" onkeypress="return event.charCode >= 48" class="select" name="numero" placeholder="Numero"/>
+<input type="number" min="0" onkeypress="return event.charCode >= 48" class="select" name="monto" placeholder="Monto" id="monto" required />
+
 <br>
 
 <br>

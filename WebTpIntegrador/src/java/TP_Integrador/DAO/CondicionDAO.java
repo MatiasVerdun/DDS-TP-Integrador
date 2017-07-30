@@ -25,11 +25,11 @@ public class CondicionDAO {
             Connection conn = mySQL.getConnection();
             
             //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement guardarCondicion = conn.prepareStatement("INSERT INTO `condiciones` (`metodologia`, `indicador`, `numeroPeriodo`) VALUES (?, ?, ?)"); 
+            PreparedStatement guardarCondicion = conn.prepareStatement("INSERT INTO `condiciones` (`metodologia`, `indicador`, `numeroPeriodo`, `tipo`) VALUES (?, ?, ?, ?)"); 
             guardarCondicion.setString(1,  condicion.getMetodologia());
             guardarCondicion.setString(2, condicion.getIndicador());
             guardarCondicion.setString(3, condicion.getNumero());
-          
+            guardarCondicion.setString(4, condicion.getTipo());
             
 
             //--- Ejecuta la sentencia para almacenar datos

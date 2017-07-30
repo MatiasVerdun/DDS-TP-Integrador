@@ -1,8 +1,8 @@
 package TP_Integrador.Controllers;
 
 import TP_Integrador.DAO.EmpresaDAO;
-import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DTO.Empresa;
+import TP_Integrador.DAO.*;
+import TP_Integrador.DTO.*;
 import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,9 +33,9 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         if(request.getParameter("usarMetodologia")!= null){
-            IndicadorDAO indicadorDAO= new IndicadorDAO();
-            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
-            request.getSession().setAttribute("indicadoresBean",indicadores);  
+            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
+            ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
+            request.getSession().setAttribute("metodologiasBean",metodologias);  
             EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
             request.getSession().setAttribute("empresasBean",empresas);

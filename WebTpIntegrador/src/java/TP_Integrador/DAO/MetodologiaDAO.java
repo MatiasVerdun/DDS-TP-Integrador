@@ -6,6 +6,7 @@
 package TP_Integrador.DAO;
 
 import TP_Integrador.DTO.Cuenta;
+import TP_Integrador.DTO.Indicador;
 import TP_Integrador.DTO.Metodologia;
 import TP_Integrador.MySQL.MySqlHelper;
 import java.sql.Array;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,6 +45,32 @@ public class MetodologiaDAO {
         return existe;
     } 
     */
+    public ArrayList<Metodologia> ObtenerMetodologias(){
+        ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>();
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaMetodologias = conn.prepareStatement("SELECT * FROM metodologias");
+
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaMetodologias.executeQuery();
+            //--- Recorre los registros y los carga en lo que va a devolver de Usar Indicador
+            while(rs.next())
+            {
+                Metodologia metodologia = new Metodologia();
+                metodologia.setNombreMetodologia(rs.getString("nombreMetodologia"));
+                
+                listaMetodologias.add(metodologia);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al Obtener Metodologias");
+        }
+        return listaMetodologias;
+    }
+    
         public void GuardarMetodologia(Metodologia metodologia){
         try {
             //--- Se conecta a la base de datos
@@ -50,11 +78,8 @@ public class MetodologiaDAO {
             Connection conn = mySQL.getConnection();
             
             //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement guardarMetodologia = conn.prepareStatement("INSERT INTO `metodologias` `nombreMetodologia` VALUES ?");
+            PreparedStatement guardarMetodologia = conn.prepareStatement("INSERT INTO `metodologias` (`nombreMetodologia`) VALUES (?)");
             guardarMetodologia.setString(1, metodologia.getNombreMetodologia());       
-            
-               
-            
 
             //--- Ejecuta la sentencia para almacenar datos
             guardarMetodologia.execute();
