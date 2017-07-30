@@ -48,7 +48,7 @@
 
     <br>
     <fieldset style="width:40%;text-align:left; margin:auto;float: left; border: 0;">
-        <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="menorA" checked=true> menorA<br>
+    <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="menorA" checked=true> menorA<br>
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="mayorA"> mayorA<br>
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="creciente"> creciente<br>
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="decreciente"> decreciente<br>

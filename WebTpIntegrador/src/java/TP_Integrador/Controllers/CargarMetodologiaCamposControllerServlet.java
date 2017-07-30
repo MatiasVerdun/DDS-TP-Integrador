@@ -33,8 +33,8 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
           //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
             String strNombreMetodologia =request.getParameter("nombreMetodologia");  
             String condicion =request.getParameter("condicion");  
-            String metodologia = request.getParameter("Metodologia");
-            String  numero = request.getParameter("numero");
+            String indicador = request.getParameter("Indicador");
+            String numero = request.getParameter("monto");
             request.setAttribute("nombreMetodologiaBean",strNombreMetodologia);
             
           //--- Crea los objetos
@@ -42,9 +42,10 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
             Condicion objCondicion = new Condicion();
           
         if(request.getParameter("proximaCondicion")!= null){
-            objCondicion.setIndicador(metodologia);
+            objCondicion.setIndicador(indicador);
             objCondicion.setMetodologia(strNombreMetodologia);
             objCondicion.setNumero(numero);
+            objCondicion.setTipo(condicion);
             condicionDAO.GuardarCondicion(objCondicion);
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
             rd.forward(request, response);
@@ -52,7 +53,12 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
             
         } 
         
-        if(request.getParameter("finalizarCarga")!= null){  
+        if(request.getParameter("finalizarCarga")!= null){ 
+            objCondicion.setIndicador(indicador);
+            objCondicion.setMetodologia(strNombreMetodologia);
+            objCondicion.setNumero(numero);
+            objCondicion.setTipo(condicion);
+            condicionDAO.GuardarCondicion(objCondicion);
             RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
             rd.forward(request, response);
         } 
