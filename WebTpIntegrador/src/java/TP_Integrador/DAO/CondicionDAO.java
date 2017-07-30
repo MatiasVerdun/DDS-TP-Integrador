@@ -5,7 +5,7 @@
  */
 package TP_Integrador.DAO;
 
-import TP_Integrador.DTO.Condicion;
+import TP_Integrador.DTO.*;
 import TP_Integrador.MySQL.MySqlHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,39 +58,39 @@ public class CondicionDAO {
                String tipo = rs.getString("tipo");
               
             if("MayorA".equals(tipo)){
-               Condicion MayorA = new Condicion();
-               MayorA.setMetodologia(rs.getString("metodologia"));
-               MayorA.setIndicador(rs.getString("indicador"));
-               MayorA.setNumero(rs.getString("numero"));
-               listaCondiciones.add(MayorA);
+               MayorA mayorA = new MayorA();
+               mayorA.setMetodologia(rs.getString("metodologia"));
+               mayorA.setIndicador(rs.getString("indicador"));
+               mayorA.setNumero(rs.getString("numero"));
+               listaCondiciones.add(mayorA);
             }
              if("MenorA".equals(tipo)){
-               Condicion MenorA = new Condicion();
-               MenorA.setMetodologia(rs.getString("metodologia"));
-               MenorA.setIndicador(rs.getString("indicador"));
-               MenorA.setNumero(rs.getString("numero"));
-               listaCondiciones.add(MenorA);
+               MenorA menorA = new MenorA();
+               menorA.setMetodologia(rs.getString("metodologia"));
+               menorA.setIndicador(rs.getString("indicador"));
+               menorA.setNumero(rs.getString("numero"));
+               listaCondiciones.add(menorA);
             } 
              if("Creciente".equals(tipo)){
-               Condicion Creciente = new Condicion();
-               Creciente.setMetodologia(rs.getString("metodologia"));
-               Creciente.setIndicador(rs.getString("indicador"));
-               Creciente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(Creciente);
+               Creciente creciente = new Creciente();
+               creciente.setMetodologia(rs.getString("metodologia"));
+               creciente.setIndicador(rs.getString("indicador"));
+               creciente.setNumero(rs.getString("numero"));
+               listaCondiciones.add(creciente);
             }
               if("Decreciente".equals(tipo)){
-               Condicion Decreciente = new Condicion();
-               Decreciente.setMetodologia(rs.getString("metodologia"));
-               Decreciente.setIndicador(rs.getString("indicador"));
-               Decreciente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(Decreciente);
+               Decreciente decreciente = new Decreciente();
+               decreciente.setMetodologia(rs.getString("metodologia"));
+               decreciente.setIndicador(rs.getString("indicador"));
+               decreciente.setNumero(rs.getString("numero"));
+               listaCondiciones.add(decreciente);
             }
               if("Consistente".equals(tipo)){
-               Condicion Consistente = new Condicion();
-               Consistente.setMetodologia(rs.getString("metodologia"));
-               Consistente.setIndicador(rs.getString("indicador"));
-               Consistente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(Consistente);
+               Consistente consistente = new Consistente();
+               consistente.setMetodologia(rs.getString("metodologia"));
+               consistente.setIndicador(rs.getString("indicador"));
+               consistente.setNumero(rs.getString("numero"));
+               listaCondiciones.add(consistente);
             }
             }
             

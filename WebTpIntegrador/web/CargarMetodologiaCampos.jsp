@@ -41,9 +41,9 @@
 <form action="CargarMetodologiaCamposControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
-    <input name ="nombreMetodologia" class="form" disabled="disable" 
+    <input name ="nombreMetodologia" class="form" disabled
            <%
-            out.print("< value='"); 		
+            out.print("<value='"); 		
             out.print(request.getAttribute("nombreMetodologiaBean")); 		
             out.print("' ");
             out.print(" >"); 		

@@ -49,95 +49,11 @@ public class Condicion {
     
 }
 
-class MenorA extends Condicion {
-    
-    @Override
-    public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
-        int i = anioDesde;
-        while(i <= anioHasta){
-        double resultado = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
-        if(resultado >= Integer.parseInt(this.getNumero()) ){
-            pasa = false;
-        }
-        i++;
-        }
-      return pasa;
-    }
-    
-}
 
-class MayorA extends Condicion{
-    @Override
-    public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
-        int i = anioDesde;
-        while(i <= anioHasta){
-        double resultado = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
-        if(resultado <= Integer.parseInt(this.getNumero()) ){
-            pasa = false;
-        }
-        i++;
-        }
-      return pasa;
-    }
-}
 
-class Creciente extends Condicion{
-    public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
-        double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));
-        
-        int i = anioDesde++;
-        while(i <= anioHasta){
-        double resultadoAComparar = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
-        if(resultadoAComparar < resultadoInicial ){
-            pasa = false;
-            resultadoInicial = resultadoAComparar;
-        }
-        i++;
-        }
-      return pasa;
-    }
-}
 
-class Decreciente extends Condicion{
-     @Override
-     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
-        double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));
-        
-        int i = anioDesde++;
-        while(i <= anioHasta){
-        double resultadoAComparar = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
-        if(resultadoAComparar > resultadoInicial ){
-            pasa = false;
-            resultadoInicial = resultadoAComparar;
-        }
-        i++;
-        }
-      return pasa;
-    }
-}
 
-class Consistente extends Condicion{
-     @Override
-     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
-        double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));
-        
-        int i = anioDesde++;
-        while(i <= anioHasta){
-        double resultadoAComparar = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
-        if( abs(resultadoAComparar - resultadoInicial)  < resultadoAComparar * 0.05 ){
-            pasa = false;
-            resultadoInicial = resultadoAComparar;
-        }
-        i++;
-        }
-      return pasa;
-    }
-    
-}
+
+
+
+
