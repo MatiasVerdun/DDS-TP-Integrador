@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TP_Integrador.Controllers;
 
+import TP_Integrador.DAO.CondicionDAO;
+import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DTO.Condicion;
 import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,11 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Victoria
- */
-@WebServlet(name = "UsarIndicadorControllerServlet", urlPatterns = {"/UsarIndicadorControllerServlet"})
+
+@WebServlet(name = "UsarMetodologiaControllerServlet", urlPatterns = {"/UsarMetodologiaControllerServlet"})
 public class UsarMetodologialControllerServlet extends HttpServlet {
 
     /**
@@ -37,20 +33,28 @@ public class UsarMetodologialControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-            String strIndicadorName=request.getParameter("Indicador");  
+            String strIndicador=request.getParameter("Indicador");  
             String strEmpresa=request.getParameter("Empresa");  
-            String strAnio=request.getParameter("Anio");
+            String strPeriodoDesde=request.getParameter("periodoDesde");
+            String strPeriodoHasta=request.getParameter("periodoHasta");
+           
+            CondicionDAO condicionDAO = new CondicionDAO();
+            ArrayList<Condicion> condiciones = new ArrayList<>();
+            condiciones = condicionDAO.ObtenerCondicion(strEmpresa);
+            int desde = Integer.parseInt(strPeriodoDesde);
+            int hasta = Integer.parseInt(strPeriodoHasta);
             
-            IndicadorDAO indicadorDAO = new IndicadorDAO();
-
+            Boolean pasaCondicion=true;
+            EmpresaDAO empresaDAO = new EmpresaDAO();
             
-            String Indicador = indicadorDAO.conseguirIndicador(strIndicadorName);
-            double resultadoFinal = indicadorDAO.resultadoFinal(Indicador, strEmpresa, strAnio);
             
-            String total = String.valueOf(resultadoFinal);
+            for(int i=0; condiciones.size() > i; i++){ 
+            pasaCondicion = condiciones.get(i).pasaCondicion(empresaDAO.ObtenerEmpresa(strEmpresa),desde,hasta);
+            }
+            
           
-            request.getSession().setAttribute("IndicadorBean",total);
-            RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp");  
+            request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
+            RequestDispatcher rd=request.getRequestDispatcher("ResultadoMetodologia.jsp");  
             rd.forward(request, response);  
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

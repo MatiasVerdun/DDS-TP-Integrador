@@ -17,10 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- *
- * @author Victoria
- */
+
 @WebServlet(name = "CargarMetodologiaCamposControllerServlet", urlPatterns = {"/CargarMetodologiaCamposControllerServlet"})
 public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
 
@@ -41,9 +38,7 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
             String strNombreMetodologia =request.getParameter("nombreMetodologia");  
             String condicion =request.getParameter("condicion");  
             String indicador = request.getParameter("Indicador");
-            int  numero = Integer.parseInt(request.getParameter("numero"));
-            int  periodoDesde= Integer.parseInt(request.getParameter("periodoDesde"));
-            int  periodoHasta = Integer.parseInt(request.getParameter("periodoHasta"));
+            String  numero = request.getParameter("numero");
             
           //--- Crea los objetos
             CondicionDAO condicionDAO = new CondicionDAO();

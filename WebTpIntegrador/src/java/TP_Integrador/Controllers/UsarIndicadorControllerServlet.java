@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TP_Integrador.Controllers;
 
 import TP_Integrador.DAO.IndicadorDAO;
@@ -17,10 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Victoria
- */
+
 @WebServlet(name = "UsarIndicadorControllerServlet", urlPatterns = {"/UsarIndicadorControllerServlet"})
 public class UsarIndicadorControllerServlet extends HttpServlet {
 
@@ -50,7 +43,7 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             String total = String.valueOf(resultadoFinal);
           
             request.getSession().setAttribute("IndicadorBean",total);
-            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicadoresPrueba.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("ResultadoIndicador.jsp");  
             rd.forward(request, response);  
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

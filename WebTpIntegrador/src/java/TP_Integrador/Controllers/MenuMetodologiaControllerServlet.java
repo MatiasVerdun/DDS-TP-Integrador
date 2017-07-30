@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- *
- * @author Victoria
- */
 @WebServlet(name = "MenuMetodologiaControllerServlet", urlPatterns = {"/MenuMetodologiaControllerServlet"})
 public class MenuMetodologiaControllerServlet extends HttpServlet {
 
@@ -37,6 +33,12 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         if(request.getParameter("usarMetodologia")!= null){
+            IndicadorDAO indicadorDAO= new IndicadorDAO();
+            ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
+            request.getSession().setAttribute("indicadoresBean",indicadores);  
+            EmpresaDAO empresaDAO = new EmpresaDAO();
+            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            request.getSession().setAttribute("empresasBean",empresas);
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
             rd.forward(request, response);
         } 

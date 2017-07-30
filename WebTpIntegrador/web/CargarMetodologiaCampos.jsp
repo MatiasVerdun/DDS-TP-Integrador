@@ -77,12 +77,7 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
 <br>
 <input type="number" min="2" onkeypress="return event.charCode >= 48" class="select" name="numero" placeholder="Numero"/>
 <br>
-<br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde"/>
-<br>
-<br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta"/>
-<br>
+
 <br>
 <input class="button" type="submit" name="proximaCondicion" value="Proxima Condicion"/>
 <br>

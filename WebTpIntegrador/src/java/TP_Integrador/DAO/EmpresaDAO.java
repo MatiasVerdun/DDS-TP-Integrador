@@ -88,4 +88,29 @@ public class EmpresaDAO {
         return listaEmpresas;
     }
     
+    public Empresa ObtenerEmpresa(String empresa ){
+       Empresa objEmpresa = new Empresa();
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaEmpresa = conn.prepareStatement("SELECT * FROM empresa WHERE (`nombreEmpresa`) VALUE (?)");
+            consultaEmpresa.setString(1, empresa);
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaEmpresa.executeQuery();
+            
+               
+                objEmpresa.setCodEmpresa(rs.getString("codEmpresa"));
+                objEmpresa.setNombreEmpresa(rs.getString("nombreEmpresa"));
+                
+              
+        } catch (SQLException ex) {
+            System.out.println("Error al Obtener Empresas");
+        }
+        return objEmpresa;
+    }
+    
+    
 }
