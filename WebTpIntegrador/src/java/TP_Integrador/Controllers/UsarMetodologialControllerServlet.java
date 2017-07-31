@@ -31,26 +31,32 @@ public class UsarMetodologialControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-            String strIndicador=request.getParameter("Indicador");  
+            String strMetodologia=request.getParameter("Metodologia");  
             String strEmpresa=request.getParameter("Empresa");  
             String strPeriodoDesde=request.getParameter("periodoDesde");
             String strPeriodoHasta=request.getParameter("periodoHasta");
            
-            CondicionDAO condicionDAO = new CondicionDAO();
-            ArrayList<Condicion> condiciones = new ArrayList<Condicion>();
-            condiciones = condicionDAO.ObtenerCondicion(strEmpresa);
+            //CondicionDAO condicionDAO = new CondicionDAO();
+            //ArrayList<Condicion> condiciones = condicionDAO.ObtenerCondicion(strEmpresa);
             int desde = Integer.parseInt(strPeriodoDesde);
             int hasta = Integer.parseInt(strPeriodoHasta);
             
-            Boolean pasaCondicion=true;
+            //Boolean pasaCondicion=true;
             EmpresaDAO empresaDAO = new EmpresaDAO();
+            Empresa empresa = new Empresa();
+            empresa.setNombreEmpresa(strEmpresa);
+            MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
             
+            Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
             
-            for(int i=0; condiciones.size() > i; i++){ 
+            /*for(int i=0; condiciones.size() > i; i++){ 
             pasaCondicion = condiciones.get(i).pasaCondicion(empresaDAO.ObtenerEmpresa(strEmpresa),desde,hasta);
-            }
+            }*/
             
-            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
+            boolean pasaCondicion = meto.pasaCondiciones(empresa, desde, hasta);
+            
+            
+
             ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));

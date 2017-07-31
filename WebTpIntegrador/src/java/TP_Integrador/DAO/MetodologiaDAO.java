@@ -5,9 +5,7 @@
  */
 package TP_Integrador.DAO;
 
-import TP_Integrador.DTO.Cuenta;
-import TP_Integrador.DTO.Indicador;
-import TP_Integrador.DTO.Metodologia;
+import TP_Integrador.DTO.*;
 import TP_Integrador.MySQL.MySqlHelper;
 import java.sql.Array;
 import java.sql.Connection;
@@ -87,4 +85,12 @@ public class MetodologiaDAO {
             System.out.println("Error al Ingresar la Metodologia");
         }
     }
+        
+       public Metodologia ObtenerMetodologiaConCondiciones(String metodologia){
+           Metodologia meto = new Metodologia();
+           meto.setNombreMetodologia(metodologia);
+           CondicionDAO condicionDAO = new CondicionDAO();
+           meto.addCondiciones(condicionDAO.ObtenerCondiciones(metodologia));
+           return meto;
+       }
 }

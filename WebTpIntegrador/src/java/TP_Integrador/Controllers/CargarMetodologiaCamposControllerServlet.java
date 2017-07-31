@@ -39,7 +39,7 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
             
           //--- Crea los objetos
             CondicionDAO condicionDAO = new CondicionDAO();
-            Condicion objCondicion = new Condicion();
+            Condicion objCondicion = new Condicion(numero, indicador);
           
         if(request.getParameter("proximaCondicion")!= null){
             objCondicion.setIndicador(indicador);

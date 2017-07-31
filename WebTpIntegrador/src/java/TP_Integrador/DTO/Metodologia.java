@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Metodologia {
     private String nombreMetodologia; 
    
-    private ArrayList condiciones = new ArrayList();
+    private ArrayList<Condicion> condiciones = new ArrayList<Condicion>();
 
     public String getNombreMetodologia() {
         return nombreMetodologia;
@@ -29,9 +29,26 @@ public class Metodologia {
         return condiciones;
     }
 
-    public void addCondiciones(String condiciones) {
-        this.condiciones.add(condiciones);
+    public void addCondicion(Condicion condicion) {
+        condiciones.add(condicion);
     }
+    
+    public void addCondiciones(ArrayList<Condicion> condicionesAAgregar){
+        condicionesAAgregar.forEach(condicion -> addCondicion(condicion));
+    }
+    
+    public boolean pasaCondiciones(Empresa empresa, int anioDesde, int anioHasta){
+        //return condiciones.stream().allMatch(condicion -> condicion.pasaCondicion(empresa, anioDesde, anioHasta));
+        boolean pasa = true;
+            for(int i = 0; i < condiciones.size(); i++){
+                if(!(condiciones.get(i).pasaCondicion(empresa, anioDesde, anioHasta))){
+                    pasa = false;
+                }
+            
+            }
+        return pasa;
+    }
+    
     
      
 }

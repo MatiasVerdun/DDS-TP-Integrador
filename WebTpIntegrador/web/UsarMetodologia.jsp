@@ -37,7 +37,7 @@
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
     <br> 
-    <select required class="select" name="Indicador">
+    <select required class="select" name="Metodologia">
 <%  
 //--- Obtiene el listado de Indicadores
 
@@ -68,7 +68,7 @@ ArrayList<Empresa> empresas =(ArrayList<Empresa>)request.getSession().getAttribu
 
 for (int counter = 0; counter < empresas.size(); counter++) { 		      
     out.print("<option value='"); 		
-    out.print(empresas.get(counter).getCodEmpresa()); 		
+    out.print(empresas.get(counter).getNombreEmpresa()); 		
     out.print("' ");
 /*
     if (empresas.get(counter).getId().equals(objSeleccionZona.getId_pais()))   {

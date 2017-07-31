@@ -37,7 +37,7 @@ public class CondicionDAO {
             System.out.println("Error al Ingresar la Condicion");
         }
     }
-       public ArrayList<Condicion> ObtenerCondicion(String metodologia ){
+       public ArrayList<Condicion> ObtenerCondiciones(String metodologia ){
         ArrayList<Condicion> listaCondiciones = new ArrayList<>();
            try {
             //--- Se conecta a la base de datos
@@ -45,14 +45,33 @@ public class CondicionDAO {
             Connection conn = mySQL.getConnection();
             
             //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement consultaCondicion = conn.prepareStatement("SELECT * FROM condiciones WHERE (`metodologia`) VALUES (?)"); 
+            PreparedStatement consultaCondicion = conn.prepareStatement("SELECT * FROM condiciones WHERE metodologia = ?"); 
             consultaCondicion.setString(1, metodologia);
             
 
             ResultSet rs = consultaCondicion.executeQuery();
             //--- Recorre los registros y los carga en lo que va a devolver de Usar Indicador
             
-            while(rs.next())
+            while(rs.next()){
+            switch (rs.getString("tipo")) {
+                       case "menorA":
+                           listaCondiciones.add(new MenorA(rs.getString("numeroPeriodo"),rs.getString("indicador")));
+                           break;
+                       case "mayorA":
+                           listaCondiciones.add(new MayorA(rs.getString("numeroPeriodo"),rs.getString("indicador")));
+                           break;
+                       case "consistente":
+                           listaCondiciones.add(new Consistente(rs.getString("numeroPeriodo"),rs.getString("indicador")));
+                           break;
+                       case "creciente":
+                           listaCondiciones.add(new Creciente(rs.getString("numeroPeriodo"),rs.getString("indicador")));
+                           break;
+                       case "decreciente":
+                           listaCondiciones.add(new Decreciente(rs.getString("numeroPeriodo"),rs.getString("indicador")));
+                           break;
+                   }
+            }
+            /*while(rs.next())
             {
                String tipo = rs.getString("tipo");
               
@@ -91,7 +110,7 @@ public class CondicionDAO {
                consistente.setNumero(rs.getString("numero"));
                listaCondiciones.add(consistente);
             }
-            }
+            }*/
             
         } catch (SQLException ex) {
             System.out.println("Error al Ingresar la Condicion");

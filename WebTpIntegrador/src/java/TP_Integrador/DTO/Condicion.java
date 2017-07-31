@@ -12,6 +12,12 @@ import static java.lang.Math.abs;
  * @author Vic
  */
 public class Condicion {
+
+    public Condicion(String numero, String indicador) {
+        this.numero = numero;
+        this.indicador = indicador;
+    }
+    
     private String metodologia;
     private String numero;
     private String indicador;

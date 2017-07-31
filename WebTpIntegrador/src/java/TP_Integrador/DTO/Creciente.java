@@ -3,6 +3,9 @@ import TP_Integrador.DAO.IndicadorDAO;
 
 
 public class Creciente extends Condicion{
+     public Creciente(String numero, String indicador) {
+        super(numero, indicador);
+    }
     @Override
     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
         IndicadorDAO indicadorDAO = new IndicadorDAO();
