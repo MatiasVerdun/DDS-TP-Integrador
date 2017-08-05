@@ -32,6 +32,14 @@
     color: red;
     font-size:110%
 }
+.table
+{
+    width:50%;
+    background-color: rgb(245, 245, 245);
+    border-color:#00c8f8;
+    margin:auto;
+    text-align: center;
+}
 </style>
    <form action="UsarMetodologiaEmpresasControllerServlet" method="POST">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
@@ -47,11 +55,6 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
     out.print("<option value='"); 		
     out.print(metodologias.get(counter).getNombreMetodologia()); 		
     out.print("' ");
-/*
-    if (empresas.get(counter).getId().equals(objSeleccionZona.getId_pais()))   {
-        out.print("selected");
-    }
-*/
     out.print(" >"); 		
     out.print(metodologias.get(counter).getNombreMetodologia()); 		
     out.print("</option>"); 		
@@ -65,10 +68,10 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
 
 <br>
 <br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde"/>
+<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde" required/>
 <br>
 <br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta"/>
+<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta" required/>
 <br>
 
     <br>
@@ -81,29 +84,36 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
 </form>
 <%  
 
-ArrayList<Metodologia> metodologiasConCondiciones =(ArrayList<Metodologia>)request.getAttribute("metodologiasConCondicionesBean");  
-ArrayList<Empresa> empresas  = (ArrayList<Empresa>)request.getAttribute("empresasBean");
-int desde = Integer.parseInt((String)request.getAttribute("desdeBean"));
-int hasta = Integer.parseInt((String)request.getAttribute("hastaBean"));
+Metodologia metodologiasConCondiciones =(Metodologia)request.getSession().getAttribute("metodologiasConCondicionesBean");  
+ArrayList<Empresa> empresas  = (ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");
+String desde = (String)request.getSession().getAttribute("desdeBean");//Integer.parseInt((String)request.getAttribute("desdeBean"));
+String hasta = (String)request.getSession().getAttribute("hastaBean");//Integer.parseInt((String)request.getAttribute("hastaBean"));
 
 if (empresas!=null && empresas.size()>0)
 {
     out.print("<br/><br/>");
-    out.print("<table class='table'>");
+    out.print("<table align='center' class='table'>");
+    out.print("<tr>");
+        out.print("<td>");
+        out.print("<b>Empresa</b>");
+        out.print("</td>");
+        out.print("<td>");
+        out.print("<b>");
+        out.print(metodologiasConCondiciones.getNombreMetodologia());
+        out.print("</b>");
+        out.print("</td>");
+        out.print("</tr>");
     for (int counter = 0; counter < empresas.size(); counter++) { 		      
-        for(int c = 0; c < metodologiasConCondiciones.size();c++) {
         Empresa empresaActual =empresas.get(counter);
         out.print("<tr>");
         out.print("<td>");
         out.print(empresaActual.getNombreEmpresa());
         out.print("</td>");
         out.print("<td>");
-        out.print(metodologiasConCondiciones.get(c).pasaCondiciones(empresaActual,desde,hasta));
+        out.print(metodologiasConCondiciones.pasaCondiciones(empresaActual,Integer.parseInt(desde), Integer.parseInt(hasta)));
         out.print("</td>");
         out.print("</tr>");
-    } 
     }
-
     out.print("</table>");
 } 
 %>

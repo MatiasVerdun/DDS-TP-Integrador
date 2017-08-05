@@ -45,6 +45,8 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         if(request.getParameter("usarMetodologiaEmpresas")!= null){
             MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
             ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
+            //request.getSession().setAttribute("desdeBean",1); 
+            //request.getSession().setAttribute("hastaBean",0);
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp"); 
             rd.forward(request, response);
