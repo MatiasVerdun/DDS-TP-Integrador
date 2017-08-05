@@ -44,7 +44,6 @@ public class Metodologia {
                 if(!(condiciones.get(i).pasaCondicion(empresa, anioDesde, anioHasta))){
                     pasa = false;
                 }
-            
             }
         return pasa;
     }

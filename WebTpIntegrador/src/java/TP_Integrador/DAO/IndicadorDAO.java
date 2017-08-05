@@ -175,5 +175,5 @@ public class IndicadorDAO {
             
             
             return (subStr.equals("no errors.\n"));
-}
+    }
 }
