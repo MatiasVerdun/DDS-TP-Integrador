@@ -5,8 +5,10 @@
  */
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -25,22 +27,35 @@ private WebClient webClient;
         this.webClient = new WebClient();
     }
     
-    @After
-    public void tearDown() {
-        this.webClient.closeAllWindows();
-    }
+ 
     
     @Test
     public void testIndexHtml() throws Exception {
-        HtmlPage page = this.webClient.getPage("http://localhost:8080/WebTpIntegrador/MenuControllerServlet");
-        Html
-        input.setValueAttribute("23");
+        Assert.assertEquals(1, 1);
+        HtmlPage page = this.webClient.getPage("http://localhost:8080/WebTpIntegrador");
+        //HtmlForm form = page1.getFormByName("myform");
+        Assert.assertEquals(1, 1);
+        HtmlTextInput usuario = page.getElementByName("Usuario");
+        HtmlPasswordInput contrasenia = page.getElementByName("Clave");
+        usuario.setValueAttribute("Hector");
+        contrasenia.setValueAttribute("1234");
+        HtmlSubmitInput button = page.getElementByName("iniciarSesion");
+        HtmlPage page1 = button.click();
+        Assert.assertEquals("http://localhost:8080/WebTpIntegrador/AccesoControllerServlet", page1.getUrl().toString());
+        HtmlSubmitInput cargarValoresCuentasButton = page1.getElementByName("cargarValoresCuentas");
+        HtmlPage cargarValoresCuentasPage = cargarValoresCuentasButton.click();
+        Assert.assertEquals("http://localhost:8080/WebTpIntegrador/MenuControllerServlet", cargarValoresCuentasPage.getUrl().toString());
+        HtmlFileInput uploadedfile = cargarValoresCuentasPage.getElementByName("uploadedfile");
+        uploadedfile.setValueAttribute("C:\\ValoresCuentas.txt");
+        HtmlSubmitInput SubirArchivo = cargarValoresCuentasPage.getElementByName("subirArchivo");
+        HtmlPage menu = SubirArchivo.click();
+        Assert.assertEquals("http://localhost:8080/WebTpIntegrador/CargarValoresCuentasControllerServlet", menu.getUrl().toString());
+        cargarValoresCuentasButton = menu.getElementByName("cargarValoresCuentas");
+        cargarValoresCuentasPage = cargarValoresCuentasButton.click();
+        Assert.assertEquals("http://localhost:8080/WebTpIntegrador/MenuControllerServlet", cargarValoresCuentasPage.getUrl().toString());
         
-        HtmlSubmitInput submit = form.getInputByName("convertir");
-        page = submit.click();
         
-        HtmlSpan span = page.getFirstByXPath("//span[@class='kilometros']");
-        assertEquals("37.01482", span.asText());
+        
+        
     }
-
 }

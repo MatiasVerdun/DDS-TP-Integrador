@@ -26,7 +26,7 @@
     <input class="file" name="uploadedfile" id="uploadedfile" type="file" />
     <br>
     <br>
-    <input class="button" type="submit" value="Subir archivo" />
+    <input class="button" type="submit" name="subirArchivo" value="Subir archivo" />
     <br>
     <br>
   </fieldset>

@@ -75,7 +75,7 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
           }
            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
            rd.forward(request, response); 
-        } else {RequestDispatcher rd=request.getRequestDispatcher("Archivo-error.jsp");  
+        } else {RequestDispatcher rd=request.getRequestDispatcher("Archivo-Error.jsp");  
                 rd.forward(request, response); }
   
      }
