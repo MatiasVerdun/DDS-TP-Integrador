@@ -36,8 +36,8 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             String strPeriodoHasta=request.getParameter("periodoHasta");
            
             
-            //int desde = Integer.parseInt(strPeriodoDesde);
-            //int hasta = Integer.parseInt(strPeriodoHasta);
+            int desde = Integer.parseInt(strPeriodoDesde);
+            int hasta = Integer.parseInt(strPeriodoHasta);
             
             MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
             Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
@@ -52,8 +52,11 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             request.getSession().setAttribute("desdeBean",strPeriodoDesde); 
             request.getSession().setAttribute("hastaBean",strPeriodoHasta);
           
+          
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp");  
-            rd.forward(request, response);  
+            rd.forward(request, response); 
+            
+            
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

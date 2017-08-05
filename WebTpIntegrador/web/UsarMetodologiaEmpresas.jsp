@@ -1,4 +1,5 @@
 
+
 <%@page import="TP_Integrador.DTO.Empresa"%>
 <%@page import="TP_Integrador.DTO.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -82,15 +83,19 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
     <br>
   </fieldset>
 </form>
+
 <%  
 
 Metodologia metodologiasConCondiciones =(Metodologia)request.getSession().getAttribute("metodologiasConCondicionesBean");  
 ArrayList<Empresa> empresas  = (ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");
-String desde = (String)request.getSession().getAttribute("desdeBean");//Integer.parseInt((String)request.getAttribute("desdeBean"));
-String hasta = (String)request.getSession().getAttribute("hastaBean");//Integer.parseInt((String)request.getAttribute("hastaBean"));
+String strDesde = (String)request.getSession().getAttribute("desdeBean");
+String strHasta = (String)request.getSession().getAttribute("hastaBean");
 
-if (empresas!=null && empresas.size()>0)
-{
+if (empresas!=null && empresas.size()>0 ){
+  
+    int desde = Integer.parseInt(strDesde);
+    int hasta = Integer.parseInt(strHasta);
+    if(desde < hasta){
     out.print("<br/><br/>");
     out.print("<table align='center' class='table'>");
     out.print("<tr>");
@@ -110,12 +115,16 @@ if (empresas!=null && empresas.size()>0)
         out.print(empresaActual.getNombreEmpresa());
         out.print("</td>");
         out.print("<td>");
-        out.print(metodologiasConCondiciones.pasaCondiciones(empresaActual,Integer.parseInt(desde), Integer.parseInt(hasta)));
+        out.print(metodologiasConCondiciones.pasaCondiciones(empresaActual,desde, hasta));
         out.print("</td>");
         out.print("</tr>");
     }
-    out.print("</table>");
+    out.print("</table>");}
+    else{
+        out.print("<font color='red'>Revise los periodos ingresados </font>");
+    }
 } 
 %>
+
 </body>
 </html>

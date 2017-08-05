@@ -58,7 +58,7 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
 %>
     </select>
     <br>
-
+    <br>
  <select required class="select" name="Empresa">
 <%  
 //--- Obtiene el listado de Empresas
@@ -79,20 +79,16 @@ for (int counter = 0; counter < empresas.size(); counter++) {
     out.print("</option>"); 		
 } 
 %>
-
-
-<br>
-<br>
-<br>
+</select>
 
 <br>
+<br>
+
 
 <input placeholder="Año" class="form" type="text" name="Anio" value="" maxlength="15" required>
-
     <br>
     <br>
-
-    <input class="button" type="submit" value="Usar Indicador" />
+<input class="button" type="submit" value="Usar Indicador" />
     <br>
     <br>
   </fieldset>

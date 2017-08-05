@@ -59,8 +59,11 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
 %>
     </select>
     <br>
+    <br>
+  
 
  <select required class="select" name="Empresa">
+
 <%  
 //--- Obtiene el listado de Empresas
 
@@ -80,15 +83,16 @@ for (int counter = 0; counter < empresas.size(); counter++) {
     out.print("</option>"); 		
 } 
 %>
-
-
+ </select>
 <br>
 <br>
+
+
 <input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde"/>
 <br>
 <br>
+
 <input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta"/>
-<br>
 
     <br>
     <br>

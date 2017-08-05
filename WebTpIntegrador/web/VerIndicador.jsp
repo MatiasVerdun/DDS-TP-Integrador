@@ -56,7 +56,7 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
     out.print("</option>"); 		
 } 
 %>
-
+</select>
 <br>
 <br>
 
