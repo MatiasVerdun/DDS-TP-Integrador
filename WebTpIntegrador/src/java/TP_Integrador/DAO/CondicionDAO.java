@@ -71,46 +71,7 @@ public class CondicionDAO {
                            break;
                    }
             }
-            /*while(rs.next())
-            {
-               String tipo = rs.getString("tipo");
-              
-            if("MayorA".equals(tipo)){
-               MayorA mayorA = new MayorA();
-               mayorA.setMetodologia(rs.getString("metodologia"));
-               mayorA.setIndicador(rs.getString("indicador"));
-               mayorA.setNumero(rs.getString("numero"));
-               listaCondiciones.add(mayorA);
-            }
-             if("MenorA".equals(tipo)){
-               MenorA menorA = new MenorA();
-               menorA.setMetodologia(rs.getString("metodologia"));
-               menorA.setIndicador(rs.getString("indicador"));
-               menorA.setNumero(rs.getString("numero"));
-               listaCondiciones.add(menorA);
-            } 
-             if("Creciente".equals(tipo)){
-               Creciente creciente = new Creciente();
-               creciente.setMetodologia(rs.getString("metodologia"));
-               creciente.setIndicador(rs.getString("indicador"));
-               creciente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(creciente);
-            }
-              if("Decreciente".equals(tipo)){
-               Decreciente decreciente = new Decreciente();
-               decreciente.setMetodologia(rs.getString("metodologia"));
-               decreciente.setIndicador(rs.getString("indicador"));
-               decreciente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(decreciente);
-            }
-              if("Consistente".equals(tipo)){
-               Consistente consistente = new Consistente();
-               consistente.setMetodologia(rs.getString("metodologia"));
-               consistente.setIndicador(rs.getString("indicador"));
-               consistente.setNumero(rs.getString("numero"));
-               listaCondiciones.add(consistente);
-            }
-            }*/
+           
             
         } catch (SQLException ex) {
             System.out.println("Error al Ingresar la Condicion");

@@ -42,7 +42,13 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
-        
+        if(request.getParameter("usarMetodologiaEmpresas")!= null){
+            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
+            ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
+            request.getSession().setAttribute("metodologiasBean",metodologias);  
+            RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp"); 
+            rd.forward(request, response);
+        } 
         if(request.getParameter("cargarMetodologia")!= null){
             
             IndicadorDAO indicadorDAO= new IndicadorDAO();

@@ -64,7 +64,7 @@ for (int counter = 0; counter < empresas.size(); counter++) {
     </select>
     <br>
     <br>
-    <input placeholder="Periodo" class="form" type="text" name="Periodo" value="" maxlength="15" >
+    <input placeholder="Periodo" class="form" type="number" min="1900" name="Periodo" value="" maxlength="15" required >
     <br>
     <br>
     <input class="button" type="submit" value="Consultar Valores" />

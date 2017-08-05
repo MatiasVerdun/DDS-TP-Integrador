@@ -30,9 +30,7 @@
     <br>
     <input class="button" type="submit" name="cargarNuevasEmpresas"  value="Cargar Nuevas Empresas">
     <br>
-    <br>
-    <input class="button" type="submit"  name="cargarNuevoIndicador" value="Cargar Nuevo Indicador">
-    <br>
+  
     <br>
   </fieldset>
 </form>

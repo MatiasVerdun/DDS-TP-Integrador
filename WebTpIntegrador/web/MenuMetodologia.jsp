@@ -27,6 +27,9 @@
     <input class="button" type="submit"  name="usarMetodologia" value="Usar Metodologia">
     <br>
     <br>
+    <input class="button" type="submit"  name="usarMetodologiaEmpresas" value="Usar Metodologia en todas las Empresas">
+    <br>
+    <br>
   </fieldset>
 </form>
 
