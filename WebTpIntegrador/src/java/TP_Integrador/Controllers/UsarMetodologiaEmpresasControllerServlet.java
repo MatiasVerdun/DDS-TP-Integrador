@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TP_Integrador.Controllers;
 
-import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DTO.Indicador;
+
+import TP_Integrador.DAO.*;
+import TP_Integrador.DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "CargarIndicadoresControllerServlet", urlPatterns = {"/CargarIndicadoresControllerServlet"})
-public class CargarIndicadoresControllerServlet extends HttpServlet {
+@WebServlet(name = "UsarMetodologiaEmpresasControllerServlet", urlPatterns = {"/UsarMetodologiaEmpresasControllerServlet"})
+public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,33 +30,32 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-        //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
-            String strNombreIndicador=request.getParameter("nombreIndicador");  
-            String strIndicador=request.getParameter("indicador");  
-          
+        PrintWriter out = response.getWriter();
+            String strMetodologia=request.getParameter("Metodologia"); 
+            String strPeriodoDesde=request.getParameter("periodoDesde");
+            String strPeriodoHasta=request.getParameter("periodoHasta");
+           
             
-        //--- Crea el objeto indicador que desde Validar
-            Indicador objIndicador=new Indicador();  
-            objIndicador.setNombre(strNombreIndicador);  
-            objIndicador.setIndicador(strIndicador); 
-              
-            IndicadorDAO indicadorDAO = new IndicadorDAO();
-            if(indicadorDAO.comprobarSintaxis(objIndicador)){
-                
-                    indicadorDAO.GuardarIndicador(objIndicador);
-                    RequestDispatcher rd=request.getRequestDispatcher("IndicadorGuardado.jsp");  
-                    rd.forward(request, response);
-            } else {
-                    RequestDispatcher rd=request.getRequestDispatcher("Cargar-Indicador-Error.jsp");  
-                    rd.forward(request, response);  
-            }
-        }
+            //int desde = Integer.parseInt(strPeriodoDesde);
+            //int hasta = Integer.parseInt(strPeriodoHasta);
+            
+            MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
+            Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
+            
+            EmpresaDAO empresaDAO = new EmpresaDAO();
+            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            
+            
+            
+            request.getSession().setAttribute("empresasBean",empresas); 
+            request.getSession().setAttribute("metodologiasConCondicionesBean",meto);
+            request.getSession().setAttribute("desdeBean",strPeriodoDesde); 
+            request.getSession().setAttribute("hastaBean",strPeriodoHasta);
+          
+            RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp");  
+            rd.forward(request, response);  
     }
-    
-    
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

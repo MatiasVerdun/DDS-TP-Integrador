@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(name = "UsarMetodologiaControllerServlet", urlPatterns = {"/UsarMetodologiaControllerServlet"})
-public class UsarMetodologialControllerServlet extends HttpServlet {
+public class UsarMetodologiaControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

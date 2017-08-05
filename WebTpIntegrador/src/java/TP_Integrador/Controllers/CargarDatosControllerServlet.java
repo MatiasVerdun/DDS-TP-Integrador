@@ -44,10 +44,7 @@ public class CargarDatosControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarCuentas.jsp"); 
             rd.forward(request, response);
         } 
-           if(request.getParameter("cargarNuevoIndicador")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
-            rd.forward(request, response);
-        } 
+   
         }
     }
 

@@ -71,6 +71,10 @@ public class CondicionDAO {
                            break;
                    }
             }
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 3db3154cc642b717b273f81db77a7560b9bc15cc
             
         } catch (SQLException ex) {
             System.out.println("Error al Ingresar la Condicion");

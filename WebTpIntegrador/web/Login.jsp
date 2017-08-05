@@ -36,7 +36,7 @@
     <br>
 	<br>
 	<br>
-    <input class="button" type="submit"  value="Iniciar Sesión">
+    <input class="button" type="submit" name="iniciarSesion"  value="Iniciar Sesión">
     <br>
     <br>
     <input class="button" type="submit" name="cambioClave" value="Cambiar Contraseña">
