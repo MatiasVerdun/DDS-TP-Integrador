@@ -1,4 +1,5 @@
 
+<%@page import="TP_Integrador.DAO.IndicadorDAO"%>
 <%@page import="TP_Integrador.DTO.Empresa"%>
 <%@page import="TP_Integrador.DTO.Indicador"%>
 <%@page import="java.util.ArrayList"%>

@@ -46,7 +46,7 @@ public class VerIndicadorControllerServlet extends HttpServlet {
             
           
             request.getSession().setAttribute("VerIndicadorBean",Indicador);
-            RequestDispatcher rd=request.getRequestDispatcher("VerIndicadorPrueba.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("ResultadoVerIndicador.jsp");  
             rd.forward(request, response);  
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

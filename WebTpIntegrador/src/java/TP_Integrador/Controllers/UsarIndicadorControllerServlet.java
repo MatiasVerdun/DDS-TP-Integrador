@@ -5,7 +5,6 @@ import TP_Integrador.DAO.IndicadorDAO;
 import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +34,10 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             String strAnio=request.getParameter("Anio");
             
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-
-            
-            String Indicador = indicadorDAO.conseguirIndicador(strIndicadorName);
-            double resultadoFinal = indicadorDAO.resultadoFinal(Indicador, strEmpresa, strAnio);
+            Indicador indicador = new Indicador();
+            indicador.setIndicador(indicadorDAO.conseguirIndicador(strIndicadorName));
+        
+            double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio);
             
             String total = String.valueOf(resultadoFinal);
           
