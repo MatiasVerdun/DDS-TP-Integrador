@@ -1,4 +1,5 @@
 package TP_Integrador.DTO;
+import TP_Integrador.DAO.IndicadorDAO;
 import TP_Integrador.DTO.Indicador;
 
 
@@ -17,7 +18,8 @@ public class MenorA extends Condicion {
     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
         boolean pasa = true;
         Indicador indicador = new Indicador();
-        indicador.setIndicador(this.indicador);
+        IndicadorDAO indicadorDAO = new IndicadorDAO();
+        indicador.setIndicador(indicadorDAO.conseguirIndicador(this.indicador));
         
         int i = anioDesde;
         while(i <= anioHasta){

@@ -5,8 +5,7 @@
  */
 package TP_Integrador.DTO;
 
-import TP_Integrador.DAO.IndicadorDAO;
-import TP_Integrador.DAO.ValorCuentaDAO;
+import TP_Integrador.DAO.*;
 import org.mariuszgromada.math.mxparser.Function;
 
 
@@ -35,14 +34,16 @@ public class Indicador {
       
             ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
             IndicadorDAO indicadorDAO = new IndicadorDAO();
+            Empresa empresa = (new EmpresaDAO()).ObtenerEmpresa(Empresa);
             Function f = new Function(indicador);
+            
             
           for(int i = 0; i < f.getArgumentsNumber(); i++){
               
               if(indicadorDAO.esIndicador(f.getArgument(i).getArgumentName())){
                   f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
+            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), empresa.getCodEmpresa(), Anio);
             f.getArgument(i).setArgumentValue(valor);
               }
           }

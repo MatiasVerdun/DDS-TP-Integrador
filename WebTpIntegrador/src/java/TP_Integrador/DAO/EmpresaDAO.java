@@ -88,7 +88,7 @@ public class EmpresaDAO {
         return listaEmpresas;
     }
     
-    public Empresa ObtenerEmpresa(String empresa ){
+    public Empresa ObtenerEmpresa(String empresa){
        Empresa objEmpresa = new Empresa();
         try {
             //--- Se conecta a la base de datos
@@ -96,11 +96,11 @@ public class EmpresaDAO {
             Connection conn = mySQL.getConnection();
             
             //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement consultaEmpresa = conn.prepareStatement("SELECT * FROM empresa WHERE (`nombreEmpresa`) VALUE (?)");
+            PreparedStatement consultaEmpresa = conn.prepareStatement("SELECT * FROM empresa WHERE nombreEmpresa = ?");
             consultaEmpresa.setString(1, empresa);
             //--- Ejecuta la consulta
             ResultSet rs = consultaEmpresa.executeQuery();
-            
+            rs.next();
                
                 objEmpresa.setCodEmpresa(rs.getString("codEmpresa"));
                 objEmpresa.setNombreEmpresa(rs.getString("nombreEmpresa"));
