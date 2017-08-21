@@ -36,10 +36,10 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             String strAnio=request.getParameter("Anio");
             
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-
-            
-            String Indicador = indicadorDAO.conseguirIndicador(strIndicadorName);
-            double resultadoFinal = indicadorDAO.resultadoFinal(Indicador, strEmpresa, strAnio);
+            Indicador indicador = new Indicador();
+            indicador.setIndicador(indicadorDAO.conseguirIndicador(strIndicadorName));
+        
+            double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio);
             
             //String total = String.valueOf(resultadoFinal);
             String total = String.format("%.02f", resultadoFinal);

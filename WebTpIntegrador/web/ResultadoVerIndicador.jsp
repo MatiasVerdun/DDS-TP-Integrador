@@ -6,13 +6,14 @@
      </head>
      <body>
          
- <%  
-     String valorFinal = (String)request.getSession().getAttribute("VerIndicadorBean");
+<%
+  
+    String indicador=(String)request.getSession().getAttribute("VerIndicadorBean");
+   
+    out.print("<p>");
+    out.print(indicador);
+    out.print("</p>");
+%>
  
-     out.print("<p>"); 		
-     out.print(valorFinal); 		
-     out.print("</p>");
- 
- %>  
      </body>
  </html>

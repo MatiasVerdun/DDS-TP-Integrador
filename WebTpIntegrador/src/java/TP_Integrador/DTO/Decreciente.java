@@ -1,5 +1,5 @@
 package TP_Integrador.DTO;
-import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DTO.Indicador;
 
 
 public class Decreciente extends Condicion{
@@ -8,14 +8,15 @@ public class Decreciente extends Condicion{
     } 
     @Override
      public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
+        Indicador indicador = new Indicador();
+        indicador.setIndicador(this.indicador);
         
         boolean pasa = true;
-        double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));
+        double resultadoInicial = indicador.resultadoFinal( empresa.getNombreEmpresa(),Integer.toString(anioDesde));
         
         int i = anioDesde++;
         while(i <= anioHasta){
-        double resultadoAComparar = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
+        double resultadoAComparar = indicador.resultadoFinal(empresa.getNombreEmpresa(),Integer.toString(i));
         if(resultadoAComparar > resultadoInicial ){
             pasa = false;
             resultadoInicial = resultadoAComparar;

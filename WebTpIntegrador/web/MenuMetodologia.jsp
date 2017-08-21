@@ -10,10 +10,10 @@
    font-size:110%
 }
 .button{
-	background-color: #00c8f8;
+    background-color: #00c8f8;
     color: white;
     height:38px; 
-    width:300px;
+    width:370px;
     font-size:120%
 }
 </style>

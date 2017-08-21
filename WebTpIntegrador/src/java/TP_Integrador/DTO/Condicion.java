@@ -20,7 +20,7 @@ public class Condicion {
     
     private String metodologia;
     private String numero;
-    private String indicador;
+    String indicador;
     private String tipo;
 
     public String getTipo() {

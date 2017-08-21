@@ -5,6 +5,10 @@
  */
 package TP_Integrador.DTO;
 
+import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DAO.ValorCuentaDAO;
+import org.mariuszgromada.math.mxparser.Function;
+
 
 public class Indicador {
     private String nombre;
@@ -26,6 +30,26 @@ public class Indicador {
         return nombre;
     }
     
-    
+
+    public double resultadoFinal(String Empresa, String Anio){
+      
+            ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
+            IndicadorDAO indicadorDAO = new IndicadorDAO();
+            Function f = new Function(indicador);
+            
+          for(int i = 0; i < f.getArgumentsNumber(); i++){
+              
+              if(indicadorDAO.esIndicador(f.getArgument(i).getArgumentName())){
+                  f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
+              }else{
+            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
+            f.getArgument(i).setArgumentValue(valor);
+              }
+          }
+          double resultadoFinal = f.calculate();
+          return resultadoFinal;
+   
+
+}
     
 }

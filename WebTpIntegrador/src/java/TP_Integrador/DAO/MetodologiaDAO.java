@@ -19,30 +19,7 @@ import java.util.ArrayList;
  * @author Vic
  */
 public class MetodologiaDAO {
-    /* public boolean validarExistencia(String codigo){
-        Boolean existe=false;
-        try {
-            //--- Se conecta a la base de datos
-            MySqlHelper mySQL = new MySqlHelper();
-            Connection conn = mySQL.getConnection();
-            
-            //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement consultaUsuario = conn.prepareStatement("SELECT * FROM cuentas where codCuenta= ?   ");
-            consultaUsuario.setString(1,codigo);
-            
-            //--- Ejecuta la consulta
-            ResultSet rs = consultaUsuario.executeQuery();
-            //--- Verifica si pudo obtener al Usuuario
-            if(rs.next())   {
-                existe=true;
-               
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error al validar cuenta ");
-        }
-        return existe;
-    } 
-    */
+    
     public ArrayList<Metodologia> ObtenerMetodologias(){
         ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>();
         try {

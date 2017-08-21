@@ -1,4 +1,5 @@
 
+<%@page import="TP_Integrador.DAO.IndicadorDAO"%>
 <%@page import="TP_Integrador.DTO.Empresa"%>
 <%@page import="TP_Integrador.DTO.Indicador"%>
 <%@page import="java.util.ArrayList"%>
@@ -56,7 +57,7 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
     out.print("</option>"); 		
 } 
 %>
-
+</select>
 <br>
 <br>
 

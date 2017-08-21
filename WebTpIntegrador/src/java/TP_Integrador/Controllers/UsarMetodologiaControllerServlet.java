@@ -48,11 +48,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
             
             Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
-            
-            /*for(int i=0; condiciones.size() > i; i++){ 
-            pasaCondicion = condiciones.get(i).pasaCondicion(empresaDAO.ObtenerEmpresa(strEmpresa),desde,hasta);
-            }*/
-            
+         
             boolean pasaCondicion = meto.pasaCondiciones(empresa, desde, hasta);
             
             
@@ -60,8 +56,11 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             ArrayList<Metodologia> metodologias= metodologiaDAO.ObtenerMetodologias();
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
+            if(desde < hasta){
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoMetodologia.jsp");  
-            rd.forward(request, response);  
+            rd.forward(request, response); }
+            else {RequestDispatcher rd=request.getRequestDispatcher("Periodo-Error.jsp");  
+            rd.forward(request, response); }
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

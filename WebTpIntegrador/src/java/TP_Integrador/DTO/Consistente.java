@@ -1,5 +1,4 @@
 package TP_Integrador.DTO;
-import TP_Integrador.DAO.IndicadorDAO;
 import static java.lang.Math.abs;
 
 public class Consistente extends Condicion{
@@ -8,13 +7,14 @@ public class Consistente extends Condicion{
     } 
     @Override
      public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        IndicadorDAO indicadorDAO = new IndicadorDAO();
+        Indicador indicador = new Indicador();
+        indicador.setIndicador(this.indicador);
         boolean pasa = true;
-        double resultadoInicial = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(anioDesde));
+        double resultadoInicial = indicador.resultadoFinal(empresa.getNombreEmpresa(),Integer.toString(anioDesde));
         
         int i = anioDesde++;
         while(i <= anioHasta){
-        double resultadoAComparar = indicadorDAO.resultadoFinal(this.getIndicador(), empresa.getNombreEmpresa(),Integer.toString(i));
+        double resultadoAComparar = indicador.resultadoFinal(empresa.getNombreEmpresa(),Integer.toString(i));
         if( abs(resultadoAComparar - resultadoInicial)  < resultadoAComparar * 0.05 ){
             pasa = false;
             resultadoInicial = resultadoAComparar;
