@@ -127,6 +127,7 @@ public class IndicadorDAO {
               }
           }
           double resultadoFinal = f.calculate();
+          
           return resultadoFinal;
    
 

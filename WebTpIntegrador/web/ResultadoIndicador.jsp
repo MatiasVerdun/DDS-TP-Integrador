@@ -8,7 +8,7 @@
          
  <%  
      String valorFinal = (String)request.getSession().getAttribute("IndicadorBean");
- 
+     
      out.print("<p>"); 		
      out.print(valorFinal); 		
      out.print("</p>");

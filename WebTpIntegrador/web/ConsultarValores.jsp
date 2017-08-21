@@ -87,7 +87,8 @@ if (valoresCuentas!=null && valoresCuentas.size()>0)
         out.print(valoresCuentas.get(counter).getCodCuenta());
         out.print("</td>");
         out.print("<td>");
-        out.print(java.math.BigDecimal.valueOf(valoresCuentas.get(counter).getValor()));
+        out.print(String.format("%.02f", valoresCuentas.get(counter).getValor()));
+        //out.print(java.math.BigDecimal.valueOf(valoresCuentas.get(counter).getValor()));
         out.print("</td>");
         out.print("</tr>");
     } 
@@ -101,7 +102,8 @@ ArrayList<ValorIndicador>valoresIndicadores =(ArrayList<ValorIndicador>)request.
         out.print(valoresIndicadores.get(counter).getNombreIndicador());
         out.print("</td>");
         out.print("<td>");
-        out.print(java.math.BigDecimal.valueOf(valoresIndicadores.get(counter).getValor()));
+        out.print(String.format("%.02f", valoresIndicadores.get(counter).getValor()));
+        //out.print(java.math.BigDecimal.valueOf(valoresIndicadores.get(counter).getValor()));
         out.print("</td>");
         out.print("</tr>");
     } 

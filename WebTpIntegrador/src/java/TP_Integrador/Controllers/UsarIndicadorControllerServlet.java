@@ -5,6 +5,7 @@ import TP_Integrador.DAO.IndicadorDAO;
 import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,8 +41,9 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             String Indicador = indicadorDAO.conseguirIndicador(strIndicadorName);
             double resultadoFinal = indicadorDAO.resultadoFinal(Indicador, strEmpresa, strAnio);
             
-            String total = String.valueOf(resultadoFinal);
-          
+            //String total = String.valueOf(resultadoFinal);
+            String total = String.format("%.02f", resultadoFinal);
+            
             request.getSession().setAttribute("IndicadorBean",total);
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoIndicador.jsp");  
             rd.forward(request, response);  

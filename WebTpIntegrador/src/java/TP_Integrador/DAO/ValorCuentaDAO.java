@@ -55,7 +55,7 @@ public class ValorCuentaDAO {
             ResultSet rs = cuenta.executeQuery();
             //--- Recorre los registros y los carga en lo que va a devolver de Usar Indicador
             rs.next();
-           valor = rs.getInt("valor");
+           valor = rs.getDouble("valor");
     } catch (SQLException ex) {
             System.out.println("Error al Obtener Valores de Cuentas");
         }
