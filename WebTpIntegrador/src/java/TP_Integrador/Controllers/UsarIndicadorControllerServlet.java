@@ -1,12 +1,16 @@
 
 package TP_Integrador.Controllers;
 
+import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DAO.ValorCuentaDAO;
+import TP_Integrador.DTO.Empresa;
 import TP_Integrador.DTO.Indicador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,10 +35,11 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+           
+           if(request.getParameter("usarIndicador")!=null){ 
             String strIndicadorName=request.getParameter("Indicador");  
             String strEmpresa=request.getParameter("Empresa");  
-            String strAnio=request.getParameter("Anio");
-            
+            String strAnio=request.getParameter("Periodo");
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             Indicador indicador = new Indicador();
             indicador.setIndicador(indicadorDAO.conseguirIndicador(strIndicadorName));
@@ -46,7 +51,33 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             
             request.getSession().setAttribute("IndicadorBean",total);
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoIndicador.jsp");  
-            rd.forward(request, response);  
+            rd.forward(request, response); 
+          }
+           
+           else{
+            String strIndicadorName=request.getParameter("Indicador");  
+            String codEmpresa=request.getParameter("Empresa");  
+            
+            
+            EmpresaDAO empresaDAO= new EmpresaDAO();
+            ArrayList<Empresa> empresas= empresaDAO.ObtenerEmpresas();
+            request.getSession().setAttribute("empresasBean",empresas); 
+               
+            
+            ValorCuentaDAO  valorCuentaDAO = new ValorCuentaDAO();
+            ArrayList<String> periodos= valorCuentaDAO.ObtenerPeriodos(codEmpresa);
+            //Elimino los periodos repetidos
+            HashSet hs = new HashSet();
+            hs.addAll(periodos);
+            periodos.clear();
+            periodos.addAll(hs);
+            
+            request.getSession().setAttribute("indicadorBean",strIndicadorName); 
+            request.getSession().setAttribute("empresaBean",codEmpresa);
+            request.getSession().setAttribute("periodosBean",periodos); 
+            RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
+            rd.forward(request, response);
+           }
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

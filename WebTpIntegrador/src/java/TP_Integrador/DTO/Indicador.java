@@ -34,7 +34,7 @@ public class Indicador {
       
             ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-            Empresa empresa = (new EmpresaDAO()).ObtenerEmpresa(Empresa);
+            
             Function f = new Function(indicador);
             
             
@@ -43,7 +43,7 @@ public class Indicador {
               if(indicadorDAO.esIndicador(f.getArgument(i).getArgumentName())){
                   f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), empresa.getCodEmpresa(), Anio);
+            double valor = valorcuentaDAO.conseguirValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
             f.getArgument(i).setArgumentValue(valor);
               }
           }

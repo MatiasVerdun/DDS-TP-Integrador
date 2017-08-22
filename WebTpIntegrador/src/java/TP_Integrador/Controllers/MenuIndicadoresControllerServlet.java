@@ -7,8 +7,10 @@ package TP_Integrador.Controllers;
 
 import TP_Integrador.DAO.EmpresaDAO;
 import TP_Integrador.DAO.IndicadorDAO;
+import TP_Integrador.DAO.ValorCuentaDAO;
 import TP_Integrador.DTO.Empresa;
 import TP_Integrador.DTO.Indicador;
+import TP_Integrador.DTO.ValorCuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -52,19 +54,24 @@ public class MenuIndicadoresControllerServlet extends HttpServlet {
         } 
         
         if(request.getParameter("usarIndicador")!= null){
-  //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
+            //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
             IndicadorDAO indicadorDAO= new IndicadorDAO();
             ArrayList<Indicador> indicadores= indicadorDAO.ObtenerIndicadores();
             request.getSession().setAttribute("indicadoresBean",indicadores);  
-            //
-            //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
-            EmpresaDAO empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            
+           
+            ArrayList<Empresa> empresas = new ArrayList<Empresa>();
             request.getSession().setAttribute("empresasBean",empresas);  
-            //
+            
+            ArrayList<String> periodos = new ArrayList<String>();
+            request.getSession().setAttribute("periodosBean",periodos); 
+             request.getSession().setAttribute("empresassBean",empresas); 
             RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
             rd.forward(request, response);
+         
+         
         } 
+        
         if(request.getParameter("cargarIndicador")!= null){
             RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
             rd.forward(request, response);

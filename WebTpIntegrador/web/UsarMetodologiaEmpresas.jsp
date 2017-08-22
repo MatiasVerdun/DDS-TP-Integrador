@@ -95,7 +95,7 @@ if (empresas!=null && empresas.size()>0 ){
   
     int desde = Integer.parseInt(strDesde);
     int hasta = Integer.parseInt(strHasta);
-    if(desde < hasta){
+    if(desde <= hasta){
     out.print("<br/><br/>");
     out.print("<table align='center' class='table'>");
     out.print("<tr>");

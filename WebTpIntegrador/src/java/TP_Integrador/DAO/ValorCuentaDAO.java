@@ -64,7 +64,7 @@ public class ValorCuentaDAO {
     
     
     
-    public ArrayList<ValorCuenta> ObtenerValoresDeCuentas(String codEmpresa, String Periodo){
+    public ArrayList<ValorCuenta> ObtenerValoresCuentasFiltradoPorPeriodo(String codEmpresa, String Periodo){
         ArrayList<ValorCuenta> listaValorCuenta = new ArrayList<ValorCuenta>();
         try {
             //--- Se conecta a la base de datos
@@ -94,5 +94,33 @@ public class ValorCuentaDAO {
         }
         return listaValorCuenta;
     }
+    
+       public ArrayList<String> ObtenerPeriodos(String codEmpresa){
+        ArrayList<String> listaPeriodos = new ArrayList<String>();
+        try {
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaCuentas = conn.prepareStatement("SELECT * FROM valorcuenta where codEmpresa = ? ");
+            consultaCuentas.setString(1, codEmpresa);
+            
 
+            //--- Ejecuta la consulta
+            ResultSet rs = consultaCuentas.executeQuery();
+            //--- Recorre los registros y los carga en lo que va a devolver de Valores de Cuentas
+            while(rs.next())
+            {
+              
+               
+                listaPeriodos.add(rs.getString("Periodo"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al Obtener Valores de Cuentas");
+        }
+        return listaPeriodos;
+    }
+
+    
 }

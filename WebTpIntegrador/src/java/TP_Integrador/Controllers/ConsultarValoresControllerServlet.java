@@ -32,8 +32,7 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
             String strCodEmpresa = request.getParameter("Empresa");
             String strPeriodo = request.getParameter("Periodo");
             ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
-            ArrayList<ValorCuenta>valoresCuentas = valorCtaDAO.ObtenerValoresDeCuentas(strCodEmpresa,strPeriodo);
-            //
+            ArrayList<ValorCuenta>valoresCuentas = valorCtaDAO.ObtenerValoresCuentasFiltradoPorPeriodo(strCodEmpresa,strPeriodo);
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             ArrayList<ValorIndicador>valoresIndicadores = indicadorDAO.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
             

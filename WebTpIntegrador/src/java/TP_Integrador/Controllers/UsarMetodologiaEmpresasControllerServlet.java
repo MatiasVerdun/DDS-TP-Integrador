@@ -35,10 +35,6 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             String strPeriodoDesde=request.getParameter("periodoDesde");
             String strPeriodoHasta=request.getParameter("periodoHasta");
            
-            
-            int desde = Integer.parseInt(strPeriodoDesde);
-            int hasta = Integer.parseInt(strPeriodoHasta);
-            
             MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
             Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
             
