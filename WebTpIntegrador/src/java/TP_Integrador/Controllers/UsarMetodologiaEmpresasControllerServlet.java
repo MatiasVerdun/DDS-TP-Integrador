@@ -7,6 +7,7 @@ import TP_Integrador.DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,7 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+           
             String strMetodologia=request.getParameter("Metodologia"); 
             String strPeriodoDesde=request.getParameter("periodoDesde");
             String strPeriodoHasta=request.getParameter("periodoHasta");
@@ -50,8 +52,9 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
           
           
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp");  
-            rd.forward(request, response); 
+            rd.forward(request, response);
             
+           
             
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

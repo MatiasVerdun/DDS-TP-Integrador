@@ -70,6 +70,7 @@
      </script>
     
     <select required class="select" name="Indicador">
+        <option value="">Indicador</option>
 <%  
 //--- Obtiene el listado de Indicadores
 

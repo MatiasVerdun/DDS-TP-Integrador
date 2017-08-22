@@ -38,7 +38,7 @@
     <br>
     <br> 
     <select required class="select" name="Indicador">
-        <option value="" disabled>Indicador</option>
+        <option value="">Indicador</option>
 <%  
 //--- Obtiene el listado de Indicadores
 

@@ -20,7 +20,7 @@
     background-color: #00c8f8;
     color: white;
     height:38px; 
-    width:300px;
+    width:370px;
     font-size:120%
 }
 .select{
@@ -47,6 +47,7 @@
     <br>
     <br> 
     <select required class="select" name="Metodologia">
+        <option value="" > Metodologia </option>
 <%  
 //--- Obtiene el listado de Indicadores
 
@@ -63,24 +64,48 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
 %>
     </select>
     <br>
-
-
-
-
+    <br>
+<%  
+ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute("periodosBean");  
+%>  
+  <select required class="select" name="periodoDesde">
+  <option value="" >Periodo Desde </option>
+    <%  
+       
+        for (int counter = 0; counter < periodos.size(); counter++) { 		      
+        
+        out.print("<option value='");
+        out.print(periodos.get(counter));
+       out.print("' selected >");
+        out.print(periodos.get(counter));
+        out.print("</option>");
+    }
+    %>  
+  </select>
+  <br>
+  <br>
+  <select required class="select" name="periodoHasta">
+  <option value="" >Periodo Hasta </option>
+    <%  
+       
+        for (int counter = 0; counter < periodos.size(); counter++) { 		      
+        
+        out.print("<option value='");
+        out.print(periodos.get(counter));
+       out.print("' selected >");
+        out.print(periodos.get(counter));
+        out.print("</option>");
+    }
+    %>  
+  </select>
 <br>
 <br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde" required/>
-<br>
-<br>
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta" required/>
-<br>
+  <input class="button" type="submit" name="usarMetodologiaEmpresas" value="Usar Metodologia en todas las Empresas">
 
     <br>
     <br>
 
-    <input class="button" type="submit" value="Usar Metodologia" />
-    <br>
-    <br>
+  
   </fieldset>
 </form>
 

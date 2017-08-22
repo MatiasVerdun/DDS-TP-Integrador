@@ -37,7 +37,8 @@
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
     <br> 
-    <select required class="select" name="Metodologia">
+    <select required class="select" name="Metodologia" >
+        <option value="">Metodologia</option>
 <%  
 //--- Obtiene el listado de Indicadores
 
@@ -60,47 +61,76 @@ for (int counter = 0; counter < metodologias.size(); counter++) {
     </select>
     <br>
     <br>
-  
-
- <select required class="select" name="Empresa">
-
+  <select required class="select" name="Empresa" onchange="if(this.value !== '') this.form.submit()">
+         <option value="">Empresa</option>
 <%  
 //--- Obtiene el listado de Empresas
 
 ArrayList<Empresa> empresas =(ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");  
-
+String empresaSeleccionada = (String)request.getSession().getAttribute("empresaBean");
 for (int counter = 0; counter < empresas.size(); counter++) { 		      
     out.print("<option value='"); 		
-    out.print(empresas.get(counter).getNombreEmpresa()); 		
+    out.print(empresas.get(counter).getCodEmpresa()); 		
     out.print("' ");
-/*
-    if (empresas.get(counter).getId().equals(objSeleccionZona.getId_pais()))   {
+
+    if (empresas.get(counter).getCodEmpresa().equals(empresaSeleccionada))   {
         out.print("selected");
     }
-*/
+
     out.print(" >"); 		
     out.print(empresas.get(counter).getNombreEmpresa()); 		
     out.print("</option>"); 		
 } 
 %>
- </select>
+    </select>
+
 <br>
 <br>
-
-
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoDesde" placeholder="Periodo Desde"/>
+<%  
+ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute("periodosBean");  
+if (periodos.size()>0) {
+%>  
+  <select required class="select" name="periodoDesde">
+  <option value="" disabled>Periodo Desde </option>
+    <%  
+       
+        for (int counter = 0; counter < periodos.size(); counter++) { 		      
+        
+        out.print("<option value='");
+        out.print(periodos.get(counter));
+       out.print("' selected >");
+        out.print(periodos.get(counter));
+        out.print("</option>");
+    }
+    %>  
+  </select>
+  <br><br>
+  <select required class="select" name="periodoHasta">
+  <option value="" disabled>Periodo Hasta </option>
+    <%  
+       
+        for (int counter = 0; counter < periodos.size(); counter++) { 		      
+        
+        out.print("<option value='");
+        out.print(periodos.get(counter));
+       out.print("' selected >");
+        out.print(periodos.get(counter));
+        out.print("</option>");
+    }
+    %>  
+  </select>
 <br>
 <br>
-
-<input type="number" min="1900" onkeypress="return event.charCode >= 48" class="select" name="periodoHasta" placeholder="Periodo Hasta"/>
-
-    <br>
-    <br>
-
-    <input class="button" type="submit" value="Usar Metodologia" />
+  <input class="button" type="submit" name="usarMetodologia" value="Usar Metodologia">
+<br>
+<br>
+<%  
+} 
+%>
     <br>
     <br>
   </fieldset>
+    
 </form>
 
 </body>

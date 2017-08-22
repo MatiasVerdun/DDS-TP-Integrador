@@ -7,6 +7,7 @@ import TP_Integrador.DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        if(request.getParameter("usarMetodologia")!=null){ 
             String strMetodologia=request.getParameter("Metodologia");  
             String strEmpresa=request.getParameter("Empresa");  
             String strPeriodoDesde=request.getParameter("periodoDesde");
@@ -61,7 +63,25 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             rd.forward(request, response); }
             else {RequestDispatcher rd=request.getRequestDispatcher("Periodo-Error.jsp");  
             rd.forward(request, response); }
+        } 
+        else {
+            String codEmpresa=request.getParameter("Empresa");      
+            ValorCuentaDAO  valorCuentaDAO = new ValorCuentaDAO();
+             ArrayList<String> periodos= valorCuentaDAO.ObtenerPeriodos(codEmpresa);
+            //Elimino los periodos repetidos
+            HashSet hs = new HashSet();
+            hs.addAll(periodos);
+            periodos.clear();
+            periodos.addAll(hs);
+            
+               
+            request.getSession().setAttribute("empresaBean",codEmpresa);
+            request.getSession().setAttribute("periodosBean",periodos); 
+            RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
+            rd.forward(request, response);
+        }
     }
+        
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
