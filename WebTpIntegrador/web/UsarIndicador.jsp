@@ -87,7 +87,6 @@ for (int counter = 0; counter < empresas.size(); counter++) {
 </select>
 <br>
 <br>
-<br>
 <%  
 ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute("periodosBean");  
 if (periodos.size()>0) {

@@ -59,6 +59,8 @@ public class MenuControllerServlet extends HttpServlet {
             //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
             EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = empresaDAO.ObtenerEmpresas();
+            ArrayList<String> periodos = new ArrayList<String>();
+            request.getSession().setAttribute("periodosBean",periodos); 
             request.getSession().setAttribute("empresasBean",empresas);  
             //
             RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 

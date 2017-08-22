@@ -7,6 +7,7 @@ import TP_Integrador.DTO.ValorIndicador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,19 +29,35 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+            if(request.getParameter("consultarValores")!=null){ 
+                String strCodEmpresa = request.getParameter("Empresa");
+                String strPeriodo = request.getParameter("Periodo");
+                ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
+                ArrayList<ValorCuenta>valoresCuentas = valorCtaDAO.ObtenerValoresCuentasFiltradoPorPeriodo(strCodEmpresa,strPeriodo);
+                IndicadorDAO indicadorDAO = new IndicadorDAO();
+                ArrayList<ValorIndicador>valoresIndicadores = indicadorDAO.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
             
-            String strCodEmpresa = request.getParameter("Empresa");
-            String strPeriodo = request.getParameter("Periodo");
-            ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
-            ArrayList<ValorCuenta>valoresCuentas = valorCtaDAO.ObtenerValoresCuentasFiltradoPorPeriodo(strCodEmpresa,strPeriodo);
-            IndicadorDAO indicadorDAO = new IndicadorDAO();
-            ArrayList<ValorIndicador>valoresIndicadores = indicadorDAO.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
+                request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
+                request.setAttribute("valoresCuentasBean",valoresCuentas);
             
-            request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
-            request.setAttribute("valoresCuentasBean",valoresCuentas);
+                RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp");  
+                rd.forward(request, response);  } 
+            else{
+                String codEmpresa=request.getParameter("Empresa");      
+                ValorCuentaDAO  valorCuentaDAO = new ValorCuentaDAO();
+                ArrayList<String> periodos= valorCuentaDAO.ObtenerPeriodos(codEmpresa);
+            //Elimino los periodos repetidos
+                HashSet hs = new HashSet();
+                hs.addAll(periodos);
+                periodos.clear();
+                periodos.addAll(hs);
             
-            RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp");  
-            rd.forward(request, response);  
+               
+                request.getSession().setAttribute("empresaBean",codEmpresa);
+                request.getSession().setAttribute("periodosBean",periodos); 
+                RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 
+                rd.forward(request, response);
+            }
         
     }
 

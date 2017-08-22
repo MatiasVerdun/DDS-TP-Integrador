@@ -41,34 +41,55 @@
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
     <br> 
-    <select required class="select" name="Empresa">
+    <select required class="select" name="Empresa" onchange="if(this.value !== '') this.form.submit()">
+         <option value="">Empresa</option>
 <%  
 //--- Obtiene el listado de Empresas
 
 ArrayList<Empresa> empresas =(ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");  
-
+String empresaSeleccionada = (String)request.getSession().getAttribute("empresaBean");
 for (int counter = 0; counter < empresas.size(); counter++) { 		      
     out.print("<option value='"); 		
     out.print(empresas.get(counter).getCodEmpresa()); 		
     out.print("' ");
-/*
-    if (empresas.get(counter).getId().equals(objSeleccionZona.getId_pais()))   {
+
+    if (empresas.get(counter).getCodEmpresa().equals(empresaSeleccionada))   {
         out.print("selected");
     }
-*/
+
     out.print(" >"); 		
     out.print(empresas.get(counter).getNombreEmpresa()); 		
     out.print("</option>"); 		
 } 
 %>
     </select>
-    <br>
-    <br>
-    <input placeholder="Periodo" class="form" type="number" min="1900" name="Periodo" value="" maxlength="15" required >
-    <br>
-    <br>
-    <input class="button" type="submit" value="Consultar Valores" />
-    <br>
+<br>
+<br>
+<%  
+ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute("periodosBean");  
+if (periodos.size()>0) {
+%>  
+  <select required class="select" name="Periodo">
+  <option value="" disabled>Periodo</option>
+    <%  
+       
+        for (int counter = 0; counter < periodos.size(); counter++) { 		      
+        
+        out.print("<option value='");
+        out.print(periodos.get(counter));
+       out.print("' selected >");
+        out.print(periodos.get(counter));
+        out.print("</option>");
+    }
+    %>  
+  </select>
+  <br><br><br>
+  <input class="button" type="submit" name="consultarValores" value="Consultar Valores">
+<br>
+<br>
+<%  
+} 
+%>
     <br>
   </fieldset>
 </form>

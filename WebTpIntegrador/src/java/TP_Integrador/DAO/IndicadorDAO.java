@@ -152,11 +152,15 @@ public class IndicadorDAO {
             //--- Recorre los registros y los carga en lo que va a devolver de Valores de Cuentas
             while(rs.next())
             {
+                String indicadorNombre = rs.getString("nombreIndicador");
                 Indicador indicador = new Indicador();
+                IndicadorDAO indicadorDAO = new IndicadorDAO();
+                indicador.setIndicador(indicadorDAO.conseguirIndicador(indicadorNombre));
+                indicador.setNombre(indicadorNombre);
                 ValorIndicador valorIndicador = new ValorIndicador();
                 valorIndicador.setCodEmpresa(Empresa);
                 valorIndicador.setPeriodo(Anio);
-                valorIndicador.setNombreIndicador(rs.getString("nombreIndicador"));
+                valorIndicador.setNombreIndicador(indicadorNombre);
                 valorIndicador.setValor(indicador.resultadoFinal(Empresa, Anio));
                 
                 listaValoresIndicadores.add(valorIndicador);
