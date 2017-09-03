@@ -37,15 +37,11 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
     @Override
     public void saveOrUpdate(T entity)  {
        Session session = sessionFactory.openSession();
-         try {
+        
            session.beginTransaction();
             session.saveOrUpdate(entity);
              session.getTransaction().commit();
        
-           } catch (Exception exc) {
-                LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
-            }
-      
      }
 
     @Override

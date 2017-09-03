@@ -22,7 +22,7 @@
 }
 </style>
 </head>
-<form action="GuardarEnLaBaseControllerServlet" method="post">
+<form action="GuardarDatosCuentasControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
 	<br>

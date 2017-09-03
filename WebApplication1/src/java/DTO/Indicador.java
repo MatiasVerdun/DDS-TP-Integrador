@@ -55,7 +55,7 @@ public class Indicador  implements Serializable {
               if(indicadorDAO.exists(f.getArgument(i).getArgumentName())){
                   f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-            ValorCuenta valorCuenta = (ValorCuenta) valorcuentaDAO.findAll(f.getArgument(i).getArgumentName(), Empresa);
+            ValorCuenta valorCuenta = (ValorCuenta) valorcuentaDAO.filter(f.getArgument(i).getArgumentName(), Empresa);
             
             f.getArgument(i).setArgumentValue(valorCuenta.getValor());
               }

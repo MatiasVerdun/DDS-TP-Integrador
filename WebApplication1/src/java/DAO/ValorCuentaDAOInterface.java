@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface ValorCuentaDAOInterface extends GenericDAOInterface<ValorCuenta,String> {
 
-    public List<ValorCuenta> findAll(String Cuenta, String Empresa);
+    public List<ValorCuenta> filter(String Cuenta, String Empresa);
    
 }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TP_Integrador.Controllers;
+package Controllers;
 
-import TP_Integrador.DAO.CuentaDAO;
-import TP_Integrador.DTO.Cuenta;
+import DAO.CuentaDAO;
+import DTO.Cuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import TP_Integrador.DAO.CuentaDAOInterface;
 
 /**
  *

@@ -16,7 +16,8 @@ import org.hibernate.Query;
 
 public class ValorCuentaDAO extends GenericDAO<ValorCuenta,String> implements  ValorCuentaDAOInterface{
     SessionFactory sessionFactory  =HibernateUtil.getSessionFactory();
-    public List<ValorCuenta> findAll(String Cuenta, String Empresa) {
+   
+    public List<ValorCuenta> filter(String Cuenta, String Empresa) {
           Session session = sessionFactory.getCurrentSession();
           session.beginTransaction();
           Query query = session.createQuery("SELECT e FROM valorcuenta WHERE codEmpresa =" +Empresa+ "AND codCuenta = " +Cuenta);

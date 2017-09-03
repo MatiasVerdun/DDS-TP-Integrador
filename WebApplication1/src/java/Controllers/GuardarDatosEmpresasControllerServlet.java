@@ -37,7 +37,7 @@ public class GuardarDatosEmpresasControllerServlet extends HttpServlet {
             objEmpresa.setCodEmpresa(strCodEmpresa);
             objEmpresa.setNombreEmpresa(strNombreEmpresa);
             
-        //--- Crea el objeto indicador que desde Validar
+       
             
             EmpresaDAO empresaDAO = new EmpresaDAO();
             empresaDAO.saveOrUpdate(objEmpresa);
