@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import DAO.CondicionDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class Metodologia  implements Serializable {
     @Column(name="nombreMetodologia")
     private String nombreMetodologia; 
 
-    @Column(name="Condiciones")
+    @Transient
     private ArrayList<Condicion> condiciones = new ArrayList<Condicion>();
 
     
@@ -56,7 +57,13 @@ public class Metodologia  implements Serializable {
         return pasa;
     }
     
-    
+     public Metodologia ObtenerMetodologiaConCondiciones(String metodologia){
+           Metodologia meto = new Metodologia();
+           meto.setNombreMetodologia(metodologia);
+           CondicionDAO condicionDAO = new CondicionDAO();
+           meto.addCondiciones((ArrayList<Condicion>) condicionDAO.filter(metodologia));
+           return meto;
+       }
      
 }
 

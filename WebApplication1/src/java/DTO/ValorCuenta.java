@@ -15,21 +15,39 @@ import javax.persistence.*;
 @Entity
 @Table(name="ValorCuenta")
 public class ValorCuenta  implements Serializable{
+  
+    
+    
     @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
+
+    
+    
     @Column(name="codEmpresa")
     private String CodEmpresa;
+    
     @Column(name="periodo")
     private String Periodo;
-    @Id
+ 
+    
     @Column(name="codCuenta")
     private String CodCuenta;
+    
     @Column(name="valor")
     private double Valor;
 
     public ValorCuenta() {
     }
     
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getCodEmpresa() {
         return CodEmpresa;

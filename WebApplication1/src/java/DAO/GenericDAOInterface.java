@@ -19,6 +19,6 @@ public interface GenericDAOInterface<T,ID extends Serializable> {
    void saveOrUpdate(T entity);
    T get(ID id);
    List<T> findAll();
-   Boolean exists(ID id);
+   boolean exists(ID id);
 }
 

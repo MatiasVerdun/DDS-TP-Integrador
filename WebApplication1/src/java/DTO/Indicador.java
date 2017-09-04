@@ -7,8 +7,10 @@ package DTO;
 
 import DAO.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import org.mariuszgromada.math.mxparser.Function;
 import javax.persistence.*;
+import org.mariuszgromada.math.mxparser.Argument;
 
 
 @Entity
@@ -42,27 +44,28 @@ public class Indicador  implements Serializable {
     }
     
 
-    public double resultadoFinal(String Empresa, String Anio){
+   public double resultadoFinal(String Empresa, String Anio){
       
-            ValorCuentaDAOInterface valorcuentaDAO = new ValorCuentaDAO();
-            IndicadorDAOInterface indicadorDAO = new IndicadorDAO();
+            ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
+            IndicadorDAO indicadorDAO = new IndicadorDAO();
             
             Function f = new Function(indicador);
             
             
           for(int i = 0; i < f.getArgumentsNumber(); i++){
-              
-              if(indicadorDAO.exists(f.getArgument(i).getArgumentName())){
-                  f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
+                Argument argumentoActual = f.getArgument(i);
+              if(indicadorDAO.exists(argumentoActual.getArgumentName())){
+                 argumentoActual.setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-            ValorCuenta valorCuenta = (ValorCuenta) valorcuentaDAO.filter(f.getArgument(i).getArgumentName(), Empresa);
-            
-            f.getArgument(i).setArgumentValue(valorCuenta.getValor());
+                double valor = valorcuentaDAO.filterValor(argumentoActual.getArgumentName(), Empresa, Anio);
+                argumentoActual.setArgumentValue(valor);
               }
           }
           double resultadoFinal = f.calculate();
           return resultadoFinal;
-   }
+   
+
+}
     
      public boolean comprobarSintaxis(){
             
@@ -73,5 +76,21 @@ public class Indicador  implements Serializable {
             
             
             return (subStr.equals("no errors.\n"));
+    }
+
+    public ArrayList<ValorIndicador> ObtenerValoresIndicadores(String strCodEmpresa, String strPeriodo) {
+        IndicadorDAO indicadorDAO = new IndicadorDAO();
+        ArrayList<Indicador> indicadores = (ArrayList<Indicador>) indicadorDAO.findAll();
+        ArrayList<ValorIndicador> valores = new  ArrayList<>();
+        for(int i=0;i<indicadores.size();i++){
+        ValorIndicador valorIndicador = new ValorIndicador();
+                valorIndicador.setCodEmpresa(strCodEmpresa);
+                valorIndicador.setPeriodo(strPeriodo);
+                valorIndicador.setNombreIndicador(indicadores.get(i).getNombre());
+                valorIndicador.setValor(indicadores.get(i).resultadoFinal(strCodEmpresa, strPeriodo));
+        valores.add(valorIndicador);
+        }
+
+      return valores;
     }
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controllers;
 
 
@@ -44,23 +40,26 @@ public class CambiarClaveControllerServlet extends HttpServlet {
             //--- Crea el objeto usuario que desde Validar
             Usuario objUsuario=new Usuario();  
             objUsuario.setUsario(strUserName);  
-            objUsuario.setPassword(strPassword); 
+            objUsuario.setPassword(strPasswordNew); 
 
             //--- Controla si existe el usuario en la Tabla
-            UsuarioDAOInterface usuarioDAO = new UsuarioDAO();
-            usuarioDAO.saveOrUpdate(objUsuario);
-
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            boolean existe = usuarioDAO.exists(strUserName);
+            Usuario usrAVerificar=usuarioDAO.get(strUserName);
+            
             //--- Determina la acción en base a la existencia
-          
+            if(existe && strPassword.equals(usrAVerificar.getContrasena())){
+                usuarioDAO.saveOrUpdate(objUsuario);
                 RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");  
                 rd.forward(request, response);  
-        }
-        catch(Exception exc){
+            }  
+            else{  
                 RequestDispatcher rd=request.getRequestDispatcher("CambioClave-error.jsp");  
                 rd.forward(request, response);  
             }
 
     }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

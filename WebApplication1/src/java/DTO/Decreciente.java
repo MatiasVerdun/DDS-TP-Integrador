@@ -5,9 +5,7 @@ import DAO.IndicadorDAO;
 
 
 public class Decreciente extends Condicion{
-     public Decreciente(String numero, String indicador) {
-        super(numero, indicador);
-    } 
+    
 
     public Decreciente() {
         super();

@@ -30,24 +30,36 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+           
+           
             if(request.getParameter("consultarValores")!=null){ 
+                ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
                 String strCodEmpresa = request.getParameter("Empresa");
                 String strPeriodo = request.getParameter("Periodo");
-                ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
-                ArrayList<ValorCuenta>valoresCuentas = valorCtaDAO.ObtenerValoresCuentasFiltradoPorPeriodo(strCodEmpresa,strPeriodo);
-                IndicadorDAO indicadorDAO = new IndicadorDAO();
-                ArrayList<ValorIndicador> valoresIndicadores = indicadorDAO.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
+                
+               
+                Indicador indicador = new Indicador();
+                
+                ArrayList<ValorCuenta> valoresFiltrados = (ArrayList<ValorCuenta>) valorCtaDAO.filterPeriodos(strPeriodo,strCodEmpresa);
+                ArrayList<ValorIndicador> valoresIndicadores= indicador.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
             
                 request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
-                request.setAttribute("valoresCuentasBean",valoresCuentas);
+                request.setAttribute("valoresCuentasBean",valoresFiltrados); 
             
                 RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp");  
                 rd.forward(request, response);  } 
             else{
                 String codEmpresa=request.getParameter("Empresa");      
-                ValorCuentaDAOInterface  valorCuentaDAO = new ValorCuentaDAO();
-                ArrayList<String> periodos= valorCuentaDAO.get(codEmpresa);
-            //Elimino los periodos repetidos
+                 ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
+                ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorCtaDAO.findAll();
+                
+                ArrayList<String> periodos= new ArrayList<>();
+                
+                for(int counter=0;counter<valores.size();counter++){
+                periodos.add(valores.get(counter).getPeriodo());
+                }
+           
+                //Elimino los periodos repetidos
                 HashSet hs = new HashSet();
                 hs.addAll(periodos);
                 periodos.clear();

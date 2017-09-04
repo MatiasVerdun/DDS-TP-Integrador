@@ -31,6 +31,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
         if(request.getParameter("usarMetodologia")!=null){ 
             String strMetodologia=request.getParameter("Metodologia");  
             String strEmpresa=request.getParameter("Empresa");  
@@ -43,20 +44,22 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             int hasta = Integer.parseInt(strPeriodoHasta);
             
             //Boolean pasaCondicion=true;
-            EmpresaDAO empresaDAO = new EmpresaDAO();
+            
             Empresa empresa = new Empresa();
             empresa.setNombreEmpresa(strEmpresa);
-            MetodologiaDAOInterface metodologiaDAO = new MetodologiaDAO();
+            Metodologia metodologia = new Metodologia();
             
-            Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
+            Metodologia meto = metodologia.ObtenerMetodologiaConCondiciones(strMetodologia);
          
             boolean pasaCondicion = meto.pasaCondiciones(empresa, desde, hasta);
             
             
-
-            ArrayList<Metodologia> metodologias= metodologiaDAO.findAll();
+            MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
+            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
+            
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
+            
             if(desde <= hasta){
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoMetodologia.jsp");  
             rd.forward(request, response); }
@@ -64,9 +67,17 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             rd.forward(request, response); }
         } 
         else {
-            String codEmpresa=request.getParameter("Empresa");      
-            ValorCuentaDAOInterface  valorCuentaDAO = new ValorCuentaDAOInterface();
-             ArrayList<String> periodos= valorCuentaDAO.ObtenerPeriodos(codEmpresa);
+            String codEmpresa=request.getParameter("Empresa");
+            
+            ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
+            ArrayList<ValorCuenta> valores = new ArrayList<>();
+            valores = (ArrayList<ValorCuenta>) valorCtaDAO.findAll();
+            
+            ArrayList<String> periodos = new ArrayList<>();
+            
+            for(int counter=0;counter<valores.size();counter++){
+                periodos.add(valores.get(counter).getPeriodo());
+            }
             //Elimino los periodos repetidos
             HashSet hs = new HashSet();
             hs.addAll(periodos);

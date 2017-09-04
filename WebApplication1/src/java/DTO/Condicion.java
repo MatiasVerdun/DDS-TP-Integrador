@@ -12,28 +12,41 @@ import javax.persistence.*;
 @Entity
 @Table(name="Condiciones")
 public class Condicion implements Serializable{
-
-    public Condicion(String numero, String indicador) {
-        this.monto = numero;
-        this.indicador = indicador;
-    }
+    
 
     public Condicion() {
     }
+  
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
+
+  
     
     @Column(name="metodologia")
     private String metodologia;
     
+    
     @Column(name="monto")
     private String monto;
     
+    
     @Column(name="indicador")
     String indicador;
+   
     
-    @Id
     @Column(name="tipo")
     private String tipo;
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+  
     public String getTipo() {
         return tipo;
     }

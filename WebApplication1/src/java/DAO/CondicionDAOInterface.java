@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.*;
+import java.util.List;
 
 
 /**
@@ -13,5 +14,5 @@ import DTO.*;
  * @author Vic
  */
 public interface CondicionDAOInterface extends GenericDAOInterface<Condicion,String> {
-
+    public List<Condicion> filter(String Metodologia);
 }

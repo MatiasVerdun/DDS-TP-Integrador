@@ -5,23 +5,15 @@
  */
 package DTO;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Matias
  */
-
-public class ValorIndicador implements Serializable {
+public class ValorIndicador {
     private String CodEmpresa;
     private String Periodo;
     private String NombreIndicador;
     private double Valor;
-
-    public ValorIndicador() {
-    }
-    
-    
     
     public String getCodEmpresa() {
         return CodEmpresa;

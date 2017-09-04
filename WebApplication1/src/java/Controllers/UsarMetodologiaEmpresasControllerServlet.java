@@ -36,8 +36,8 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             String strPeriodoDesde=request.getParameter("periodoDesde");
             String strPeriodoHasta=request.getParameter("periodoHasta");
            
-            MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
-            Metodologia meto = metodologiaDAO.ObtenerMetodologiaConCondiciones(strMetodologia);
+            Metodologia metodologia = new Metodologia();
+            metodologia=metodologia.ObtenerMetodologiaConCondiciones(strMetodologia);
             
             EmpresaDAOInterface empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
@@ -45,7 +45,7 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             
             
             request.getSession().setAttribute("empresasBean",empresas); 
-            request.getSession().setAttribute("metodologiasConCondicionesBean",meto);
+            request.getSession().setAttribute("metodologiasConCondicionesBean",metodologia);
             request.getSession().setAttribute("desdeBean",strPeriodoDesde); 
             request.getSession().setAttribute("hastaBean",strPeriodoHasta);
           

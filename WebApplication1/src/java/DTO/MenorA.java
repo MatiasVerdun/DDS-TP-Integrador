@@ -6,14 +6,7 @@ import DAO.IndicadorDAO;
 
 public class MenorA extends Condicion {
 
-    /**
-     *
-     * @param numero
-     * @param indicador
-     */
-    public MenorA(String numero, String indicador) {
-        super(numero, indicador);
-    }
+   
 
     public MenorA() {
         super();

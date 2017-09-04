@@ -43,7 +43,7 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
         
             double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio);
             
-            //String total = String.valueOf(resultadoFinal);
+            
             String total = String.format("%.02f", resultadoFinal);
             
             request.getSession().setAttribute("IndicadorBean",total);
@@ -62,11 +62,11 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
                
             
             ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-            ArrayList<ValorCuenta> valorCuenta= (ArrayList<ValorCuenta>) valorCuentaDAO.findAll(codEmpresa,codEmpresa);
+            ArrayList<ValorCuenta> valores= (ArrayList<ValorCuenta>) valorCuentaDAO.findAll();
             //Elimino los periodos repetidos
             ArrayList<String> periodos= new ArrayList();
-            for(int counter=0;counter>valorCuenta.size();counter++){
-                periodos.add(valorCuenta.get(counter).getPeriodo());
+            for(int counter=0;counter<valores.size();counter++){
+                periodos.add(valores.get(counter).getPeriodo());
             }
             HashSet hs = new HashSet();
             hs.addAll(periodos);

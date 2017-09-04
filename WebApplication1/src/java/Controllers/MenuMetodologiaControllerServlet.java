@@ -49,17 +49,17 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
             ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
             
-            ArrayList<Empresa> empresas = new ArrayList<Empresa>();
-            //Cargo los periodos
-                EmpresaDAOInterface empresaDAO = new EmpresaDAO();
-                ArrayList<Empresa> Empresas = new ArrayList<Empresa>();
-                Empresas = (ArrayList<Empresa>) empresaDAO.findAll();
-                ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-                ArrayList<String> periodos= new ArrayList<String>();
+            EmpresaDAOInterface empresaDAO = new EmpresaDAO();
+            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
+            
+            ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
+           ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorCuentaDAO.findAll();
                 
-                for(int counter =0;counter < Empresas.size();counter++){
-                periodos.addAll(valorCuentaDAO.findAll(Empresas.get(counter).getCodEmpresa()));
-                }
+            //Cargo los periodos
+                ArrayList<String> periodos= new ArrayList();
+            for(int counter=0;counter<valores.size();counter++){
+                periodos.add(valores.get(counter).getPeriodo());
+            }
                 
             //Elimino los periodos repetidos
                 HashSet hs = new HashSet();

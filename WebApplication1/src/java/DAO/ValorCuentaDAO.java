@@ -17,16 +17,32 @@ import org.hibernate.Query;
 public class ValorCuentaDAO extends GenericDAO<ValorCuenta,String> implements  ValorCuentaDAOInterface{
     SessionFactory sessionFactory  =HibernateUtil.getSessionFactory();
    
+    @Override
     public List<ValorCuenta> filter(String Cuenta, String Empresa) {
-          Session session = sessionFactory.getCurrentSession();
+          Session session = sessionFactory.openSession();
           session.beginTransaction();
-          Query query = session.createQuery("SELECT e FROM valorcuenta WHERE codEmpresa =" +Empresa+ "AND codCuenta = " +Cuenta);
-           
-          session.getTransaction().commit();
+          Query query = session.createQuery("SELECT e FROM valorcuenta WHERE codEmpresa = " +Empresa+ "AND codCuenta = " +Cuenta);  
+          session.close();
           return query.list();
     }
 
-   
+    @Override
+   public List<ValorCuenta> filterPeriodos(String Periodo, String Empresa) {
+          Session session = sessionFactory.openSession();
+          session.beginTransaction();
+          Query query = session.createQuery("SELECT e FROM valorcuenta WHERE codEmpresa = " +Empresa+ "AND periodo = " +Periodo);
+          session.close();
+          return query.list();
+    }
+
+    @Override
+   public double filterValor(String Cuenta, String Empresa,String Periodo) {
+         Session session = sessionFactory.openSession();
+          session.beginTransaction();
+          Query query = (Query) session.createQuery("SELECT e FROM valorcuenta WHERE codEmpresa = " +Empresa+ "AND periodo = " +Periodo+ "AND codCuenta = " +Cuenta);
+          session.close();
+          return (double) query.list().get(0);
+    }
 
    
     

@@ -37,11 +37,10 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
     @Override
     public void saveOrUpdate(T entity)  {
        Session session = sessionFactory.openSession();
-        
            session.beginTransaction();
             session.saveOrUpdate(entity);
              session.getTransaction().commit();
-       
+             session.close();
      }
 
     @Override
@@ -50,8 +49,9 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
           session.beginTransaction();
           T entity = (T) session.get(getEntityClass(), id);
           session.getTransaction().commit();
+          session.close();
           return entity;
-    
+          
     }
 
 
@@ -60,6 +60,7 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
         List<T> entities = query.list();
+        session.close();
         return entities;
      }
 
@@ -70,15 +71,17 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
     
    
     @Override
-    public Boolean exists(ID id ){
+    public boolean exists(ID id ){
         Session session = sessionFactory.openSession();
-        Query query = (Query) session.createQuery("SELECT e FROM " + getEntityClass().getSimpleName() + " e");
+        Query query = (Query) session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
          List<T> entities = query.list();
-        if (entities.isEmpty()) {
+        session.close();
+         if (entities.isEmpty()) {
         return false;
         } else{
         return true;
         }
+        
     }
     
     

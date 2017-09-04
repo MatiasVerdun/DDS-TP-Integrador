@@ -3,9 +3,7 @@ import DAO.*;
 
 
 public class MayorA extends Condicion{
-     public MayorA(String numero, String indicador) {
-        super(numero, indicador);
-    }
+     
 
     public MayorA() {
         super();

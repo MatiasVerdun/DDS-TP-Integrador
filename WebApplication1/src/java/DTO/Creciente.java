@@ -3,9 +3,7 @@ import DAO.*;
 
 
 public class Creciente extends Condicion{
-     public Creciente(String numero, String indicador) {
-        super(numero, indicador);
-    }
+  
 
     public Creciente() {
         super();

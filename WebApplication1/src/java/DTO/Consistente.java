@@ -4,9 +4,7 @@ import static java.lang.Math.abs;
 
 
 public class Consistente extends Condicion{
-     public Consistente(String numero, String indicador) {
-        super(numero, indicador);
-    } 
+     
 
     public Consistente() {
         super();
