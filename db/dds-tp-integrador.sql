@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2017 a las 00:53:06
+-- Tiempo de generación: 08-09-2017 a las 22:39:51
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -32,9 +32,19 @@ DROP TABLE IF EXISTS `condiciones`;
 CREATE TABLE `condiciones` (
   `metodologia` varchar(500) NOT NULL,
   `indicador` varchar(50) NOT NULL,
-  `numeroPeriodo` varchar(20) NOT NULL,
-  `tipo` varchar(100) NOT NULL
+  `monto` varchar(20) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `id` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `condiciones`
+--
+
+INSERT INTO `condiciones` (`metodologia`, `indicador`, `monto`, `tipo`, `id`) VALUES
+('hola', 'indicador', '098', 'menorA', 1),
+('hola', 'indicador', '5678', 'menorA', 2),
+('hola', 'indicador', '4567', 'menorA', 3);
 
 -- --------------------------------------------------------
 
@@ -54,27 +64,31 @@ CREATE TABLE `cuentas` (
 
 INSERT INTO `cuentas` (`codCuenta`, `nombreCuenta`) VALUES
 ('iNetoOpCont', 'Ingreso Neto en Operaciones Continuas'),
-('iNetoOpDisc', 'Ingreso Neto en Operaciones Discontinuas');
+('iNetoOpDisc', 'Ingreso Neto en Operaciones Discontinuas'),
+('ingresoNetito', 'ingreso');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Estructura de tabla para la tabla `empresas`
 --
 
-DROP TABLE IF EXISTS `empresa`;
-CREATE TABLE `empresa` (
+DROP TABLE IF EXISTS `empresas`;
+CREATE TABLE `empresas` (
   `codEmpresa` varchar(20) NOT NULL,
   `nombreEmpresa` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Volcado de datos para la tabla `empresas`
 --
 
-INSERT INTO `empresa` (`codEmpresa`, `nombreEmpresa`) VALUES
+INSERT INTO `empresas` (`codEmpresa`, `nombreEmpresa`) VALUES
 ('face', 'Facebook'),
-('tw', 'Twitter');
+('hika', 'qweer'),
+('Star', 'STarbucks'),
+('tw', 'Twitter'),
+('wpp', 'Whatsapp');
 
 -- --------------------------------------------------------
 
@@ -93,7 +107,8 @@ CREATE TABLE `indicadores` (
 --
 
 INSERT INTO `indicadores` (`nombreIndicador`, `indicador`) VALUES
-('indicadorPrueba', 'f(x)=x+1');
+('indicador', 'f(x)=x+4'),
+('prueba', 'f(iNetoOpCont)=iNetoOpCont + 1');
 
 -- --------------------------------------------------------
 
@@ -105,6 +120,15 @@ DROP TABLE IF EXISTS `metodologias`;
 CREATE TABLE `metodologias` (
   `nombreMetodologia` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `metodologias`
+--
+
+INSERT INTO `metodologias` (`nombreMetodologia`) VALUES
+('Hola'),
+('vic'),
+('ytfgf');
 
 -- --------------------------------------------------------
 
@@ -123,7 +147,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `contrasena`) VALUES
-('Hector', '1234');
+('Hector', '123');
 
 -- --------------------------------------------------------
 
@@ -136,22 +160,29 @@ CREATE TABLE `valorcuenta` (
   `codEmpresa` varchar(20) NOT NULL,
   `periodo` varchar(20) NOT NULL,
   `codCuenta` varchar(50) NOT NULL,
-  `valor` double NOT NULL
+  `valor` double NOT NULL,
+  `id` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `valorcuenta`
 --
 
-INSERT INTO `valorcuenta` (`codEmpresa`, `periodo`, `codCuenta`, `valor`) VALUES
-('face', '2016', 'ebitda', 14870000000),
-('face', '2016', 'iNetoOpCont', 4273000000),
-('face', '2016', 'iNetoOpDis', 0),
-('tw', '2017', 'iNetoOpCont', 4273000000);
+INSERT INTO `valorcuenta` (`codEmpresa`, `periodo`, `codCuenta`, `valor`, `id`) VALUES
+('face', '2016', 'iNetoOpCont', 4273000000, 1),
+('face', '2016', 'iNetoOpDisc', 0, 2),
+('face', '2016', 'iNetoOpCont', 4273000000, 3),
+('face', '2016', 'iNetoOpDisc', 0, 4);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `condiciones`
+--
+ALTER TABLE `condiciones`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `cuentas`
@@ -160,9 +191,9 @@ ALTER TABLE `cuentas`
   ADD PRIMARY KEY (`codCuenta`);
 
 --
--- Indices de la tabla `empresa`
+-- Indices de la tabla `empresas`
 --
-ALTER TABLE `empresa`
+ALTER TABLE `empresas`
   ADD PRIMARY KEY (`codEmpresa`);
 
 --
@@ -187,7 +218,7 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `valorcuenta`
 --
 ALTER TABLE `valorcuenta`
-  ADD PRIMARY KEY (`codEmpresa`,`periodo`,`codCuenta`);
+  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
