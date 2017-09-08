@@ -58,13 +58,14 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
                 
                 String codigoEmpresa = arreglo_datos[0];
                 String codigoCuenta = arreglo_datos[2];
+                
                 valorCuentaLinea.setCodEmpresa(codigoEmpresa);
                 valorCuentaLinea.setPeriodo(arreglo_datos[1]);  
                 valorCuentaLinea.setCodCuenta(codigoCuenta);
                 valorCuentaLinea.setValor(Double.parseDouble(arreglo_datos[3]));
 
                 if(empresa.exists(codigoEmpresa) && cuenta.exists(codigoCuenta) ){
-                ValorCuentaDAOInterface valorCuenta = new ValorCuentaDAO();
+                ValorCuentaDAO valorCuenta = new ValorCuentaDAO();
                 valorCuenta.saveOrUpdate(valorCuentaLinea);
                 } else{RequestDispatcher rd=request.getRequestDispatcher("EmpresaCuenta-error.jsp");  
                   rd.forward(request, response);}

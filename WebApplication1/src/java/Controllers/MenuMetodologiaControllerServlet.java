@@ -37,11 +37,14 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
             ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
             request.getSession().setAttribute("metodologiasBean",metodologias);  
-            EmpresaDAOInterface empresaDAO = new EmpresaDAO();
+            
+            EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
             request.getSession().setAttribute("empresasBean",empresas);
-             ArrayList<String> periodos = new ArrayList<String>();
+             
+            ArrayList<String> periodos = new ArrayList<>();
             request.getSession().setAttribute("periodosBean",periodos); 
+           
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
@@ -49,7 +52,7 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
             ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
             
-            EmpresaDAOInterface empresaDAO = new EmpresaDAO();
+            EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
             
             ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
@@ -60,13 +63,13 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             for(int counter=0;counter<valores.size();counter++){
                 periodos.add(valores.get(counter).getPeriodo());
             }
-                
-            //Elimino los periodos repetidos
+            
+             //Elimino los periodos repetidos
                 HashSet hs = new HashSet();
                 hs.addAll(periodos);
                 periodos.clear();
                 periodos.addAll(hs);
-            
+       
             request.getSession().setAttribute("empresasBean",empresas);
             request.getSession().setAttribute("periodosBean",periodos); 
             request.getSession().setAttribute("metodologiasBean",metodologias);  
@@ -75,7 +78,7 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         } 
         if(request.getParameter("cargarMetodologia")!= null){
             
-            IndicadorDAOInterface indicadorDAO= new IndicadorDAO();
+            IndicadorDAO indicadorDAO= new IndicadorDAO();
             ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.findAll();
             
             request.getSession().setAttribute("indicadoresBean",indicadores);  

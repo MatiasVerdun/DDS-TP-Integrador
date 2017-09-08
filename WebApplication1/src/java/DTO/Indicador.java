@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import org.mariuszgromada.math.mxparser.Function;
 import javax.persistence.*;
-import org.mariuszgromada.math.mxparser.Argument;
 
 
 @Entity
@@ -44,7 +43,7 @@ public class Indicador  implements Serializable {
     }
     
 
-   public double resultadoFinal(String Empresa, String Anio){
+      public double resultadoFinal(String Empresa, String Anio){
       
             ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
             IndicadorDAO indicadorDAO = new IndicadorDAO();
@@ -53,12 +52,12 @@ public class Indicador  implements Serializable {
             
             
           for(int i = 0; i < f.getArgumentsNumber(); i++){
-                Argument argumentoActual = f.getArgument(i);
-              if(indicadorDAO.exists(argumentoActual.getArgumentName())){
-                 argumentoActual.setArgumentValue(resultadoFinal(Empresa, Anio));
+              
+              if(indicadorDAO.exists(f.getArgument(i).getArgumentName())){
+                  f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-                double valor = valorcuentaDAO.filterValor(argumentoActual.getArgumentName(), Empresa, Anio);
-                argumentoActual.setArgumentValue(valor);
+            double valor = valorcuentaDAO.filterValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
+            f.getArgument(i).setArgumentValue(valor);
               }
           }
           double resultadoFinal = f.calculate();

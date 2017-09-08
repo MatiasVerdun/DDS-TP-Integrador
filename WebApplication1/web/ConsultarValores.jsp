@@ -67,7 +67,7 @@ for (int counter = 0; counter < empresas.size(); counter++) {
 <br>
 <%  
 ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute("periodosBean");  
-if (periodos.size()<0) {
+if (periodos.size()>0) {
 %>  
   <select required class="select" name="Periodo">
   <option value="" disabled>Periodo</option>

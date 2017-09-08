@@ -30,12 +30,6 @@
     <input class="button" type="submit"  name="consultarValores" value="Consultar Valores">
     <br>
     <br>
-    <input class="button" type="submit"  name="graficos" value="Visualizar Gráficos">
-    <br>
-    <br>
-    <input class="button" type="submit"  name="analizarEmpresa" value="Analizar Empresa">
-    <br>
-    <br>
     <input class="button" type="submit"  name="indicadores" value="Indicadores">
     <br>
     <br>

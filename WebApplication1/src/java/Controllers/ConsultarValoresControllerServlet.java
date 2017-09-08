@@ -40,11 +40,11 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
                
                 Indicador indicador = new Indicador();
                 
-                ArrayList<ValorCuenta> valoresFiltrados = (ArrayList<ValorCuenta>) valorCtaDAO.filterPeriodos(strPeriodo,strCodEmpresa);
+                ArrayList<ValorCuenta> valoresCuentas = (ArrayList<ValorCuenta>) valorCtaDAO.filterPeriodos(strPeriodo,strCodEmpresa);
                 ArrayList<ValorIndicador> valoresIndicadores= indicador.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
             
                 request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
-                request.setAttribute("valoresCuentasBean",valoresFiltrados); 
+                request.setAttribute("valoresCuentasBean",valoresCuentas); 
             
                 RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp");  
                 rd.forward(request, response);  } 

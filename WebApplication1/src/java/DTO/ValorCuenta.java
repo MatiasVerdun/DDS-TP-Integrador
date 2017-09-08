@@ -20,7 +20,8 @@ public class ValorCuenta  implements Serializable{
     
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue( generator = "generador_propietario_hibernate_increment")
+    @org.hibernate.annotations.GenericGenerator(name = "generador_propietario_hibernate_increment", strategy = "increment")
     private int id;
 
     

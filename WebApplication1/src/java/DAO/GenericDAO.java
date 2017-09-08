@@ -71,9 +71,10 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
     
    
     @Override
-    public boolean exists(ID id ){
+    public boolean exists(ID id){
         Session session = sessionFactory.openSession();
-        Query query = (Query) session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
+       String clase = getEntityClass().getName();
+        Query query = (Query) session.createQuery("SELECT e FROM " + clase + " e");
          List<T> entities = query.list();
         session.close();
          if (entities.isEmpty()) {
