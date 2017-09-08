@@ -55,6 +55,7 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
     }
 
 
+
     @Override
     public List<T> findAll() {
         Session session = sessionFactory.openSession();

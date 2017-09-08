@@ -9,7 +9,6 @@ package DAO;
 import DTO.ValorCuenta;
 import Hibernate.HibernateUtil;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,8 +21,7 @@ public class ValorCuentaDAO extends GenericDAO<ValorCuenta,String> implements  V
     public ArrayList<ValorCuenta> filter(String Cuenta, String Empresa) {
           Session session = sessionFactory.openSession();
           session.beginTransaction();
-          Query query = session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' AND codCuenta = '" +Cuenta+ "'");  
-          session.close();
+          Query query = session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' && codCuenta = '" +Cuenta+ "'"); 
           return (ArrayList<ValorCuenta>) query.list();
     }
 
@@ -31,7 +29,7 @@ public class ValorCuentaDAO extends GenericDAO<ValorCuenta,String> implements  V
    public ArrayList<ValorCuenta> filterPeriodos(String Periodo, String Empresa) {
           Session session = sessionFactory.openSession();
           session.beginTransaction();
-          Query query = session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' AND periodo = '" +Periodo+ "'");
+          Query query = session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' && periodo = '" +Periodo+ "'");
           
           return (ArrayList<ValorCuenta>) query.list();
     }
@@ -40,7 +38,7 @@ public class ValorCuentaDAO extends GenericDAO<ValorCuenta,String> implements  V
    public double filterValor(String Cuenta, String Empresa,String Periodo) {
          Session session = sessionFactory.openSession();
           session.beginTransaction();
-          Query query = (Query) session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' AND periodo = '" +Periodo+ "' AND codCuenta = '" +Cuenta+ "'" );
+          Query query = (Query) session.createQuery("SELECT e FROM DTO.ValorCuenta e WHERE codEmpresa = '" +Empresa+ "' && periodo = '" +Periodo+ "' && codCuenta = '" +Cuenta+ "'" );
           return (double) query.list().get(0);
     }
 

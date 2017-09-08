@@ -114,7 +114,7 @@ ArrayList<Empresa> empresas  = (ArrayList<Empresa>)request.getSession().getAttri
 String strDesde = (String)request.getSession().getAttribute("desdeBean");
 String strHasta = (String)request.getSession().getAttribute("hastaBean");
 
-if (empresas!=null && empresas.size()>0 ){
+if (metodologiasConCondiciones != null ){
   
     int desde = Integer.parseInt(strDesde);
     int hasta = Integer.parseInt(strHasta);
