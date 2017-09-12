@@ -8,6 +8,6 @@ package DAO;
 import DTO.Empresa;
 
 public interface EmpresaDAOInterface extends GenericDAOInterface<Empresa,String>{
-
+    public boolean exists(String id);
     
 }

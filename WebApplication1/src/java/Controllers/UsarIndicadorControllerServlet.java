@@ -38,7 +38,6 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             String strEmpresa=request.getParameter("Empresa");  
             String strAnio=request.getParameter("Periodo");
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-            
             Indicador indicador =indicadorDAO.get(strIndicadorName);
         
             double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio);

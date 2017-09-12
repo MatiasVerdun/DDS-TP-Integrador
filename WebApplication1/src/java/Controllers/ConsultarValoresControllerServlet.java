@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import DAO.*;
 import DTO.*;
 import java.io.IOException;
@@ -9,12 +8,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
+@WebServlet(name = "ConsultarValoresControllerServlet", urlPatterns = {"/ConsultarValoresControllerServlet"})
 public class ConsultarValoresControllerServlet extends HttpServlet {
 
     /**
@@ -30,36 +29,33 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-           
-           
             if(request.getParameter("consultarValores")!=null){ 
-                ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
                 String strCodEmpresa = request.getParameter("Empresa");
                 String strPeriodo = request.getParameter("Periodo");
                 
-               
-                Indicador indicador = new Indicador();
+                ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
+                ValorCuenta valorCta= new ValorCuenta();
+                ArrayList<ValorCuenta> valoresCuentas = valorCta.obtenerPeriodosEmpresa((ArrayList<ValorCuenta>) valorCtaDAO.findAll(),strCodEmpresa,strPeriodo);
                 
-                ArrayList<ValorCuenta> valoresCuentas = (ArrayList<ValorCuenta>) valorCtaDAO.filterPeriodos(strPeriodo,strCodEmpresa);
-                ArrayList<ValorIndicador> valoresIndicadores= indicador.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
+                Indicador indicador = new Indicador();
+                ArrayList<ValorIndicador>valoresIndicadores = indicador.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
             
                 request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
-                request.setAttribute("valoresCuentasBean",valoresCuentas); 
+                request.setAttribute("valoresCuentasBean",valoresCuentas);
             
                 RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp");  
                 rd.forward(request, response);  } 
             else{
                 String codEmpresa=request.getParameter("Empresa");      
-                 ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
-                ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorCtaDAO.findAll();
+                ValorCuenta  valorCuenta = new ValorCuenta();
+                 ValorCuentaDAO  valorCuentaDAO = new ValorCuentaDAO();
+                ArrayList<ValorCuenta> filtroEmpresas= valorCuenta.filtrarEmpresa((ArrayList<ValorCuenta>) valorCuentaDAO.findAll(),codEmpresa);
+                ArrayList<String> periodos = new ArrayList();
                 
-                ArrayList<String> periodos= new ArrayList<>();
-                
-                for(int counter=0;counter<valores.size();counter++){
-                periodos.add(valores.get(counter).getPeriodo());
+                for(int i=0; i<filtroEmpresas.size(); i++){
+                    periodos.add(filtroEmpresas.get(i).getPeriodo());
                 }
-           
-                //Elimino los periodos repetidos
+            //Elimino los periodos repetidos
                 HashSet hs = new HashSet();
                 hs.addAll(periodos);
                 periodos.clear();

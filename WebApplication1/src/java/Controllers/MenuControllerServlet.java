@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import DAO.*;
 import DTO.*;
 import java.io.IOException;
@@ -58,7 +57,7 @@ public class MenuControllerServlet extends HttpServlet {
             //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
             EmpresaDAO empresaDAO = new EmpresaDAO();
             ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
-            ArrayList<String> periodos = new ArrayList<>();
+            ArrayList<String> periodos = new ArrayList<String>();
             request.getSession().setAttribute("periodosBean",periodos); 
             request.getSession().setAttribute("empresasBean",empresas);  
             //
@@ -69,7 +68,14 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
-     
+        if(request.getParameter("graficos")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("VisualizarGraficos.jsp"); 
+            rd.forward(request, response);
+        }
+        if(request.getParameter("analizarEmpresa")!= null){
+            RequestDispatcher rd=request.getRequestDispatcher("AnalizarEmpresa.jsp"); 
+            rd.forward(request, response);
+        }   
     
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -8,5 +8,5 @@ package DAO;
 import DTO.Indicador;
 
 public interface IndicadorDAOInterface extends GenericDAOInterface<Indicador,String> {
-   
+   public boolean exists(String id);
 }

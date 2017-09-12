@@ -2,6 +2,7 @@ package DAO;
 
 import Hibernate.HibernateUtil;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.logging.Level;
@@ -69,23 +70,5 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
      }
 
-    
    
-    @Override
-    public boolean exists(ID id){
-        Session session = sessionFactory.openSession();
-       String clase = getEntityClass().getName();
-        Query query = (Query) session.createQuery("SELECT e FROM " + clase + " e");
-         List<T> entities = query.list();
-        session.close();
-         if (entities.isEmpty()) {
-        return false;
-        } else{
-        return true;
-        }
-        
-    }
-    
-    
-
 }

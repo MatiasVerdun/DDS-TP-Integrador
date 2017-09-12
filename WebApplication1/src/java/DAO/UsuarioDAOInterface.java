@@ -9,7 +9,7 @@ import DTO.Usuario;
 
 
 public interface UsuarioDAOInterface extends GenericDAOInterface<Usuario,String> {
-    
+    public boolean exists(String id);
     
     
 }

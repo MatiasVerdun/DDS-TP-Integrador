@@ -13,5 +13,5 @@ import DTO.Cuenta;
  * @author Victoria
  */
 public interface CuentaDAOInterface extends GenericDAOInterface<Cuenta,String> {
-   
+    public boolean exists(String id);
 }

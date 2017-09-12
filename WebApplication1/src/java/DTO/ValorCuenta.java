@@ -6,6 +6,7 @@
 package DTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.*;
 
 /**
@@ -82,5 +83,58 @@ public class ValorCuenta  implements Serializable{
         this.Valor = Valor;
     }
     
+    public ArrayList<ValorCuenta> filtrarEmpresa(ArrayList<ValorCuenta> valores , String empresa){
+        ArrayList<ValorCuenta> valoresAux = new ArrayList();
+        valores.forEach(valor -> {
+            if(valor.getCodEmpresa().equals(empresa)){
+                valoresAux.add(valor);
+            }
+        } );
+    return valoresAux;
+    }
     
+    public ArrayList<ValorCuenta> filtrarPeriodo(ArrayList<ValorCuenta> valores , String periodo){
+        ArrayList<ValorCuenta> valoresAux = new ArrayList();
+        valores.forEach(valor -> {
+            if(valor.getPeriodo().equals(periodo)){
+                valoresAux.add(valor);
+            }
+        } );
+    return valoresAux;
+    }
+     
+     public ArrayList<ValorCuenta> filtrarCuenta(ArrayList<ValorCuenta> valores , String cuenta){
+        ArrayList<ValorCuenta> valoresAux = new ArrayList();
+        valores.forEach(valor -> {
+            if(valor.getCodCuenta().equals(cuenta)){
+                valoresAux.add(valor);
+            }
+        } );
+    return valoresAux;
+    }
+     
+      public double obtenerValor(ArrayList<ValorCuenta> valores,String empresa,String cuenta, String periodo){
+       ValorCuenta valor = new ValorCuenta();
+       ArrayList<ValorCuenta> filterEmpresa=valor.filtrarEmpresa(valores,empresa);
+       ArrayList<ValorCuenta> filterCuenta= valor.filtrarCuenta(filterEmpresa, cuenta);
+       ArrayList<ValorCuenta> filterPeriodo= valor.filtrarPeriodo(filterCuenta, periodo);
+       if(filterPeriodo.isEmpty()){
+           System.out.print("Error al conseguir un valor");
+       }
+         return filterPeriodo.get(0).getValor();
+    
+     }
+      
+       public ArrayList<ValorCuenta> obtenerPeriodosEmpresa(ArrayList<ValorCuenta> valores,String empresa, String periodo){
+       ValorCuenta valor = new ValorCuenta();
+       ArrayList<ValorCuenta> filterEmpresa=valor.filtrarEmpresa(valores,empresa);
+       ArrayList<ValorCuenta> filterPeriodo= valor.filtrarPeriodo(filterEmpresa, periodo);
+       return filterPeriodo;
+        
+          
+    }
+
+   
+       
+       
 }

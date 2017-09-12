@@ -1,14 +1,16 @@
 <%@page import="DAO.*"%>
-<%@page import="DTO.*"%> 
+<%@page import="DTO.*"%>  
 <%@page import="java.util.ArrayList"%>  
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<body>
-<head>
-<style>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <style>
 .form{
    height:35px;
-   width:280px;;
+   width:285px;
    border-color:#00c8f8;
    font-size:110%
 }
@@ -16,12 +18,12 @@
     background-color: #00c8f8;
     color: white;
     height:38px; 
-   width:300px;;
+    width:300px;
     font-size:120%
 }
 .select{
    height:35px;
-  width:290px;;
+   width:290px;
    border-color:#00c8f8;
    font-size:110%
 }
@@ -29,19 +31,12 @@
     color: red;
     font-size:110%
 }
-.table
-{
-    width:50%;
-    background-color: rgb(245, 245, 245);
-    border-color:#00c8f8;
-    margin:auto;
-}
 </style>
-  <form action="ConsultarValoresControllerServlet" method="POST">
+   <form action="ConsultarValoresControllerServlet" method="POST">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
     <br>
-    <br> 
-    <select required class="select" name="Empresa" onchange="if(this.value !== '') this.form.submit()">
+    <br>
+  <select required class="select" name="Empresa" onchange="if(this.value !== '') this.form.submit()">
          <option value="">Empresa</option>
 <%  
 //--- Obtiene el listado de Empresas
@@ -63,6 +58,7 @@ for (int counter = 0; counter < empresas.size(); counter++) {
 } 
 %>
     </select>
+
 <br>
 <br>
 <%  
@@ -83,7 +79,10 @@ if (periodos.size()>0) {
     }
     %>  
   </select>
-  <br><br><br>
+  <br><br>
+ 
+<br>
+<br>
   <input class="button" type="submit" name="consultarValores" value="Consultar Valores">
 <br>
 <br>
@@ -91,7 +90,9 @@ if (periodos.size()>0) {
 } 
 %>
     <br>
+    <br>
   </fieldset>
+    
 </form>
 <%  
 //--- Obtiene el listado de Valores de Cuentas
@@ -124,6 +125,7 @@ ArrayList<ValorIndicador>valoresIndicadores =(ArrayList<ValorIndicador>)request.
         out.print("</td>");
         out.print("<td>");
         out.print(String.format("%.02f", valoresIndicadores.get(counter).getValor()));
+        //out.print(java.math.BigDecimal.valueOf(valoresIndicadores.get(counter).getValor()));
         out.print("</td>");
         out.print("</tr>");
     } 

@@ -57,7 +57,8 @@ public class AccesoControllerServlet extends HttpServlet {
             boolean existe = usuarioDAO.exists(strUserName);
             Usuario usrAConfirmar = usuarioDAO.get(strUserName);
                //--- Determina la acci�n en base a la existencia
-            if(existe && strPassword.equals(usrAConfirmar.getContrasena()) ){
+           
+               if(existe && strPassword.equals(usrAConfirmar.getContrasena()) ){
                 //--- Guarda en la Session los datos del Usuario
                 request.getSession().setAttribute("usuarioBean",objUsuario);  
 
@@ -68,6 +69,8 @@ public class AccesoControllerServlet extends HttpServlet {
                 RequestDispatcher rd=request.getRequestDispatcher("Login-error.jsp");  
                 rd.forward(request, response);  
             }
+           
+            
         }
     }
 

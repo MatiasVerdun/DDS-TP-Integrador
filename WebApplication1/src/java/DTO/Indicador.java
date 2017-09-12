@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Indicador  implements Serializable {
     @Id
     @Column(name="nombreIndicador")
-    private String nombre;
+    private String nombreIndicador;
     @Column(name="indicador")
     private String indicador;
 
@@ -35,28 +35,30 @@ public class Indicador  implements Serializable {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreIndicador = nombre;
     }
 
     public String getNombre() {
-        return nombre;
+        return nombreIndicador;
     }
     
 
       public double resultadoFinal(String Empresa, String Anio){
-      
+            
+            ValorCuenta valorcuenta = new ValorCuenta();
             ValorCuentaDAO valorcuentaDAO = new ValorCuentaDAO();
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             
             Function f = new Function(indicador);
             
+            ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorcuentaDAO.findAll();
             
           for(int i = 0; i < f.getArgumentsNumber(); i++){
-              
-              if(indicadorDAO.exists(f.getArgument(i).getArgumentName())){
+                String indicadorActual = f.getArgument(i).getArgumentName();
+              if(indicadorDAO.exists(indicadorActual)){
                   f.getArgument(i).setArgumentValue(resultadoFinal(Empresa, Anio));
               }else{
-            double valor = valorcuentaDAO.filterValor(f.getArgument(i).getArgumentName(), Empresa, Anio);
+            double valor = valorcuenta.obtenerValor(valores,Empresa,f.getArgument(i).getArgumentName(), Anio);
             f.getArgument(i).setArgumentValue(valor);
               }
           }
@@ -69,11 +71,14 @@ public class Indicador  implements Serializable {
      public boolean comprobarSintaxis(){
             
             Function f = new Function(indicador);
-            
-            f.checkSyntax();
+            IndicadorDAO indicadorDAO = new IndicadorDAO();
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            for(int i = 0; i < f.getArgumentsNumber(); i++){
+              if(indicadorDAO.exists(f.getArgument(i).getArgumentName()) || cuentaDAO.exists(f.getArgument(i).getArgumentName())){
+                 f.checkSyntax();
+                 
+              }}
             String subStr = f.getErrorMessage().substring(f.getErrorMessage().length() - 11);
-            
-            
             return (subStr.equals("no errors.\n"));
     }
 
