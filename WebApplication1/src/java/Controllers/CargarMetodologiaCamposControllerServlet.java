@@ -32,6 +32,7 @@ public class CargarMetodologiaCamposControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
           //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
+            
             String strNombreMetodologia =request.getParameter("nombreMetodologia");  
             String condicion =request.getParameter("condicion");  
             String indicador = request.getParameter("Indicador");

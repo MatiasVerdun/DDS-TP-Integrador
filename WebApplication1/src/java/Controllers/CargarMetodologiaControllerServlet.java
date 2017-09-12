@@ -32,13 +32,18 @@ public class CargarMetodologiaControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+           String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
            String strNombreMetodologia=request.getParameter("nombreMetodologia"); 
+           
            MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
            Metodologia objMetodologia = new Metodologia();
            objMetodologia.setNombreMetodologia(strNombreMetodologia);
-           metodologiaDAO.saveOrUpdate(objMetodologia); 
+           objMetodologia.setId_usuario(id_usuario);
+           
+           //metodologiaDAO.saveOrUpdate(objMetodologia); 
            
            if(request.getParameter("cargarCondiciones")!= null){
+            metodologiaDAO.saveOrUpdate(objMetodologia); 
             request.setAttribute("nombreMetodologiaBean",strNombreMetodologia);
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologiaCampos.jsp"); 
             rd.forward(request, response);

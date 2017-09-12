@@ -33,13 +33,14 @@ public class MenuControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+        String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
         if(request.getParameter("cargarDatos")!= null){
             RequestDispatcher rd=request.getRequestDispatcher("CargarDatos.jsp"); 
             rd.forward(request, response);
         } 
         
         if(request.getParameter("indicadores")!= null){
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             RequestDispatcher rd=request.getRequestDispatcher("MenuIndicadores.jsp"); 
             rd.forward(request, response);
         }
@@ -49,6 +50,7 @@ public class MenuControllerServlet extends HttpServlet {
             rd.forward(request, response);
         } 
          if(request.getParameter("metodologia")!= null){
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
             rd.forward(request, response);
         } 
@@ -56,8 +58,9 @@ public class MenuControllerServlet extends HttpServlet {
         if(request.getParameter("consultarValores")!= null){
             //--- Obtiene la lista de Empresas y la almacena para que lo tome la Vista
             EmpresaDAO empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
+            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.filter();
             ArrayList<String> periodos = new ArrayList<String>();
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             request.getSession().setAttribute("periodosBean",periodos); 
             request.getSession().setAttribute("empresasBean",empresas);  
             //
@@ -68,14 +71,7 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
         } 
-        if(request.getParameter("graficos")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("VisualizarGraficos.jsp"); 
-            rd.forward(request, response);
-        }
-        if(request.getParameter("analizarEmpresa")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("AnalizarEmpresa.jsp"); 
-            rd.forward(request, response);
-        }   
+      
     
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -18,6 +18,6 @@ public interface GenericDAOInterface<T,ID extends Serializable> {
    T create();
    void saveOrUpdate(T entity);
    T get(ID id);
-   List<T> findAll();
+   List<T> filter();
 }
 

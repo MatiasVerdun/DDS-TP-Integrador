@@ -34,11 +34,11 @@ public class MenuIndicadoresControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+        String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
         if(request.getParameter("verIndicador")!= null){
             //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
             IndicadorDAO indicadorDAO= new IndicadorDAO();
-            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.findAll();
+            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
             request.getSession().setAttribute("indicadoresBean",indicadores);  
             
             RequestDispatcher rd=request.getRequestDispatcher("VerIndicador.jsp"); 
@@ -48,7 +48,7 @@ public class MenuIndicadoresControllerServlet extends HttpServlet {
         if(request.getParameter("usarIndicador")!= null){
             //--- Obtiene la lista de Indicadores y la almacena para que lo tome la Vista
             IndicadorDAO indicadorDAO= new IndicadorDAO();
-            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.findAll();
+            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
             request.getSession().setAttribute("indicadoresBean",indicadores);  
             
            
@@ -65,6 +65,7 @@ public class MenuIndicadoresControllerServlet extends HttpServlet {
         } 
         
         if(request.getParameter("cargarIndicador")!= null){
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             RequestDispatcher rd=request.getRequestDispatcher("CargarIndicador.jsp"); 
             rd.forward(request, response);
         }

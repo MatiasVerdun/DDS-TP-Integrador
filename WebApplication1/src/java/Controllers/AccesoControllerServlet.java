@@ -60,7 +60,7 @@ public class AccesoControllerServlet extends HttpServlet {
            
                if(existe && strPassword.equals(usrAConfirmar.getContrasena()) ){
                 //--- Guarda en la Session los datos del Usuario
-                request.getSession().setAttribute("usuarioBean",objUsuario);  
+                request.getSession().setAttribute("usuarioBean",strUserName);  
 
                 RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
                 rd.forward(request, response);  

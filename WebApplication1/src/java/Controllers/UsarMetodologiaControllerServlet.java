@@ -53,9 +53,10 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
          
             boolean pasaCondicion = meto.pasaCondiciones(empresa, desde, hasta);
             
+            String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
             
             MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
-            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
+            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.filter(id_usuario);
             
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
@@ -71,7 +72,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             
             ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
             ArrayList<ValorCuenta> valores = new ArrayList<>();
-            valores = (ArrayList<ValorCuenta>) valorCtaDAO.findAll();
+            valores = (ArrayList<ValorCuenta>) valorCtaDAO.filter();
             
             ArrayList<String> periodos = new ArrayList<>();
             

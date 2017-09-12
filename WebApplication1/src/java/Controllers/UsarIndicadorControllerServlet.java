@@ -56,12 +56,12 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             
             
             EmpresaDAO empresaDAO= new EmpresaDAO();
-            ArrayList<Empresa> empresas= (ArrayList<Empresa>) empresaDAO.findAll();
+            ArrayList<Empresa> empresas= (ArrayList<Empresa>) empresaDAO.filter();
             request.getSession().setAttribute("empresasBean",empresas); 
                
             
             ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-            ArrayList<ValorCuenta> valores= (ArrayList<ValorCuenta>) valorCuentaDAO.findAll();
+            ArrayList<ValorCuenta> valores= (ArrayList<ValorCuenta>) valorCuentaDAO.filter();
             //Elimino los periodos repetidos
             ArrayList<String> periodos= new ArrayList();
             for(int counter=0;counter<valores.size();counter++){

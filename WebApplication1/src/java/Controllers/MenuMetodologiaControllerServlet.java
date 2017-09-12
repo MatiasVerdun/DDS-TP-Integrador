@@ -32,14 +32,15 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+        String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
         if(request.getParameter("usarMetodologia")!= null){
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
-            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
+            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.filter(id_usuario);
             request.getSession().setAttribute("metodologiasBean",metodologias);  
             
             EmpresaDAO empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
+            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.filter();
             request.getSession().setAttribute("empresasBean",empresas);
              
             ArrayList<String> periodos = new ArrayList<>();
@@ -50,13 +51,13 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         } 
         if(request.getParameter("usarMetodologiaEmpresas")!= null){
            MetodologiaDAO metodologiaDAO= new MetodologiaDAO();
-            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.findAll();
+            ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.filter(id_usuario);
             
             EmpresaDAO empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
+            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.filter();
             
             ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-           ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorCuentaDAO.findAll();
+           ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorCuentaDAO.filter();
                 
             //Cargo los periodos
                 ArrayList<String> periodos= new ArrayList();
@@ -77,10 +78,9 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             rd.forward(request, response);
         } 
         if(request.getParameter("cargarMetodologia")!= null){
-            
+            request.getSession().setAttribute("usuarioBean",id_usuario); 
             IndicadorDAO indicadorDAO= new IndicadorDAO();
-            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.findAll();
-            
+            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
             request.getSession().setAttribute("indicadoresBean",indicadores);  
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);

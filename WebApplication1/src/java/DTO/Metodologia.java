@@ -17,13 +17,25 @@ public class Metodologia  implements Serializable {
     @Id
     @Column(name="nombreMetodologia")
     private String nombreMetodologia; 
-
+   
     @Transient
     private ArrayList<Condicion> condiciones = new ArrayList<Condicion>();
-
     
+    @Column(name="id_usuario")
+    private String id_usuario;
+
     public Metodologia() {
     }
+    
+    
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
     
     public String getNombreMetodologia() {
         return nombreMetodologia;

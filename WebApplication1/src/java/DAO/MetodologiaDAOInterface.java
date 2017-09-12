@@ -6,9 +6,12 @@
 package DAO;
 
 import DTO.*;
+import java.util.List;
 
 
 public interface MetodologiaDAOInterface extends GenericDAOInterface<Metodologia,String> {
     
+    public List<Metodologia> filter(String id_usuario);
+
     
 }

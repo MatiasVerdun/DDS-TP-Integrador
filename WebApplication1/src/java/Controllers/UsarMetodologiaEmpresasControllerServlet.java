@@ -40,7 +40,7 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             metodologia=metodologia.ObtenerMetodologiaConCondiciones(strMetodologia);
             
             EmpresaDAOInterface empresaDAO = new EmpresaDAO();
-            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.findAll();
+            ArrayList<Empresa> empresas = (ArrayList<Empresa>) empresaDAO.filter();
             
             
             

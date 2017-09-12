@@ -58,7 +58,7 @@ public class GenericDAO<T, ID extends Serializable> implements GenericDAOInterfa
 
 
     @Override
-    public List<T> findAll() {
+    public List<T> filter() {
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("SELECT e FROM " + getEntityClass().getName() + " e");
         List<T> entities = query.list();

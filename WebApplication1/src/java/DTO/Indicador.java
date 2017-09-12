@@ -20,12 +20,31 @@ public class Indicador  implements Serializable {
     private String nombreIndicador;
     @Column(name="indicador")
     private String indicador;
+    @Column(name="id_usuario")
+    private String id_usuario;
 
-    public Indicador() {
+      public Indicador() {
     }
     
     
-    
+    public String getNombre() {
+        return nombreIndicador;
+    }
+
+    public void setNombre(String nombreIndicador) {
+        this.nombreIndicador = nombreIndicador;
+    }
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+
+   
     public String getIndicador() {
         return indicador;
     }
@@ -34,13 +53,7 @@ public class Indicador  implements Serializable {
         this.indicador = indicador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombreIndicador = nombre;
-    }
-
-    public String getNombre() {
-        return nombreIndicador;
-    }
+   
     
 
       public double resultadoFinal(String Empresa, String Anio){
@@ -51,7 +64,7 @@ public class Indicador  implements Serializable {
             
             Function f = new Function(indicador);
             
-            ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorcuentaDAO.findAll();
+            ArrayList<ValorCuenta> valores = (ArrayList<ValorCuenta>) valorcuentaDAO.filter();
             
           for(int i = 0; i < f.getArgumentsNumber(); i++){
                 String indicadorActual = f.getArgument(i).getArgumentName();
@@ -82,9 +95,8 @@ public class Indicador  implements Serializable {
             return (subStr.equals("no errors.\n"));
     }
 
-    public ArrayList<ValorIndicador> ObtenerValoresIndicadores(String strCodEmpresa, String strPeriodo) {
+    public ArrayList<ValorIndicador> ObtenerValoresIndicadores(ArrayList<Indicador> indicadores,String strCodEmpresa, String strPeriodo) {
         IndicadorDAO indicadorDAO = new IndicadorDAO();
-        ArrayList<Indicador> indicadores = (ArrayList<Indicador>) indicadorDAO.findAll();
         ArrayList<ValorIndicador> valores = new  ArrayList<>();
         for(int i=0;i<indicadores.size();i++){
         ValorIndicador valorIndicador = new ValorIndicador();

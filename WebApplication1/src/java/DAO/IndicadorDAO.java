@@ -28,4 +28,14 @@ public class IndicadorDAO extends GenericDAO<Indicador,String> implements  Indic
          return !entities.isEmpty();
        
     }
+    
+    @Override
+    public List<Indicador> filter(String id_usuario) {
+          
+        Session session = sessionFactory.openSession();
+          session.beginTransaction();
+          Query query = session.createQuery("SELECT e FROM DTO.Indicador e WHERE id_usuario= '" +id_usuario+ "'");
+            List<Indicador> entities = query.list();
+           return entities;
+    }
 }

@@ -36,6 +36,7 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
         //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
+            String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
             String strNombreIndicador=request.getParameter("nombreIndicador");  
             String strIndicador=request.getParameter("indicador");  
           
@@ -44,7 +45,7 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
             Indicador objIndicador=new Indicador();  
             objIndicador.setNombre(strNombreIndicador);  
             objIndicador.setIndicador(strIndicador); 
-              
+            objIndicador.setId_usuario(id_usuario);
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             if(objIndicador.comprobarSintaxis()){
                 

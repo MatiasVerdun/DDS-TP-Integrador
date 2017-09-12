@@ -29,16 +29,19 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-            if(request.getParameter("consultarValores")!=null){ 
+         String id_usuario = (String) request.getSession().getAttribute("usuarioBean");    
+        if(request.getParameter("consultarValores")!=null){ 
                 String strCodEmpresa = request.getParameter("Empresa");
                 String strPeriodo = request.getParameter("Periodo");
                 
                 ValorCuentaDAO valorCtaDAO = new ValorCuentaDAO();
                 ValorCuenta valorCta= new ValorCuenta();
-                ArrayList<ValorCuenta> valoresCuentas = valorCta.obtenerPeriodosEmpresa((ArrayList<ValorCuenta>) valorCtaDAO.findAll(),strCodEmpresa,strPeriodo);
+                ArrayList<ValorCuenta> valoresCuentas = valorCta.obtenerPeriodosEmpresa((ArrayList<ValorCuenta>) valorCtaDAO.filter(),strCodEmpresa,strPeriodo);
                 
                 Indicador indicador = new Indicador();
-                ArrayList<ValorIndicador>valoresIndicadores = indicador.ObtenerValoresIndicadores(strCodEmpresa,strPeriodo);
+                IndicadorDAO indicadorDAO = new IndicadorDAO();
+                ArrayList<Indicador> indicadores = (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
+                ArrayList<ValorIndicador>valoresIndicadores = indicador.ObtenerValoresIndicadores(indicadores,strCodEmpresa,strPeriodo);
             
                 request.setAttribute("valoresIndicadoresBean",valoresIndicadores);
                 request.setAttribute("valoresCuentasBean",valoresCuentas);
@@ -49,7 +52,7 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
                 String codEmpresa=request.getParameter("Empresa");      
                 ValorCuenta  valorCuenta = new ValorCuenta();
                  ValorCuentaDAO  valorCuentaDAO = new ValorCuentaDAO();
-                ArrayList<ValorCuenta> filtroEmpresas= valorCuenta.filtrarEmpresa((ArrayList<ValorCuenta>) valorCuentaDAO.findAll(),codEmpresa);
+                ArrayList<ValorCuenta> filtroEmpresas= valorCuenta.filtrarEmpresa((ArrayList<ValorCuenta>) valorCuentaDAO.filter(),codEmpresa);
                 ArrayList<String> periodos = new ArrayList();
                 
                 for(int i=0; i<filtroEmpresas.size(); i++){
