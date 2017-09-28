@@ -23,8 +23,7 @@ public class CondicionDAO extends GenericDAO<Condicion,String> implements  Condi
     
     @Override
     public List<Condicion> filter(String Metodologia) {
-          
-        Session session = sessionFactory.openSession();
+            Session session = sessionFactory.openSession();
           session.beginTransaction();
           Query query = session.createQuery("SELECT e FROM DTO.Condicion e WHERE metodologia = '" +Metodologia+ "'");
             List<Condicion> entities = query.list();

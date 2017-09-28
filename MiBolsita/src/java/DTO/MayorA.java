@@ -11,17 +11,17 @@ public class MayorA extends Condicion{
      
     @Override
     public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        boolean pasa = true;
+        
         IndicadorDAO indicadorDAO = new IndicadorDAO();
-        Indicador indicador = indicadorDAO.get(this.indicador);
+        Indicador indi = indicadorDAO.get(this.indicador);
         int i = anioDesde;
         while(i <= anioHasta){
-        double resultado = indicador.resultadoFinal(empresa.getNombreEmpresa(),Integer.toString(i));
+        double resultado = indi.resultadoFinal(empresa.getCodEmpresa(),Integer.toString(i));
         if(resultado <= Integer.parseInt(this.getMonto()) ){
-            pasa = false;
+            return  false;
         }
         i++;
         }
-      return pasa;
+      return true ;
     }
 }

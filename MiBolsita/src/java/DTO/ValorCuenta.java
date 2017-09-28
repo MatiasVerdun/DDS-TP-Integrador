@@ -120,9 +120,11 @@ public class ValorCuenta  implements Serializable{
        ArrayList<ValorCuenta> filterPeriodo= valor.filtrarPeriodo(filterCuenta, periodo);
        if(filterPeriodo.isEmpty()){
            System.out.print("Error al conseguir un valor");
+          
+       }else{ 
+           return filterPeriodo.get(0).getValor();
        }
-         return filterPeriodo.get(0).getValor();
-    
+        return 0;
      }
       
        public ArrayList<ValorCuenta> obtenerPeriodosEmpresa(ArrayList<ValorCuenta> valores,String empresa, String periodo){

@@ -46,7 +46,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             //Boolean pasaCondicion=true;
             
             Empresa empresa = new Empresa();
-            empresa.setNombreEmpresa(strEmpresa);
+            empresa.setCodEmpresa(strEmpresa);
             Metodologia metodologia = new Metodologia();
             
             Metodologia meto = metodologia.ObtenerMetodologiaConCondiciones(strMetodologia);

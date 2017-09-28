@@ -25,7 +25,7 @@
 </style>
 </head>
 <form action="AccesoControllerServlet" method="post">
-  <fieldset style="width:20%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
+  <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
 	<br>
         <input required="" placeholder="Usuario" class="form" type="text" name="Usuario" value="" maxlength="15" >

@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Condiciones")
-public class Condicion implements Serializable{
+public  class Condicion implements Serializable,CondicionInterface{
     
 
     public Condicion() {
@@ -80,12 +80,13 @@ public class Condicion implements Serializable{
     public void setMonto(String numero) {
         this.monto = numero;
     }
-    
-    public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
-        
-         return true;
-    }
 
+    @Override
+    public Boolean pasaCondicion(Empresa empresa, int anioDesde, int anioHasta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   
     
 }
 

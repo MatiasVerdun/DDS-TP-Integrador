@@ -109,15 +109,16 @@ ArrayList<String> periodos =(ArrayList<String>)request.getSession().getAttribute
 
 <%  
 
-Metodologia metodologiasConCondiciones =(Metodologia)request.getSession().getAttribute("metodologiasConCondicionesBean");  
+Metodologia metodologiaConCondiciones =(Metodologia)request.getSession().getAttribute("metodologiaConCondicionesBean");  
 ArrayList<Empresa> empresas  = (ArrayList<Empresa>)request.getSession().getAttribute("empresasBean");
 String strDesde = (String)request.getSession().getAttribute("desdeBean");
 String strHasta = (String)request.getSession().getAttribute("hastaBean");
 
-if (metodologiasConCondiciones != null ){
+if (metodologiaConCondiciones != null ){
   
     int desde = Integer.parseInt(strDesde);
     int hasta = Integer.parseInt(strHasta);
+    
     if(desde <= hasta){
     out.print("<br/><br/>");
     out.print("<table align='center' class='table'>");
@@ -127,7 +128,7 @@ if (metodologiasConCondiciones != null ){
         out.print("</td>");
         out.print("<td>");
         out.print("<b>");
-        out.print(metodologiasConCondiciones.getNombreMetodologia());
+        out.print(metodologiaConCondiciones.getNombreMetodologia());
         out.print("</b>");
         out.print("</td>");
         out.print("</tr>");
@@ -138,11 +139,12 @@ if (metodologiasConCondiciones != null ){
         out.print(empresaActual.getNombreEmpresa());
         out.print("</td>");
         out.print("<td>");
-        out.print(metodologiasConCondiciones.pasaCondiciones(empresaActual,desde, hasta));
+        out.print(metodologiaConCondiciones.pasaCondiciones(empresaActual,desde, hasta));
         out.print("</td>");
         out.print("</tr>");
     }
     out.print("</table>");}
+    
     else{
         out.print("<font color='red'>Revise los periodos ingresados </font>");
     }

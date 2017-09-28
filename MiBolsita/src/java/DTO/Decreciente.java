@@ -15,18 +15,18 @@ public class Decreciente extends Condicion{
      public Boolean pasaCondicion(Empresa empresa,int anioDesde, int anioHasta){
         IndicadorDAO indicadorDAO = new IndicadorDAO();
         Indicador indicador = indicadorDAO.get(this.indicador);
-        boolean pasa = true;
-        double resultadoInicial = indicador.resultadoFinal( empresa.getNombreEmpresa(),Integer.toString(anioDesde));
+        
+        double resultadoInicial = indicador.resultadoFinal( empresa.getCodEmpresa(),Integer.toString(anioDesde));
         
         int i = anioDesde++;
         while(i <= anioHasta){
-        double resultadoAComparar = indicador.resultadoFinal(empresa.getNombreEmpresa(),Integer.toString(i));
+        double resultadoAComparar = indicador.resultadoFinal(empresa.getCodEmpresa(),Integer.toString(i));
         if(resultadoAComparar > resultadoInicial ){
-            pasa = false;
             resultadoInicial = resultadoAComparar;
+            return  false;
         }
         i++;
         }
-      return pasa;
+      return true;
     }
 }
