@@ -26,20 +26,25 @@
 </head>
 <form action="AccesoControllerServlet" method="post">
   <fieldset style="width:40%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
- 	<br>
+ 	
+        <br>
 	<br>
-        <input required="" placeholder="Usuario" class="form" type="text" name="Usuario" value="" maxlength="15" >
+        <input required="" placeholder="Usuario"  class="form" type="text" name="Usuario" value="" maxlength="15" >
     <br>
     <br>
 	<br>
         <input required=""placeholder="Contraseña" class="form" type="password" name="Clave" value="" maxlength="15" >
     <br>
+    
 	<br>
 	<br>
     <input class="button" type="submit" name="iniciarSesion"  value="Iniciar Sesión">
     <br>
     <br>
     <input class="button" type="submit" name="cambioClave" value="Cambiar Contraseña">
+    <br>
+    <br>
+    <input class="button" type="submit" name="registrarse"  value="Registrarse">
     <br>
     <br>
   </fieldset>

@@ -67,10 +67,7 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("ConsultarValores.jsp"); 
             rd.forward(request, response);
         } 
-        if(request.getParameter("cargarMetodologia")!= null){
-            RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
-            rd.forward(request, response);
-        } 
+       
       
     
     }

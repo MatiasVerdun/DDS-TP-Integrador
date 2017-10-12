@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet(name = "AccesoControllerServlet", urlPatterns = {"/AccesoControllerServlet"})
-public class AccesoControllerServlet extends HttpServlet {
+@WebServlet(name = "NuevoUsuarioControllerServlet", urlPatterns = {"/NuevoUsuarioControllerServlet"})
+public class NuevoUsuarioControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,51 +35,32 @@ public class AccesoControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();  
-          //--- Determina la acción seleccionada
-       if (request.getParameter("cambioClave")!=null)
-        {
-            //
-            RequestDispatcher rd=request.getRequestDispatcher("CambioClave.jsp");  
-            rd.forward(request, response);  
-        }  
-         if (request.getParameter("registrarse")!=null)
-        {
-            //
-            RequestDispatcher rd=request.getRequestDispatcher("NuevoUsuario.jsp");  
-            rd.forward(request, response);  
-        }  
-        else{ 
+          
             //--- Obtiene los datos desde la Vista (Login.jsp)
             String strUserName=request.getParameter("Usuario");  
             String strPassword=request.getParameter("Clave");  
-
+            String strPasswordRepetida=request.getParameter("ClaveRepetida");  
             //--- Crea el objeto usuario que desde Validar
             Usuario objUsuario=new Usuario();  
             objUsuario.setUsario(strUserName);  
             objUsuario.setPassword(strPassword); 
-
-            //--- Controla si existe el usuario en la Tabla
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean existe = usuarioDAO.exists(strUserName);
-            Usuario usrAConfirmar = usuarioDAO.get(strUserName);
-               //--- Determina la acci�n en base a la existencia
-           
-               if(existe && strPassword.equals(usrAConfirmar.getContrasena()) ){
+            
+            
+            
+               if(strPassword.equals(strPasswordRepetida) && !usuarioDAO.exists(strUserName)){
                 //--- Guarda en la Session los datos del Usuario
-                request.getSession().setAttribute("usuarioBean",strUserName);  
-
-                RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+                usuarioDAO.saveOrUpdate(objUsuario);
+                RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");  
                 rd.forward(request, response);  
             }  
             else{  
-                RequestDispatcher rd=request.getRequestDispatcher("Login-error.jsp");  
+                RequestDispatcher rd=request.getRequestDispatcher("NuevoUsuario-error.jsp");  
                 rd.forward(request, response);  
             }
            
             
         }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -119,4 +100,6 @@ public class AccesoControllerServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+    }
+
+
