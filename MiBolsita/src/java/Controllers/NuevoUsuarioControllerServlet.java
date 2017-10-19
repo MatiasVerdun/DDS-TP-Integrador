@@ -35,7 +35,7 @@ public class NuevoUsuarioControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();  
-          
+          if(request.getParameter("registrarse")!= null ){
             //--- Obtiene los datos desde la Vista (Login.jsp)
             String strUserName=request.getParameter("Usuario");  
             String strPassword=request.getParameter("Clave");  
@@ -60,7 +60,12 @@ public class NuevoUsuarioControllerServlet extends HttpServlet {
             }
            
             
-        }
+        } if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("Login.jsp"); 
+            rd.forward(request, response);
+        } 
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

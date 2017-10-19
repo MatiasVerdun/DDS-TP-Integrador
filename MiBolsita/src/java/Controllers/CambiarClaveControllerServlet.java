@@ -59,7 +59,11 @@ public class CambiarClaveControllerServlet extends HttpServlet {
                 RequestDispatcher rd=request.getRequestDispatcher("CambioClave-error.jsp");  
                 rd.forward(request, response);  
             }
-
+ if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("Login.jsp"); 
+            rd.forward(request, response);
+        } 
     }
 }
 

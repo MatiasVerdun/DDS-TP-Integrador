@@ -31,7 +31,7 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-           
+           if(request.getParameter("usarMetodologia")!= null){
             String strMetodologia=request.getParameter("Metodologia"); 
             String strPeriodoDesde=request.getParameter("periodoDesde");
             String strPeriodoHasta=request.getParameter("periodoHasta");
@@ -52,10 +52,16 @@ public class UsarMetodologiaEmpresasControllerServlet extends HttpServlet {
           
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologiaEmpresas.jsp");  
             rd.forward(request, response);
+    }
+           if(request.getParameter("atras")!= null){
             
-           
+            RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
+            rd.forward(request, response);
+        } 
             
     }
+    
+    
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

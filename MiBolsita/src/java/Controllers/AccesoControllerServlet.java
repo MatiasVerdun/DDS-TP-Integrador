@@ -36,12 +36,7 @@ public class AccesoControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();  
           //--- Determina la acción seleccionada
-       if (request.getParameter("cambioClave")!=null)
-        {
-            //
-            RequestDispatcher rd=request.getRequestDispatcher("CambioClave.jsp");  
-            rd.forward(request, response);  
-        }  
+        
          if (request.getParameter("registrarse")!=null)
         {
             //

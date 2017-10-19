@@ -49,7 +49,7 @@ public class MenuControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("CargarValoresCuentas.jsp"); 
             rd.forward(request, response);
         } 
-         if(request.getParameter("metodologia")!= null){
+         if(request.getParameter("metodologias")!= null){
             request.getSession().setAttribute("usuarioBean",id_usuario); 
             RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
             rd.forward(request, response);

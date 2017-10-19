@@ -78,6 +78,11 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
             rd.forward(request, response);
            }
+           if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("MenuIndicadores.jsp"); 
+            rd.forward(request, response);
+        } 
     }
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

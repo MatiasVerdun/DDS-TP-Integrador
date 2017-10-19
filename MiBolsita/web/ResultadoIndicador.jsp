@@ -3,9 +3,20 @@
  <!DOCTYPE html>
  <html>
      <head>
+         <style>
+             #formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+             </style>
      </head>
      <body>
-         
+         <div id="formFooter">
+        
  <%  
      String valorFinal = (String)request.getSession().getAttribute("IndicadorBean");
      
@@ -14,5 +25,7 @@
      out.print("</p>");
  
  %>  
-     </body>
+  
+         </div>
+  </body>
  </html>

@@ -42,7 +42,7 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
         PrintWriter out=response.getWriter(); 
         
         //--- Obtiene los datos desde la Vista (CargarCuentas.jsp)
-       
+       if(request.getParameter("subirArchivo")!= null){
         
         final Part filePart = request.getPart("uploadedfile");
         InputStream filecontent = filePart.getInputStream();
@@ -77,6 +77,14 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
                 rd.forward(request, response); }
   
      }
+    if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
+            rd.forward(request, response);
+        } 
+    }
+    
+   
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -59,7 +59,7 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             ArrayList<Metodologia> metodologias= (ArrayList<Metodologia>) metodologiaDAO.filter(id_usuario);
             
             request.getSession().setAttribute("metodologiasBean",metodologias);  
-            request.getSession().setAttribute("ResultadoMetodologiaBean",Boolean.toString(pasaCondicion));
+            request.getSession().setAttribute("ResultadoMetodologiaBean",pasaCondicion);
             
             if(desde <= hasta){
             RequestDispatcher rd=request.getRequestDispatcher("ResultadoMetodologia.jsp");  
@@ -91,6 +91,12 @@ public class UsarMetodologiaControllerServlet extends HttpServlet {
             RequestDispatcher rd=request.getRequestDispatcher("UsarMetodologia.jsp"); 
             rd.forward(request, response);
         }
+        
+        if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("MenuMetodologia.jsp"); 
+            rd.forward(request, response);
+        } 
     }
         
    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

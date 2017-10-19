@@ -87,6 +87,11 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
+        if(request.getParameter("atras")!= null){
+            
+            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
+            rd.forward(request, response);
+        } 
     
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
