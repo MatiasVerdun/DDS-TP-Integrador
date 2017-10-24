@@ -42,7 +42,7 @@ public class GuardarDatosEmpresasControllerServlet extends HttpServlet {
             EmpresaDAO empresaDAO = new EmpresaDAO();
             empresaDAO.saveOrUpdate(objEmpresa);
             
-            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp");  
             rd.forward(request, response);
             
 

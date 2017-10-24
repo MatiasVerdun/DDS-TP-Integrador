@@ -48,7 +48,7 @@ public class GuardarDatosCuentasControllerServlet extends HttpServlet {
             CuentaDAO cuentaDAO = new CuentaDAO();
             cuentaDAO.saveOrUpdate(objCuenta);
             
-            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp");  
             rd.forward(request, response);
             
 

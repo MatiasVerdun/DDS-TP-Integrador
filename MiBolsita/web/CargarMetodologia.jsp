@@ -13,10 +13,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
 
  
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
   
-  
-      <link rel="stylesheet" href="css/style.css">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   
 </head>
@@ -112,11 +117,10 @@ input[type=button]{
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
+  background-color: #56baed;
+
+  
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -395,10 +399,9 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
   <form action="CargarMetodologiaControllerServlet" method="post"> 
 
     <div align="right">
-       <input type="button" class="btn btn-default" onclick="history.back()" value="<"name="atras">
-           <span class="glyphicon glyphicon-chevron-left" ></span>
-    </input>
+        <button type="button" class="btn btn-default" onclick="history.back()"  name="atras"> <span class="glyphicon glyphicon-chevron-left" ></span> </button>
        </div>
+   
 </head>
   
     <h2>Nombre de la Metodologia</h2>
@@ -413,12 +416,14 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
             out.print(request.getAttribute("nombreMetodologiaBean")); 		
             out.print("' ");
             out.print(" >"); 
-             }
+
+             }else{ArrayList<Condicion> lista = new ArrayList();
+            request.getSession().setAttribute("condiciones",lista);}
            %>
           
     <br>
     <br>
-    <fieldset style="width:40%;text-align:left; margin:auto;float: left; border: 0;">
+    <fieldset style="text-align:left; ">
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="menorA" checked=true> menorA<br>
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Monto')" value="mayorA"> mayorA<br>
     <input name ="condicion" class = "check" type="radio"  onclick="handleClick('Cantidad de periodos')" value="creciente"> creciente<br>
@@ -468,6 +473,31 @@ for (int counter = 0; counter < indicadores.size(); counter++) {
 <br>
 <input class="button" type="submit" name="proximaCondicion" value="Proxima Condicion"/>
 <input class="button" type="submit"  name="finalizarCarga" value="Finalizar Carga">
+
+<div id="formFooter" >
+     <%  Boolean esPrimero = (Boolean) request.getSession().getAttribute("primero");
+         ArrayList<Condicion>condiciones = (ArrayList)request.getSession().getAttribute("condiciones");
+     if(!esPrimero){
+         out.print("<h2>Condiciones pendientes para cargar</h2>"); 		
+         	for(int i=0; i < condiciones.size(); i++){
+                 out.print("<fieldset style='");
+                 out.print("text-align:left;'>");
+                    out.print("<DL>"); 
+                 out.print("<DT>"); 
+                 out.print("Condicion NRO."); 
+                 out.print(i+1); 
+                  out.print("<DD>"); 
+                 out.print(condiciones.get(i).getTipo()); 
+                  out.print("<DD>"); 
+                 out.print(condiciones.get(i).getIndicador()); 
+                  out.print("<DD>"); 
+                 out.print(condiciones.get(i).getMonto()); 
+                out.print("</DL>"); 
+                out.print("</fieldset>");
+                }
+     }
+     %>
+    </div>
 </fieldset>
 </form>
 </body>

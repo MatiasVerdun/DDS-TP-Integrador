@@ -1,7 +1,10 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@ include file="UsarIndicador.jsp" %>
- <!DOCTYPE html>
+<%@ include file="Login.jsp" %>
+<!DOCTYPE html>
  <html>
+
+  
      <head>
          <style>
              #formFooter {
@@ -16,16 +19,10 @@
      </head>
      <body>
          <div id="formFooter">
-        
- <%  
-     String valorFinal = (String)request.getSession().getAttribute("IndicadorBean");
-     
-     out.print("<h2>"); 		
-     out.print(valorFinal); 		
-     out.print("</h2>");
- 
- %>  
-  
-         </div></div>
+             <p class="text-success">La acción fue realizada con éxito.</p> 
+         </div>
+                 </div>
+         </div>
+
   </body>
  </html>

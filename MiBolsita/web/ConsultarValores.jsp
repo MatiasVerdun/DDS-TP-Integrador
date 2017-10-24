@@ -5,19 +5,25 @@
 
 <!DOCTYPE html>
 <html>
-
-<html >
 <head>
   <meta charset="UTF-8">
   <title>¿Dónde invierto?</title>
+  
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  
+  
       <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
 
  
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-
   
 </head>
 <style>
@@ -101,11 +107,11 @@
 
 input[type=button]{
   border: none;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #39ace7 ;
   padding: 10px 20px;
   text-align: center;
-  font-size:x-large;
+  font-size:large;
   
 }
 
@@ -114,9 +120,9 @@ input[type=button]{
 html {
   background-color: #56baed;
 }
-
 body {
   font-family: "Poppins", sans-serif;
+  background-color: #56baed;
   height: 100vh;
 }
 
@@ -380,7 +386,7 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
 </style>
     </select>
     
-    <body>
+   
   <body>
       
          <div id="crouton">
@@ -396,9 +402,7 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
  
 
     <div align="right">
-        <input type="button" class="btn btn-default" onclick="history.back()" value="<" name="atras">
-           <span class="glyphicon glyphicon-chevron-left" ></span>
-    </input>
+        <button type="button" class="btn btn-default" onclick="history.back()"  name="atras"> <span class="glyphicon glyphicon-chevron-left" ></span> </button>
        </div>
    
    
@@ -459,25 +463,32 @@ if (periodos.size()>0) {
 
   </fieldset>
     <div id="formFooter">
+         
+
+        
 </form>
 <%  
 //--- Obtiene el listado de Valores de Cuentas
+
 ArrayList<ValorCuenta>valoresCuentas =(ArrayList<ValorCuenta>)request.getAttribute("valoresCuentasBean");  
 
 
 if (valoresCuentas!=null && valoresCuentas.size()>0)
 {
     out.print("<br/>");
-    out.print("<table class='table table-striped'>");
-     out.print("<tr>");
+    out.print("<table class='table table-striped' >");
+   
+    out.print("<tr>");
         out.print("<td>");
         out.print("<b>Cuenta</b>");
         out.print("</td>");
         out.print("<td>");
         out.print("<b>Valor</b>");
         out.print("</td>");
-        out.print("</tr>");
+    out.print("</tr>");
+       
     for (int counter = 0; counter < valoresCuentas.size(); counter++) { 		      
+        
         out.print("<tr>");
         out.print("<td>");
         out.print(valoresCuentas.get(counter).getCodCuenta());
@@ -487,11 +498,14 @@ if (valoresCuentas!=null && valoresCuentas.size()>0)
         //out.print(java.math.BigDecimal.valueOf(valoresCuentas.get(counter).getValor()));
         out.print("</td>");
         out.print("</tr>");
+        
     } 
-   
+    
+    out.print("</table>"); }
+ /*   
 ArrayList<ValorIndicador>valoresIndicadores =(ArrayList<ValorIndicador>)request.getAttribute("valoresIndicadoresBean");  
 
-    
+   
     for (int counter = 0; counter < valoresIndicadores.size(); counter++) { 		      
         out.print("<tr>");
         out.print("<td>");
@@ -504,8 +518,13 @@ ArrayList<ValorIndicador>valoresIndicadores =(ArrayList<ValorIndicador>)request.
         out.print("</tr>");
     } 
     
-    out.print("</table>");
-} 
+    
+} */
+
+
+
+
+
 %>
 </div>
 </body>

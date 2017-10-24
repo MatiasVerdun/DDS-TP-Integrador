@@ -6,14 +6,17 @@
 <head>
   <meta charset="UTF-8">
   <title>¿Dónde invierto?</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
+      <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
 
  
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-
   
 </head>
 <style>
@@ -107,11 +110,9 @@ input[type=button]{
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
+  background-color: #56baed;
+
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -402,8 +403,7 @@ input[type=button]{
         <input type="submit" class="fadeIn fourth"  name="consultarValores" value="Consultar Valores">
     
 
-  </div>
-</div>
+
        </form>
 </body>
   

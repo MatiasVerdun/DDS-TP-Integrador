@@ -17,10 +17,10 @@
      <body>
          <div id="formFooter"> 
  <%  
-     boolean valorFinal = (boolean)request.getSession().getAttribute("ResultadoMetodologiaBean");
+     String valorFinal = (String)request.getSession().getAttribute("ResultadoMetodologiaBean");
  
      out.print("<p>"); 	
-     if(valorFinal){
+     if(valorFinal=="true"){
      out.print("Es seguro invertir en ésta empresa");}
      else{
          out.print("No es seguro invertir en ésta empresa");

@@ -51,7 +51,7 @@ public class NuevoUsuarioControllerServlet extends HttpServlet {
                if(strPassword.equals(strPasswordRepetida) && !usuarioDAO.exists(strUserName)){
                 //--- Guarda en la Session los datos del Usuario
                 usuarioDAO.saveOrUpdate(objUsuario);
-                RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");  
+                RequestDispatcher rd=request.getRequestDispatcher("Correcto_1.jsp");  
                 rd.forward(request, response);  
             }  
             else{  

@@ -9,25 +9,23 @@
   <meta charset="UTF-8">
   <title>¿Dónde invierto?</title>
       <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
- 
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
-  
-  
-      <link rel="stylesheet" href="css/style.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
   
 </head>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
-
-html {
-  background-color: #56baed;
-}
-
 body {
+  background-color: #56baed;
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -324,7 +322,8 @@ input[type=password ] {
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+     
+        <img src="icon.svg" id="icon" alt="User Icon" />
     </div>
 
     <!-- Login Form -->
@@ -336,13 +335,12 @@ input[type=password ] {
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="http://localhost:8080/MiBolsita/CambioClave.jsp">Olvidaste tu Contraseña?</a>
+      <a class="underlineHover" href="http://localhost:8080/MiBolsita/CambioClave.jsp">¿Olvidaste tu Contraseña?</a>
       <br>
-      <a class="underlineHover" href="http://localhost:8080/MiBolsita/NuevoUsuario.jsp">Sos nuevo?</a>
+      <a class="underlineHover" href="http://localhost:8080/MiBolsita/NuevoUsuario.jsp">¿Sos nuevo?</a>
     </div>
 
-  </div>
-</div>
+  
        </form>
 </body>
   

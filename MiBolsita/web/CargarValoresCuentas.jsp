@@ -6,12 +6,16 @@
   <title>¿Dónde invierto?</title>
       <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
 
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
  
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-       
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import "compass/css3";
@@ -97,17 +101,15 @@ input[type=button]{
   color: #39ace7 ;
   padding: 10px 20px;
   text-align: center;
-  font-size:x-large;
+  font-size:large;
   
 }
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
+  background-color: #56baed;
+
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -164,6 +166,7 @@ h2 {
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
+  text-align: justify;
 }
 
 
@@ -370,14 +373,25 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
   box-sizing: border-box;
 }
 </style>
-  <form enctype="multipart/form-data" action="CargarValoresCuentasControllerServlet" method="POST">
+</select>
+   <div id="crouton">
+  <ul>
+    <li ><a href="http://localhost:8080/MiBolsita/Menu.jsp""><i class="icon-fixed-width icon-home"></i>home</a></li>
+    <li ><a href="http://localhost:8080/MiBolsita/Login.jsp""><i class="icon-fixed-width icon-user"></i>log out</a></li>
+    </ul>
+    
+           </div>
+ 
+     
       <div class="wrapper">
       <div id="formContent">
-      <div align="right">
-       <input type="button" class="btn btn-default" onclick="history.back()" value="<" name="atras">
-    </input>
-       </div>
       
+   <form enctype="multipart/form-data" action="CargarValoresCuentasControllerServlet" method="POST">
+    <div align="right">
+        <button type="button" class="btn btn-default" onclick="history.back()"  name="atras"> <span class="glyphicon glyphicon-chevron-left" ></span> </button>
+       </div>
+   
+   
 	<br> 
     <input class="file" name="uploadedfile" id="uploadedfile" type="file" />
     <br>
@@ -385,9 +399,16 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
     <input class="button" type="submit" name="subirArchivo" value="Subir archivo" />
     <br>
     <br>
-   
-            </div>
+
+          <div id="formFooter" >
+   <small class="text-muted"  >Recordar: El formato del archivo es Código de la Empresa,Año,Código de la Cuenta,Valor adquirido en ese Año  debe ser en ese orden y estar separado por comas. </small>
+    </div>
+           </div>
   </fieldset>
 </form>
+ <script src="http://code.jquery.com/jquery.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>

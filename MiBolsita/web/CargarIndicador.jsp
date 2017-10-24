@@ -11,10 +11,14 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"> <!?Con esto garantizamos que se vea bien en dispositivos móviles?> 
 
  
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> <!?Llamamos al archivo CSS ?> 
-  
-  
-      <link rel="stylesheet" href="css/style.css">
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   
 </head>
@@ -103,17 +107,15 @@ input[type=button]{
   color: #39ace7 ;
   padding: 10px 20px;
   text-align: center;
-  font-size:x-large;
+  font-size:large;
   
 }
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
-
 body {
+  background-color: #56baed;
+
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -170,6 +172,7 @@ h2 {
   text-align: center;
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
+  text-align: justify;
 }
 
 
@@ -415,10 +418,9 @@ input[type=password ] {
  
 
     <div align="right">
-        <input type="button" class="btn btn-default" onclick="history.back()" value="<"name="atras">
-         
-    </input>
+        <button type="button" class="btn btn-default" onclick="history.back()"  name="atras"> <span class="glyphicon glyphicon-chevron-left" ></span> </button>
        </div>
+   
 
     <!-- Login Form -->
     <h2>Nombre del indicador</h2>
@@ -426,16 +428,19 @@ input[type=password ] {
      <h2>Formula</h2>
       <input type="text"  class="fadeIn" name="indicador" required="">
       <br>
-      <input type="submit" class="fadeIn " value="Cargar" >
+       
+      <input type="submit" class="fadeIn " value="Cargar" name="cargarIndicador" >
    
-
-   
-
-  </div>
-</div>
-       </form>
+       <div id="formFooter" >
+   <small class="text-muted"  >Recordar: La sintaxis debe ser la siguiente forma f(Indicador,Cuenta,...)=..., los argumentos deben estar separados por una coma  y deben ser indicadores o cuentas ya existentes</small>
+    </div>
 </body>
-  
+   
+
+
+       </form>
+
+     
      <script src="http://code.jquery.com/jquery.js"></script>
 
     <script src="js/bootstrap.min.js"></script>

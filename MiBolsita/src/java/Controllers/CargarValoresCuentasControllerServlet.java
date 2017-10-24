@@ -79,7 +79,7 @@ public class CargarValoresCuentasControllerServlet extends HttpServlet {
      }
     if(request.getParameter("atras")!= null){
             
-            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
+            RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp"); 
             rd.forward(request, response);
         } 
     }

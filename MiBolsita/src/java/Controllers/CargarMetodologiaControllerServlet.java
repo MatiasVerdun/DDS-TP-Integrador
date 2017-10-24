@@ -32,35 +32,42 @@ public class CargarMetodologiaControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
           //--- Obtiene los datos desde la Vista (CargarIndicador.jsp)
-            
+           
             String strNombreMetodologia =request.getParameter("nombreMetodologia");  
             String condicion =request.getParameter("condicion");  
             String indicador = request.getParameter("Indicador");
             String numero = request.getParameter("monto");
             String id_usuario = (String)request.getSession().getAttribute("usuarioBean");
+            boolean primero = (boolean)request.getSession().getAttribute("primero");
+            
             request.setAttribute("nombreMetodologiaBean",strNombreMetodologia);
             
             
+            //ArrayList<Condicion> lista = new ArrayList();
+           
             
           //--- Crea los objetos
             CondicionDAO condicionDAO = new CondicionDAO();
             MetodologiaDAO metodologiaDAO = new MetodologiaDAO();
             Metodologia metodologia = new Metodologia();
-            ArrayList<Condicion> condiciones = new ArrayList();
-          
+            
+           
+            
             metodologia.setNombreMetodologia(strNombreMetodologia);
             metodologia.setId_usuario(id_usuario);
             
         if(request.getParameter("proximaCondicion")!= null){
+            ArrayList<Condicion> lista=(ArrayList)request.getSession().getAttribute("condiciones");
             Condicion objCondicion = new Condicion();
             objCondicion.setIndicador(indicador);
             objCondicion.setMetodologia(strNombreMetodologia);
             objCondicion.setMonto(numero);
             objCondicion.setTipo(condicion);
             
-            condiciones.add(objCondicion);
+           lista.add(objCondicion);
             
             request.getSession().setAttribute("primero",false); 
+            request.setAttribute("condiciones",lista);
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 
             rd.forward(request, response);
             
@@ -68,21 +75,23 @@ public class CargarMetodologiaControllerServlet extends HttpServlet {
         } 
         
         if(request.getParameter("finalizarCarga")!= null){ 
+           
+           ArrayList<Condicion> lista=(ArrayList)request.getSession().getAttribute("condiciones");
             Condicion objCondicion = new Condicion();
             objCondicion.setIndicador(indicador);
             objCondicion.setMetodologia(strNombreMetodologia);
             objCondicion.setMonto(numero);
             objCondicion.setTipo(condicion);
             
-            condiciones.add(objCondicion);
+            lista.add(objCondicion);
             
   
             metodologiaDAO.saveOrUpdate(metodologia);
-            condiciones.forEach((unaCondicion) -> {
+            lista.forEach((unaCondicion) -> {
                 condicionDAO.saveOrUpdate(unaCondicion);
             });
             
-            RequestDispatcher rd=request.getRequestDispatcher("Menu.jsp"); 
+            RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp"); 
             rd.forward(request, response);
         } 
         if(request.getParameter("atras")!= null){
