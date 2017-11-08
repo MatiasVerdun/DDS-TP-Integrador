@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2017 a las 22:39:51
+-- Tiempo de generación: 08-11-2017 a las 02:47:39
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dds-tp-integrador`
 --
-CREATE DATABASE IF NOT EXISTS `dds-tp-integrador` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `dds-tp-integrador`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `dds-tp-integrador`;
 -- Estructura de tabla para la tabla `condiciones`
 --
 
-DROP TABLE IF EXISTS `condiciones`;
 CREATE TABLE `condiciones` (
   `metodologia` varchar(500) NOT NULL,
   `indicador` varchar(50) NOT NULL,
@@ -42,9 +39,8 @@ CREATE TABLE `condiciones` (
 --
 
 INSERT INTO `condiciones` (`metodologia`, `indicador`, `monto`, `tipo`, `id`) VALUES
-('hola', 'indicador', '098', 'menorA', 1),
-('hola', 'indicador', '5678', 'menorA', 2),
-('hola', 'indicador', '4567', 'menorA', 3);
+('metoHector', 'indicadorBueno', '2', 'menorA', 2),
+('MetoVic', 'indicadorVic', '2', 'menorA', 4);
 
 -- --------------------------------------------------------
 
@@ -52,7 +48,6 @@ INSERT INTO `condiciones` (`metodologia`, `indicador`, `monto`, `tipo`, `id`) VA
 -- Estructura de tabla para la tabla `cuentas`
 --
 
-DROP TABLE IF EXISTS `cuentas`;
 CREATE TABLE `cuentas` (
   `codCuenta` varchar(25) NOT NULL,
   `nombreCuenta` varchar(50) NOT NULL
@@ -73,7 +68,6 @@ INSERT INTO `cuentas` (`codCuenta`, `nombreCuenta`) VALUES
 -- Estructura de tabla para la tabla `empresas`
 --
 
-DROP TABLE IF EXISTS `empresas`;
 CREATE TABLE `empresas` (
   `codEmpresa` varchar(20) NOT NULL,
   `nombreEmpresa` varchar(50) NOT NULL
@@ -85,8 +79,6 @@ CREATE TABLE `empresas` (
 
 INSERT INTO `empresas` (`codEmpresa`, `nombreEmpresa`) VALUES
 ('face', 'Facebook'),
-('hika', 'qweer'),
-('Star', 'STarbucks'),
 ('tw', 'Twitter'),
 ('wpp', 'Whatsapp');
 
@@ -96,19 +88,19 @@ INSERT INTO `empresas` (`codEmpresa`, `nombreEmpresa`) VALUES
 -- Estructura de tabla para la tabla `indicadores`
 --
 
-DROP TABLE IF EXISTS `indicadores`;
 CREATE TABLE `indicadores` (
   `nombreIndicador` varchar(25) NOT NULL,
-  `indicador` varchar(500) NOT NULL
+  `indicador` varchar(500) NOT NULL,
+  `id_usuario` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `indicadores`
 --
 
-INSERT INTO `indicadores` (`nombreIndicador`, `indicador`) VALUES
-('indicador', 'f(x)=x+4'),
-('prueba', 'f(iNetoOpCont)=iNetoOpCont + 1');
+INSERT INTO `indicadores` (`nombreIndicador`, `indicador`, `id_usuario`) VALUES
+('indicadorHector', '	 f(iNetoOpCont)=iNetoOpCont + 1', 'Hector'),
+('indicadorVic', 'f(iNetoOpDisc)=iNetoOpDisc + 4', 'Vic');
 
 -- --------------------------------------------------------
 
@@ -116,19 +108,18 @@ INSERT INTO `indicadores` (`nombreIndicador`, `indicador`) VALUES
 -- Estructura de tabla para la tabla `metodologias`
 --
 
-DROP TABLE IF EXISTS `metodologias`;
 CREATE TABLE `metodologias` (
-  `nombreMetodologia` varchar(500) NOT NULL
+  `nombreMetodologia` varchar(500) NOT NULL,
+  `id_usuario` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `metodologias`
 --
 
-INSERT INTO `metodologias` (`nombreMetodologia`) VALUES
-('Hola'),
-('vic'),
-('ytfgf');
+INSERT INTO `metodologias` (`nombreMetodologia`, `id_usuario`) VALUES
+('metoHector', 'Hector'),
+('MetoVic', 'Vic');
 
 -- --------------------------------------------------------
 
@@ -136,7 +127,6 @@ INSERT INTO `metodologias` (`nombreMetodologia`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` varchar(50) NOT NULL,
   `contrasena` varchar(50) NOT NULL
@@ -147,7 +137,11 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `contrasena`) VALUES
-('Hector', '123');
+('Hector', '123'),
+('v', 'v'),
+('Vic', '123'),
+('vicc', '123'),
+('vicky', '123');
 
 -- --------------------------------------------------------
 
@@ -155,7 +149,6 @@ INSERT INTO `usuarios` (`id_usuario`, `contrasena`) VALUES
 -- Estructura de tabla para la tabla `valorcuenta`
 --
 
-DROP TABLE IF EXISTS `valorcuenta`;
 CREATE TABLE `valorcuenta` (
   `codEmpresa` varchar(20) NOT NULL,
   `periodo` varchar(20) NOT NULL,
@@ -169,10 +162,32 @@ CREATE TABLE `valorcuenta` (
 --
 
 INSERT INTO `valorcuenta` (`codEmpresa`, `periodo`, `codCuenta`, `valor`, `id`) VALUES
-('face', '2016', 'iNetoOpCont', 4273000000, 1),
-('face', '2016', 'iNetoOpDisc', 0, 2),
-('face', '2016', 'iNetoOpCont', 4273000000, 3),
-('face', '2016', 'iNetoOpDisc', 0, 4);
+('face', '2016', 'ebitda', 400, 6),
+('face', '2016', 'iNetoOpCont', 4273000000, 12),
+('face', '2016', 'iNetoOpDisc', 0, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `valorindicador`
+--
+
+CREATE TABLE `valorindicador` (
+  `codEmpresa` varchar(20) NOT NULL,
+  `periodo` varchar(20) NOT NULL,
+  `nombreIndicador` varchar(50) NOT NULL,
+  `valor` double NOT NULL,
+  `id` int(50) NOT NULL,
+  `id_usuario` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `valorindicador`
+--
+
+INSERT INTO `valorindicador` (`codEmpresa`, `periodo`, `nombreIndicador`, `valor`, `id`, `id_usuario`) VALUES
+('face', '2016', 'indicadorVic', 4, 1, 'Vic'),
+('face', '2016', 'indicadorHector', 4273000001, 2, 'Hector');
 
 --
 -- Índices para tablas volcadas
@@ -218,6 +233,12 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `valorcuenta`
 --
 ALTER TABLE `valorcuenta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `valorindicador`
+--
+ALTER TABLE `valorindicador`
   ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
