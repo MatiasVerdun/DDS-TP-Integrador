@@ -401,7 +401,8 @@ input[type=text]:placeholder ,input[type=password]:placeholder {
     <br>
 
           <div id="formFooter" >
-   <small class="text-muted"  >Recordar: El formato del archivo es Código de la Empresa,Año,Código de la Cuenta,Valor adquirido en ese Año  debe ser en ese orden y estar separado por comas. </small>
+   <small class="text-muted"  >Recordar: El formato del archivo es Código de la Empresa,Año,Código de la Cuenta,Valor adquirido en ese Año  debe ser en ese orden y estar separado por comas. Por ejemplo: face,2016,iNetoOpCont,4273000000
+</small>
     </div>
            </div>
   </fieldset>

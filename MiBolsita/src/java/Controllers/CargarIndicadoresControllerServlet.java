@@ -43,15 +43,21 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
           
             
         //--- Crea el objeto indicador que desde Validar
-            Indicador objIndicador=new Indicador();  
+            Indicador objIndicador=new Indicador(); 
+            ValorIndicador objValorIndicador = new ValorIndicador();
             objIndicador.setNombre(strNombreIndicador);  
             objIndicador.setIndicador(strIndicador); 
             objIndicador.setId_usuario(id_usuario);
+            objValorIndicador.setId_usuario(id_usuario);
+            objValorIndicador.setNombreIndicador(strNombreIndicador);
             IndicadorDAO indicadorDAO = new IndicadorDAO();
+            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
             if(objIndicador.comprobarSintaxis()){
                 
                     indicadorDAO.saveOrUpdate(objIndicador);
+                    objValorIndicador.generarValores();
                     RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp");  
+
                     rd.forward(request, response);
             } else {
                     RequestDispatcher rd=request.getRequestDispatcher("Cargar-Indicador-Error.jsp");  

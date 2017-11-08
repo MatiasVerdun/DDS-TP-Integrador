@@ -40,7 +40,15 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             Indicador indicador =indicadorDAO.get(strIndicadorName);
         
-            double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio);
+            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+            ValorIndicador valorIndicador = new ValorIndicador();
+            
+            //Todos los valoresIndicadores 
+            ArrayList<ValorIndicador> valoresIndicador = (ArrayList<ValorIndicador>) valorIndicadorDAO.filter();
+             double resultadoFinal= valorIndicador.obtenerValor(valoresIndicador, strEmpresa, strIndicadorName, strAnio);
+            
+
+            //double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio); //Antes de la entrega 6.
             
             
             String total = String.format("%.02f", resultadoFinal);
@@ -53,31 +61,44 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
            else{
             String strIndicadorName=request.getParameter("Indicador");  
             String codEmpresa=request.getParameter("Empresa");  
+            String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
             
+           EmpresaDAO empresaDAO= new EmpresaDAO();
+           
+            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+            ArrayList<ValorIndicador> valores= (ArrayList<ValorIndicador>) valorIndicadorDAO.filterId(id_usuario);
+            ArrayList<Empresa> empresas= new ArrayList();
             
-            EmpresaDAO empresaDAO= new EmpresaDAO();
-            ArrayList<Empresa> empresas= (ArrayList<Empresa>) empresaDAO.filter();
-            request.getSession().setAttribute("empresasBean",empresas); 
-               
-            
-            ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-            ArrayList<ValorCuenta> valores= (ArrayList<ValorCuenta>) valorCuentaDAO.filter();
+
             //Elimino los periodos repetidos
             ArrayList<String> periodos= new ArrayList();
             for(int counter=0;counter<valores.size();counter++){
                 periodos.add(valores.get(counter).getPeriodo());
+                Empresa empresa = empresaDAO.get(valores.get(counter).getCodEmpresa());
+                empresas.add(empresa);
             }
+            
+           
+          
             HashSet hs = new HashSet();
             hs.addAll(periodos);
             periodos.clear();
             periodos.addAll(hs);
-            
-            request.getSession().setAttribute("indicadorBean",strIndicadorName); 
+            hs.clear();
+            hs.addAll(empresas);
+            empresas.clear();
+            empresas.addAll(hs);
             request.getSession().setAttribute("empresaBean",codEmpresa);
+            request.getSession().setAttribute("indicadorBean",strIndicadorName); 
+            request.getSession().setAttribute("empresasBean",empresas);
             request.getSession().setAttribute("periodosBean",periodos); 
             RequestDispatcher rd=request.getRequestDispatcher("UsarIndicador.jsp"); 
             rd.forward(request, response);
            }
+           
+           
+           
+           
            if(request.getParameter("atras")!= null){
             
             RequestDispatcher rd=request.getRequestDispatcher("MenuIndicadores.jsp"); 

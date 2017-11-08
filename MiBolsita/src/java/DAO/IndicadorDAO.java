@@ -30,12 +30,22 @@ public class IndicadorDAO extends GenericDAO<Indicador,String> implements  Indic
     }
     
     @Override
-    public List<Indicador> filter(String id_usuario) {
+    public List<Indicador> filterId(String id_usuario) {
           
         Session session = sessionFactory.openSession();
           session.beginTransaction();
           Query query = session.createQuery("SELECT e FROM DTO.Indicador e WHERE id_usuario= '" +id_usuario+ "'");
             List<Indicador> entities = query.list();
            return entities;
+    }
+    
+    @Override
+    public Indicador filter(String id_indicador) {
+          
+        Session session = sessionFactory.openSession();
+          session.beginTransaction();
+          Query query = session.createQuery("SELECT e FROM DTO.Indicador e WHERE nombreIndicador= '" +id_indicador+ "'");
+            List<Indicador> entities = query.list();
+           return entities.get(0);
     }
 }

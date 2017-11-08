@@ -40,7 +40,7 @@ public class ConsultarValoresControllerServlet extends HttpServlet {
                 
                 Indicador indicador = new Indicador();
                 IndicadorDAO indicadorDAO = new IndicadorDAO();
-                ArrayList<Indicador> indicadores = (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
+                ArrayList<Indicador> indicadores = (ArrayList<Indicador>) indicadorDAO.filterId(id_usuario);
                 ArrayList<ValorIndicador>valoresIndicadores = indicador.ObtenerValoresIndicadores(indicadores,strCodEmpresa,strPeriodo);
             
                 request.setAttribute("valoresIndicadoresBean",valoresIndicadores);

@@ -13,6 +13,6 @@
     <mapping class="DTO.Indicador"/>
     <mapping class="DTO.Metodologia"/>
     <mapping class="DTO.ValorCuenta"/>
-    <mapping class="DTO.Usuario"/>
+  <mapping class="DTO.ValorIndicador"/>  <mapping class="DTO.Usuario"/>
   </session-factory>
 </hibernate-configuration>

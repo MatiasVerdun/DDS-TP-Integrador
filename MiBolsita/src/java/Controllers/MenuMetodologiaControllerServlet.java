@@ -80,7 +80,7 @@ public class MenuMetodologiaControllerServlet extends HttpServlet {
         if(request.getParameter("cargarMetodologia")!= null){
             request.getSession().setAttribute("usuarioBean",id_usuario); 
             IndicadorDAO indicadorDAO= new IndicadorDAO();
-            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.filter(id_usuario);
+            ArrayList<Indicador> indicadores= (ArrayList<Indicador>) indicadorDAO.filterId(id_usuario);
              request.getSession().setAttribute("primero",true); 
             request.getSession().setAttribute("indicadoresBean",indicadores);  
             RequestDispatcher rd=request.getRequestDispatcher("CargarMetodologia.jsp"); 

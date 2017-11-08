@@ -104,7 +104,7 @@ public class Indicador  implements Serializable {
                 valorIndicador.setPeriodo(strPeriodo);
                 valorIndicador.setNombreIndicador(indicadores.get(i).getNombre());
                 valorIndicador.setValor(indicadores.get(i).resultadoFinal(strCodEmpresa, strPeriodo));
-        valores.add(valorIndicador);
+                valores.add(valorIndicador);
         }
 
       return valores;

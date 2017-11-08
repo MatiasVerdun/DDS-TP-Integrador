@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface IndicadorDAOInterface extends GenericDAOInterface<Indicador,String> {
    public boolean exists(String id);
-   public List<Indicador> filter(String id_usuario);
+   public List<Indicador> filterId(String id_usuario);
+   public Indicador filter(String id_indicador);
 }
