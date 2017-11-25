@@ -6,8 +6,7 @@
 package DAO;
 
 import DTO.Empresa;
-import DTO.Usuario;
-import Hibernate.HibernateUtil;
+import Util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,7 +24,7 @@ public class EmpresaDAO extends GenericDAO<Empresa,String> implements  EmpresaDA
        Session session = sessionFactory.openSession();
        session.beginTransaction();
         Query query = (Query) session.createQuery("SELECT e FROM DTO.Empresa e WHERE codEmpresa = '" +id+ "'");
-         List<Usuario> entities = query.list();
+         List<Empresa> entities = query.list();
          return !entities.isEmpty();
        
     }

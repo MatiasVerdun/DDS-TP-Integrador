@@ -7,7 +7,7 @@ package DAO;
 
 import DTO.Indicador;
 import DTO.Usuario;
-import Hibernate.HibernateUtil;
+import Util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;

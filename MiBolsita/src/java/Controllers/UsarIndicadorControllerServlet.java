@@ -5,9 +5,9 @@ import DAO.*;
 import DTO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +32,7 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-           
+          String id_usuario = (String) request.getSession().getAttribute("usuarioBean"); 
            if(request.getParameter("usarIndicador")!=null){ 
             String strIndicadorName=request.getParameter("Indicador");  
             String strEmpresa=request.getParameter("Empresa");  
@@ -40,16 +40,15 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             IndicadorDAO indicadorDAO = new IndicadorDAO();
             Indicador indicador =indicadorDAO.get(strIndicadorName);
         
-            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+            ValorIndicadorMongo valorIndicadorDAO = new ValorIndicadorMongo();
             ValorIndicador valorIndicador = new ValorIndicador();
             
             //Todos los valoresIndicadores 
-            ArrayList<ValorIndicador> valoresIndicador = (ArrayList<ValorIndicador>) valorIndicadorDAO.filter();
+            ArrayList<ValorIndicador> valoresIndicador = (ArrayList<ValorIndicador>) valorIndicadorDAO.filterId(id_usuario);
              double resultadoFinal= valorIndicador.obtenerValor(valoresIndicador, strEmpresa, strIndicadorName, strAnio);
             
 
-            //double resultadoFinal = indicador.resultadoFinal(strEmpresa, strAnio); //Antes de la entrega 6.
-            
+        
             
             String total = String.format("%.02f", resultadoFinal);
             
@@ -61,17 +60,18 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
            else{
             String strIndicadorName=request.getParameter("Indicador");  
             String codEmpresa=request.getParameter("Empresa");  
-            String id_usuario = (String) request.getSession().getAttribute("usuarioBean");
+            
             
            EmpresaDAO empresaDAO= new EmpresaDAO();
            
-            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+            ValorIndicadorMongo valorIndicadorDAO = new ValorIndicadorMongo();
             ArrayList<ValorIndicador> valores= (ArrayList<ValorIndicador>) valorIndicadorDAO.filterId(id_usuario);
-            ArrayList<Empresa> empresas= new ArrayList();
+           
             
 
-            //Elimino los periodos repetidos
+            //Elimino los periodos  y empresas  repetidos
             ArrayList<String> periodos= new ArrayList();
+           ArrayList<Empresa> empresas= new ArrayList<Empresa>();
             for(int counter=0;counter<valores.size();counter++){
                 periodos.add(valores.get(counter).getPeriodo());
                 Empresa empresa = empresaDAO.get(valores.get(counter).getCodEmpresa());
@@ -84,10 +84,9 @@ public class UsarIndicadorControllerServlet extends HttpServlet {
             hs.addAll(periodos);
             periodos.clear();
             periodos.addAll(hs);
-            hs.clear();
-            hs.addAll(empresas);
-            empresas.clear();
-            empresas.addAll(hs);
+            
+                    
+            
             request.getSession().setAttribute("empresaBean",codEmpresa);
             request.getSession().setAttribute("indicadorBean",strIndicadorName); 
             request.getSession().setAttribute("empresasBean",empresas);

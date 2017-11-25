@@ -51,13 +51,12 @@ public class CargarIndicadoresControllerServlet extends HttpServlet {
             objValorIndicador.setId_usuario(id_usuario);
             objValorIndicador.setNombreIndicador(strNombreIndicador);
             IndicadorDAO indicadorDAO = new IndicadorDAO();
-            ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+            ValorIndicadorMongo valorIndicadorDAO = new ValorIndicadorMongo();
             if(objIndicador.comprobarSintaxis()){
                 
                     indicadorDAO.saveOrUpdate(objIndicador);
                     objValorIndicador.generarValores();
-                    RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp");  
-
+                    RequestDispatcher rd=request.getRequestDispatcher("Correcto.jsp"); 
                     rd.forward(request, response);
             } else {
                     RequestDispatcher rd=request.getRequestDispatcher("Cargar-Indicador-Error.jsp");  

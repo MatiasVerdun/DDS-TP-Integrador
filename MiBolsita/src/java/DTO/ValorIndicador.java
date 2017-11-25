@@ -1,43 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTO;
+
+
 
 import DAO.IndicadorDAO;
 import DAO.ValorCuentaDAO;
-import DAO.ValorIndicadorDAO;
+import DAO.ValorIndicadorMongo;
 import java.util.ArrayList;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-/**
- *
- * @author Matias
- */
-@Entity
-@Table(name="ValorIndicador")
+
+
 public class ValorIndicador {
     
-    @Column(name="codEmpresa")
+    
+
     private String CodEmpresa;
-     @Column(name="periodo")
+    
+    
     private String Periodo;
-      @Column(name="nombreIndicador")
+    
+  
     private String NombreIndicador;
-     @Column(name="valor")
+    
     private double Valor;
-     @Column(name="id_usuario")
+
+    
     private String id_usuario;
-    @Id
-    @Column(name="id")
-    @GeneratedValue( generator = "generador_propietario_hibernate_increment")
-    @org.hibernate.annotations.GenericGenerator(name = "generador_propietario_hibernate_increment", strategy = "increment")
-    private int id;
+    
+    
 
     public String getId_usuario() {
         return id_usuario;
@@ -81,12 +70,15 @@ public class ValorIndicador {
         this.Valor = Valor;
     }
 
+    
+    
+     //DB Relacional 
     public void generarValores() {
        
        IndicadorDAO indicadorDAO = new IndicadorDAO();
        Indicador indicador = indicadorDAO.filter(NombreIndicador);
         ValorCuentaDAO valorCuentaDAO = new ValorCuentaDAO();
-        ValorIndicadorDAO valorIndicadorDAO = new ValorIndicadorDAO();
+        ValorIndicadorMongo valorIndicadorDAO = new ValorIndicadorMongo();
        //Obtiene todos los valoresCuenta
         ArrayList<ValorCuenta> valorCuenta = (ArrayList<ValorCuenta>) valorCuentaDAO.filter();
         
@@ -100,6 +92,8 @@ public class ValorIndicador {
        
         
     }
+    
+    
     
     
     

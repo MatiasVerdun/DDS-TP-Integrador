@@ -6,7 +6,7 @@
 package DAO;
 
 import DTO.Condicion;
-import Hibernate.HibernateUtil;
+import Util.HibernateUtil;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import static javafx.scene.input.KeyCode.T;

@@ -53,7 +53,7 @@ public class MenuIndicadoresControllerServlet extends HttpServlet {
             request.getSession().setAttribute("indicadoresBean",indicadores);  
             
            
-            ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+            ArrayList<String> empresas = new ArrayList<String>();
             ArrayList<String> periodos = new ArrayList<String>();
             
             request.getSession().setAttribute("usuarioBean",id_usuario); 

@@ -1,6 +1,6 @@
 package DAO;
 
-import Hibernate.HibernateUtil;
+import Util.HibernateUtil;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
