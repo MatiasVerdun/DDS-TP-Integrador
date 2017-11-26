@@ -15,7 +15,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
  
   
 </head>
@@ -160,6 +160,7 @@ h2 {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  
 }
 
 #formFooter {
@@ -189,6 +190,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
  input[type=submit], input[type=reset]  {
+  width: 80%;
   background-color: #56baed;
   border: none;
   color: white;
@@ -300,6 +302,7 @@ input[type=text]:placeholder,input[type=password]:placeholder {
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fadeIn {
+  
   opacity:0;
   -webkit-animation:fadeIn ease-in 1;
   -moz-animation:fadeIn ease-in 1;

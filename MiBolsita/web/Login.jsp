@@ -335,9 +335,9 @@ input[type=password ] {
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="http://localhost:8080/MiBolsita/CambioClave.jsp">¿Olvidaste tu Contraseña?</a>
+      <a class="underlineHover" href="CambioClave.jsp">¿Olvidaste tu Contraseña?</a>
       <br>
-      <a class="underlineHover" href="http://localhost:8080/MiBolsita/NuevoUsuario.jsp">¿Sos nuevo?</a>
+      <a class="underlineHover" href="NuevoUsuario.jsp">¿Sos nuevo?</a>
     </div>
 
   
